@@ -28,8 +28,11 @@ public class Panel03 extends JPanel {
 	private JButton login;
 	private JPanel north, n_East, center;
 	public Panel03() {
-		imgService = new Image_Service();
+		this.setVisible(true);
 		this.setLayout(new BorderLayout());
+		imgService = new Image_Service();
+		
+		
 		login = new JButton("·Î±×ÀÎ");
 		north = new JPanel();
 		north.setLayout(new BorderLayout());
@@ -39,8 +42,10 @@ public class Panel03 extends JPanel {
 		north.add("East",n_East);
 		this.add("North", north);
 		center = new JPanel();
-		center.setLayout(new GridLayout(1,7));
+		center.setLayout(new GridLayout(7,1));
 		setLabel();
+		
+		
 	}
 
 	void setLabel() {
