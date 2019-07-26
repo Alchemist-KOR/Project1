@@ -10,17 +10,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+
 
 
 public class Panel03 extends JPanel {
 	private JLabel[] lbl;
 	private JLabel[] images;
 	private JButton login;
-	private JPanel north, n_East, center, east;
-	private JScrollPane sp;
+	private JPanel north, n_East, center;
 	private Image poo1_1, poo1_2; private Image poo2_1, poo2_2;
 	private Image spa1_1, spa1_2; private Image spa2_1, spa2_2;
+	private Image fit1_1, fit1_2; private Image fit2_1, fit2_2;
 	public Panel03() {
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
@@ -71,6 +71,9 @@ public class Panel03 extends JPanel {
 		images[1].setBounds(10, 800, 900, 10);
 		center.add(images[1]);
 		
+		lbl[3].setLocation(50, 50);
+		lbl[3].setBounds(10, 850, 500, 25);
+		
 		this.add("Center",center);
 	}
 
@@ -83,6 +86,8 @@ public class Panel03 extends JPanel {
 		lbl[1].setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 15 ));
 		lbl[2] =new JLabel("½ºÆÄ | Spa");
 		lbl[2].setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 15 ));
+		lbl[3] =new JLabel("ÇÇÆ®´Ï½º | Fitness");
+		lbl[3].setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 15 ));
 	}
 
 	void setImage() {
@@ -116,6 +121,18 @@ public class Panel03 extends JPanel {
 		
 		ImageIcon img4 = new ImageIcon("img//¼±.png");
 		images[5] = new JLabel(img4);
+		
+		ImageIcon fit1 = new ImageIcon("img//fit01.jpg");
+		fit1_1 = fit1.getImage();
+		fit1_2 = fit1_1.getScaledInstance(300, 200, Image.SCALE_SMOOTH);
+		ImageIcon fit_1 = new ImageIcon(fit1_2);
+		images[6] = new JLabel(fit_1);
+		
+		ImageIcon fit2 = new ImageIcon("img//fit02.jpg");
+		fit2_1 = fit2.getImage();
+		fit2_2 = spa2_1.getScaledInstance(300, 200, Image.SCALE_SMOOTH);
+		ImageIcon fit_2 = new ImageIcon(fit2_2);
+		images[7] = new JLabel(fit_2);
 	}
 
 	public static void main(String[] args) {

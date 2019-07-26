@@ -17,8 +17,7 @@ public class Panel03 extends JPanel {
 	private JLabel[] lbl;
 	private JLabel[] images;
 	private JButton login;
-	private JPanel north, n_East, center, east;
-	private JScrollPane sp;
+	private JPanel north, n_East, center;
 	private Image poo1_1, poo1_2; private Image poo2_1, poo2_2;
 	private Image spa1_1, spa1_2; private Image spa2_1, spa2_2;
 	public Panel03() {
