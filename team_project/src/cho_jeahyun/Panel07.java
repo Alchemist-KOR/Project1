@@ -1,5 +1,9 @@
 package cho_jeahyun;
 
-public class Panel07 {
+import javax.swing.JPanel;
 
+public class Panel07 extends JPanel{
+	Panel07(){
+		
+	}
 }
