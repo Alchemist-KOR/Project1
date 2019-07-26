@@ -1,6 +1,7 @@
 package cho_jeahyun;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 public class MainFrame extends JFrame{
@@ -13,10 +14,12 @@ public class MainFrame extends JFrame{
 	public Panel05 p5;
 	public Panel06 p6;
 	public Panel07 p7;
+	private JScrollPane pan2;
 	
 	
 	MainFrame(){
 		mainTabb = new JTabbedPane();
+		
 		
 		p1 = new Panel01();
 		p2 = new Panel02();
@@ -26,9 +29,11 @@ public class MainFrame extends JFrame{
 		p6 = new Panel06();
 		p7 = new Panel07();
 		
+		pan2 = new JScrollPane(p2);
+		
 		
 		mainTabb.addTab("메인", p1);
-		mainTabb.addTab("객실정보", p2);
+		mainTabb.addTab("객실정보", pan2);
 		mainTabb.addTab("서비스", p3);
 		mainTabb.addTab("갤러리", p4);
 		mainTabb.addTab("소개및 위치", p5);
