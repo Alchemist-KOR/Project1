@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class Panel02 extends JPanel{
-	private JButton login, res_confirm;
+	private JButton login;
 	private JPanel north,north_east, center,center_content;
 	private ImageIcon img; 
 	
@@ -26,10 +26,8 @@ public class Panel02 extends JPanel{
 		center_content = new JPanel(new GridLayout(12,1));
 		
 		login = new JButton("로그인");
-		res_confirm = new JButton("예약확인");
 		
 		north_east.add(login);
-		north_east.add(res_confirm);
 		
 		north.add("East",north_east);
 		
