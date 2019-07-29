@@ -3,6 +3,7 @@ package cho_jeahyun;
 public class Reservation_Info {
 	private Integer order_id;
 	private String cid;
+	private String name;
 	private String roomid;
 	private Integer adult;
 	private Integer child;
@@ -12,6 +13,13 @@ public class Reservation_Info {
 	private String check_out_d;
 	
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public Integer getOrder_id() {
 		return order_id;
 	}

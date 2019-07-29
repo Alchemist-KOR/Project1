@@ -11,19 +11,19 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 //     예약확인
-class ItemInfoModel extends AbstractTableModel {
+class Reservation_Info_Model extends AbstractTableModel {
 	private Object[][] tableData;
 	int cols, rows;
-	private String[] columnName = { "상품번호", "상품이름", "상품가격", "상품정보", "원산지", "이미지 이름" };
+	private String[] columnName = {"예약번호","예약날짜","예약자 명","방 번호","체크인/체크아웃","가격"," "};
 	private List list;
 	
-//	ItemInfoModel(List<ItemInfo> info) {
-//		list = info;
-//		setData();
-//	}
-	ItemInfoModel() {
+	Reservation_Info_Model(List<Reservation_Info> info) {
+		list = info;
+		setData();
+	}
+	Reservation_Info_Model() {
 		CrudProcess crud = new CrudProcess();
-		//list = crud.selectAllIteminfo();
+		list = crud.selectAllIteminfo();
 		setData();
 	}
 
@@ -33,16 +33,17 @@ class ItemInfoModel extends AbstractTableModel {
 		cols = columnName.length;
 		tableData = new Object[rows][cols];
 		int r = 0;
-		while (it.hasNext()) {
-			ItemInfo item = (ItemInfo) it.next();
-			tableData[r][0] = item.getCode();
-			tableData[r][1] = item.getName();
-			tableData[r][2] = item.getPrice();
-			tableData[r][3] = item.getInfo();
-			tableData[r][4] = item.getOrgin();
-			tableData[r][5] = item.getImage();
-			r++;
-		}
+//		while (it.hasNext()) {
+//			Reservation_Info res = (Reservation_Info) it.next();
+//			tableData[r][0] = res.getOrder_id();
+//			tableData[r][1] = res.getReservation_date();
+//			tableData[r][2] = res.getName();
+//			tableData[r][3] = res.getRoomid();
+//			tableData[r][4] = res.getCheck_in_d()+res.getCheck_out_d();
+//			tableData[r][5] = res.getTotal_price();
+//			
+//			r++;
+//		}
 	}
 
 	@Override
@@ -73,7 +74,7 @@ public class Panel07 extends JPanel{
 	
 	
 	Panel07(){
-		String[] header = {"예약번호","예약날짜","예약자 명","방 번호","체크인/체크아웃","가격"," "};
+		
 		this.setLayout(new BorderLayout());
 		north_right = new JPanel(new BorderLayout());
 		
