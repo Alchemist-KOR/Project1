@@ -54,25 +54,25 @@ public class Panel03 extends JPanel {
 		
 		center.add(lbl[2]);
 		lbl[2].setLocation(50, 50);
-		lbl[2].setBounds(10, 500, 500, 25);
+		lbl[2].setBounds(10, 400, 500, 25);
 		
 		images[1].setLocation(50, 50);
-		images[1].setBounds(10, 480, 900, 10);
+		images[1].setBounds(10, 380, 900, 10);
 		center.add(images[1]);
 		
 		images[3].setLocation(50, 50);
-		images[3].setBounds(10, 530, 300, 200);
+		images[3].setBounds(10, 430, 300, 200);
 		center.add(images[3]);
 		images[4].setLocation(50, 50);
-		images[4].setBounds(330, 530, 300, 200);
+		images[4].setBounds(330, 430, 300, 200);
 		center.add(images[4]);
 		
 		images[1].setLocation(50, 50);
-		images[1].setBounds(10, 800, 900, 10);
+		images[1].setBounds(10, 700, 900, 10);
 		center.add(images[1]);
 		
 		lbl[3].setLocation(50, 50);
-		lbl[3].setBounds(10, 850, 500, 25);
+		lbl[3].setBounds(10, 750, 500, 25);
 		
 		this.add("Center",center);
 	}
