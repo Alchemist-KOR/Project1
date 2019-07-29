@@ -3,6 +3,7 @@ package cho_jeahyun;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.ScrollPaneConstants;
@@ -18,6 +19,7 @@ public class MainFrame extends JFrame{
 	public Panel06 p6;
 	public Panel07 p7;
 	private JScrollPane pan2;
+	private JScrollBar bar;
 	
 	
 	MainFrame(){
@@ -32,10 +34,11 @@ public class MainFrame extends JFrame{
 		p6 = new Panel06();
 		p7 = new Panel07();
 		
-		pan2 = new JScrollPane(p2, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		//pan2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		pan2.setPreferredSize(new Dimension(850,500));
-		pan2.getVerticalScrollBar().setValue(1500);
+		pan2 = new JScrollPane(p2);
+		//pan2.setHorizontalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+//		pan2.setPreferredSize(new Dimension(800,700));
+		pan2.setMinimumSize(new Dimension(800,10));
+//		pan2.setMaximumSize(new Dimension(850,1200));
 		
 		mainTabb.addTab("메인", p1);
 		mainTabb.addTab("객실정보", pan2);

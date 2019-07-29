@@ -3,6 +3,7 @@ package cho_jeahyun;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -13,6 +14,7 @@ import javax.swing.JPanel;
 public class Panel02 extends JPanel{
 	private JButton login;
 	private JPanel north,north_east, center,center_content;
+	private JPanel content_1,content_2,content_3;
 	private ImageIcon img1,img2,img3;
 	private ImageIcon res_img1, res_img2,res_img3;
 	private JLabel rating1,text1,imglabel1;
@@ -76,7 +78,6 @@ public class Panel02 extends JPanel{
 		
 		
 		
-		
 		rating1.setBounds(65,7,55 , 15);
 		imglabel1.setBounds(65, 25, 400, 200);
 		text1.setBounds(65, 190, 420, 120);
@@ -87,12 +88,14 @@ public class Panel02 extends JPanel{
 		
 		rating3.setBounds(65,690,55 , 15);
 		imglabel3.setBounds(65, 710, 400, 200);
-		text3.setBounds(65, 870, 420, 350);
+		text3.setBounds(65, 860, 420, 350);
 		
 		center_content.add(rating1);
 		center_content.add(imglabel1);
 		center.setAlignmentX(imglabel1.LEFT_ALIGNMENT);
 		center_content.add(text1);
+		
+		//center_content.add(content_1);
 		
 		center_content.add(rating2);
 		center_content.add(imglabel2);
