@@ -43,7 +43,7 @@ public class MainFrame extends JFrame{
 		this.add(mainTabb);
 		
 		this.setTitle("호텔예약시스템 ver1.0");
-		this.setSize(600,700);
+		this.setSize(850,700);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
