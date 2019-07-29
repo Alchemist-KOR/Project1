@@ -35,7 +35,7 @@ public class MainFrame extends JFrame{
 		pan2 = new JScrollPane(p2, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		//pan2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		pan2.setPreferredSize(new Dimension(850,500));
-		pan2.getVerticalScrollBar().setValue(1500);;
+		pan2.getVerticalScrollBar().setValue(1500);
 		
 		mainTabb.addTab("메인", p1);
 		mainTabb.addTab("객실정보", pan2);
