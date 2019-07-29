@@ -3,50 +3,10 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cho_jeahyun.myMapper">
-	<select id="selectAllItemInfo"
-		resultType = "cho_jeahyun.ItemInfo">
-		select * from Item_Info order by to_number(code) desc
+	<select id="selectAllReservation_Info"
+		resultType = "cho_jeahyun.Reservation_Info">
+		select * from Reservation_Info order by to_number(order_id) desc
 	</select>
-	<select id="selectItem" parameterType = "HashMap"
-		resultType = "cho_jeahyun.ItemInfo">
-		select * from Item_info
-		<where>
-			<if test="code != null">and code = #{code}</if>
-			<if test="name != null">and name = #{name}</if>
-			<if test="price != null">and price = #{price}</if>
-			<if test="orgin != null">and orgin = #{orgin}</if>
-			<if test="info != null">and info = #{info}</if>
-			<if test="image != null">and image = #{image}</if>
-		</where>
-	</select>
-	<select id="selectItemCode"	parameterType = "Integer"
-		resultType = "cho_jeahyun.ItemInfo">
-		select * from Item_info where code = #{code}
-	</select>
-	<insert id="insertItemInfo" parameterType = "cho_jeahyun.ItemInfo">
-		insert into item_info(code, name, price, orgin, info, image)
-		values(#{code},#{name},#{price},#{orgin},#{info}, #{image})
-	</insert>
-	<delete id="deleteItemInfo" parameterType = "HashMap">
-		delete from item_info
-		<where>
-			<if test="code != null">and code = #{code}</if>
-			<if test="name != null">and name = #{name}</if>
-			<if test="price != null">and price = #{price}</if>
-			<if test="orgin != null">and orgin = #{orgin}</if>
-			<if test="info != null">and info = #{info}</if>
-			<if test="image != null">and image = #{image}</if>
-		</where>
-	</delete>
-	<update id="updateItemInfo" parameterType = "cho_jeahyun.ItemInfo">
-		update item_info set name = #{name},
-		price = #{price},
-		orgin = #{orgin},
-		info = #{info},
-		image = #{image}
-		where code = #{code}
-	</update>
-	
 </mapper>
 
 

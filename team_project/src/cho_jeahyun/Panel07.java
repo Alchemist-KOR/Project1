@@ -1,6 +1,8 @@
 package cho_jeahyun;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,7 +25,7 @@ class Reservation_Info_Model extends AbstractTableModel {
 	}
 	Reservation_Info_Model() {
 		CrudProcess crud = new CrudProcess();
-		list = crud.selectAllIteminfo();
+		list = crud.selectAllReservation_Info();
 		setData();
 	}
 
@@ -64,13 +66,20 @@ class Reservation_Info_Model extends AbstractTableModel {
 	}
 
 }
-public class Panel07 extends JPanel{
+public class Panel07 extends JPanel implements ActionListener{
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		JButton button = (JButton)e.getSource();
+		if(button == select) {
+			table.setModel(new Reservation_Info_Model());
+		}
+	}
+
 	private JPanel tabPanel, north_right;
 	private JButton select;
 	private JTable table;
 	private JScrollPane tablescroll;
-	
-	
 	
 	
 	Panel07(){
@@ -79,6 +88,7 @@ public class Panel07 extends JPanel{
 		north_right = new JPanel(new BorderLayout());
 		
 		select = new JButton("Á¶È¸");
+		select.addActionListener(this);
 		
 		north_right.add("East", select);
 		
