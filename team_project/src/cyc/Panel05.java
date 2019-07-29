@@ -52,7 +52,7 @@ public class Panel05 extends JPanel{
 		
 		ImageIcon img4 = new ImageIcon("img//¼±.png");
 		line = new JLabel(img4);
-		line.setLocation(50, 50);
+		line.setLocation(10, 50);
 		line.setBounds(10, 55, 900, 10);
 		center.add(line);
 		
@@ -61,7 +61,7 @@ public class Panel05 extends JPanel{
 		introduce2 = introduce1.getScaledInstance(550, 400, Image.SCALE_SMOOTH);
 		ImageIcon icon_introduce2 = new ImageIcon(introduce2);
 		img = new JLabel(icon_introduce2);
-		img.setLocation(50, 50);
+		img.setLocation(10, 50);
 		img.setBounds(10, 80, 600, 500);
 		center.add(img);
 		

@@ -52,27 +52,34 @@ public class Panel03 extends JPanel {
 		images[2].setBounds(330, 110, 300, 200);
 		center.add(images[2]);
 		
-		center.add(lbl[2]);
-		lbl[2].setLocation(50, 50);
-		lbl[2].setBounds(10, 400, 500, 25);
+//		images[1].setLocation(50, 50);
+//		images[1].setBounds(10, 330, 900, 10);
+//		center.add(images[1]);
 		
-		images[1].setLocation(50, 50);
-		images[1].setBounds(10, 380, 900, 10);
-		center.add(images[1]);
+		lbl[2].setLocation(50, 50);
+		lbl[2].setBounds(10, 300, 500, 25);
+		center.add(lbl[2]);
 		
 		images[3].setLocation(50, 50);
-		images[3].setBounds(10, 430, 300, 200);
+		images[3].setBounds(10, 330, 300, 200);
 		center.add(images[3]);
 		images[4].setLocation(50, 50);
-		images[4].setBounds(330, 430, 300, 200);
+		images[4].setBounds(330, 330, 300, 200);
 		center.add(images[4]);
 		
-		images[1].setLocation(50, 50);
-		images[1].setBounds(10, 700, 900, 10);
-		center.add(images[1]);
+//		images[5].setLocation(50, 50);
+//		images[5].setBounds(10, 650, 900, 10);
+//		center.add(images[5]);
 		
 		lbl[3].setLocation(50, 50);
-		lbl[3].setBounds(10, 750, 500, 25);
+		lbl[3].setBounds(10, 650, 500, 25);
+		
+		images[6].setLocation(50, 50);
+		images[6].setBounds(10, 680, 300, 200);
+		center.add(images[6]);
+		images[7].setLocation(50, 50);
+		images[7].setBounds(330, 680, 300, 200);
+		center.add(images[7]);
 		
 		this.add("Center",center);
 	}
@@ -98,8 +105,8 @@ public class Panel03 extends JPanel {
 		ImageIcon img1_1 = new ImageIcon(poo1_2);
 		images[0] = new JLabel(img1_1);
 		
-		ImageIcon img2 = new ImageIcon("img//識.png");
-		images[1] = new JLabel(img2);
+//		ImageIcon img2 = new ImageIcon("img//識.png");
+//		images[1] = new JLabel(img2);
 		
 		ImageIcon img3 = new ImageIcon("img//pool2.jpg");
 		poo2_1 = img3.getImage();
@@ -119,8 +126,8 @@ public class Panel03 extends JPanel {
 		ImageIcon spa_2 = new ImageIcon(spa2_2);
 		images[4] = new JLabel(spa_2);
 		
-		ImageIcon img4 = new ImageIcon("img//識.png");
-		images[5] = new JLabel(img4);
+//		ImageIcon img4 = new ImageIcon("img//識.png");
+//		images[5] = new JLabel(img4);
 		
 		ImageIcon fit1 = new ImageIcon("img//fit01.jpg");
 		fit1_1 = fit1.getImage();
