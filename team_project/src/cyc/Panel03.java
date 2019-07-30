@@ -1,5 +1,6 @@
 package cyc;
 
+import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -11,8 +12,6 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 
 
 //컴포넌트전환으로 수정했어요
@@ -149,14 +148,14 @@ public class Panel03 extends JPanel implements ActionListener{
 	public PoolPanel poolPanel;
 	public SpaPanel spaPanel;
 	public FitnessPanel fitPanel;
-	private JLabel lbl, rogo, info;
-	private JLabel[] images;
+	private JLabel lbl, rogo, info, main;
+//	private JLabel[] images;
 	private JButton login, swimmingpool, sauna, fitnesscenter;
 	private JPanel north, n_East, center, south;
 //	private Image poo1_1, poo1_2; private Image poo2_1, poo2_2;
 //	private Image spa1_1, spa1_2; private Image spa2_1, spa2_2;
 //	private Image fit1_1, fit1_2; private Image fit2_1, fit2_2;
-	private Image rogo1, rogo2;
+	private Image rogo1, rogo2;private Image main1, main2;
 	public Panel03() {
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
@@ -202,6 +201,15 @@ public class Panel03 extends JPanel implements ActionListener{
 		info.setLocation(50, 50);
 		info.setBounds(10, 40, 500, 25);
 		center.add(info);
+		
+		ImageIcon icon_main = new ImageIcon("img//rogo.jpg");
+		main1 = icon_main.getImage();
+		main2 = main1.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
+		ImageIcon icon_main2 = new ImageIcon(main2);
+		main = new JLabel(icon_main2);
+		main.setLocation(50, 50);
+		main.setBounds(10, 70, 500, 500);
+		center.add("Center",main);
 		
 		
 //		setLabel();
