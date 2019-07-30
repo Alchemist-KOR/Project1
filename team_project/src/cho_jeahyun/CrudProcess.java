@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 public class CrudProcess {
 
 	private final String NAMESPACE="cho_jeahyun.myMapper";
+	
 	public Reservation_Info selectItemCode(Integer code){
 		SqlSession ss = getSession();
 		Reservation_Info info = null;
@@ -23,12 +24,12 @@ public class CrudProcess {
 			ss.close();
 		}
 	}
-	public List<Reservation_Info> selectAllIteminfo() {
+	public List<Reservation_Info> selectAllReservation_Info() {
 		SqlSession s = getSession();
 		List<Reservation_Info> info = null;
 		
 		try {
-			String query = NAMESPACE + ".selectAllItemInfo";
+			String query = NAMESPACE + ".selectAllReservation_Info";
 			info = s.selectList(query);
 			
 			return info;
