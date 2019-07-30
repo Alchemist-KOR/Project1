@@ -2,13 +2,17 @@ package cho_jeahyun;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Panel01 extends JPanel{
+public class Panel01 extends JPanel implements ActionListener{
+	
+
 	JPanel north,east,center2,south3;
 	JLabel south,center,south2;
 	JButton btn_login;
@@ -49,6 +53,17 @@ public class Panel01 extends JPanel{
 	
 	void setBtn() {
 		btn_login = new JButton("·Î±×ÀÎ");
+		btn_login.addActionListener(this);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		JButton bt = (JButton)e.getSource();
+		
+		if(bt == btn_login) {
+			new Login();
+		}
 	}
 
 }

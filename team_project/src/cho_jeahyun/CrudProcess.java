@@ -11,7 +11,38 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 public class CrudProcess {
 
 	private final String NAMESPACE="cho_jeahyun.myMapper";
-	
+	public Integer selectLogin(Login_info li) {//로그인
+		SqlSession s = getSession();
+		Integer res;
+		List<Login_info> lg = null;
+		try {
+			String query=NAMESPACE+".selectLogin";
+			lg = s.selectOne(query,li);
+			if(lg != null) {
+				res = 1;
+			}else {
+				res = 0;
+			}
+			return res;
+		}finally {
+			s.close();
+		}
+	}
+
+	public Integer insertLogin(Login_info li) {//회원가입
+		SqlSession ss=getSession();
+		Integer result=null;
+		try {
+			String query=NAMESPACE+".insertLogin";
+			result=ss.insert(query,li);
+			
+			if(result>0) ss.commit();
+			else ss.rollback();		
+			return result;
+		}finally {
+			ss.close();
+		}
+	}
 	public Reservation_Info selectItemCode(Integer code){
 		SqlSession ss = getSession();
 		Reservation_Info info = null;

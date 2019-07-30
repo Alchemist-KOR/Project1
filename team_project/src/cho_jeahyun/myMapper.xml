@@ -7,6 +7,18 @@
 		resultType = "cho_jeahyun.Reservation_Info">
 		select * from Reservation_Info order by to_number(order_id) desc
 	</select>
+	
+	<select id="selectLogin" parameterType="cho_jeahyun.Login_info"
+	resultType="cho_jeahyun.Login_info">
+		select * from customer
+		where cid = #{customer_id} and pw = #{customer_pwd}
+	</select>
+	
+	<insert id="insertLogin" parameterType="cho_jeahyun.Login_info" >
+		insert into customer values(#{customer_id},#{customer_pwd},
+		#{customer_name},#{customer_birthday},#{customer_gender},
+		#{customer_email},#{customer_phone},#{customer_address},0)
+	</insert>
 </mapper>
 
 
