@@ -13,13 +13,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Panel02 extends JPanel implements ActionListener{
 	
 
 
-	private JButton login;
 	private JPanel north,north_east, center,center_content;
 	private JPanel content_1,content_2,content_3;
 	private ImageIcon img1,img2,img3;
@@ -31,6 +31,7 @@ public class Panel02 extends JPanel implements ActionListener{
 	private Image resizeimage;
 	private Image result;
 	MainFrame mf;
+	Panel07 p7;
 
 	private JComboBox room_select;
 	
@@ -39,7 +40,7 @@ public class Panel02 extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		Object ob = e.getSource();
+		Object bt = e.getSource();
 		if(room_select.getSelectedIndex() == 1) {
 			center_content.removeAll();
 			rating1.setText("스텐다드");
@@ -104,9 +105,6 @@ public class Panel02 extends JPanel implements ActionListener{
 			center_content.repaint();
 		
 		}
-		if(ob == login) {
-			new Login(mf);
-		}
 	}
 	Panel02(MainFrame mf){
 		this.mf = mf;
@@ -116,10 +114,7 @@ public class Panel02 extends JPanel implements ActionListener{
 		
 		room_select = new JComboBox<String>(room);
 		room_select.addActionListener(this);
-		login = new JButton("로그인");
-		login.addActionListener(this);
-		
-		north_east.add(login);
+
 		north.add("East",north_east);
 		
 		center = new JPanel(new BorderLayout());

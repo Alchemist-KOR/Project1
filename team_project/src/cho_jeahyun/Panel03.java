@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -142,9 +143,6 @@ public class Panel03 extends JPanel implements ActionListener{
 			fitnesscenter.revalidate();
 			fitnesscenter.repaint();
 		}
-		if(obj == obj) {
-			new Login(mf);
-		}
 		
 	}
 	public PoolPanel poolPanel;
@@ -152,13 +150,14 @@ public class Panel03 extends JPanel implements ActionListener{
 	public FitnessPanel fitPanel;
 	private JLabel lbl, rogo, info, main;
 //	private JLabel[] images;
-	private JButton login, swimmingpool, sauna, fitnesscenter;
+	private JButton swimmingpool, sauna,fitnesscenter;
 	private JPanel north, n_East, center, south;
 //	private Image poo1_1, poo1_2; private Image poo2_1, poo2_2;
 //	private Image spa1_1, spa1_2; private Image spa2_1, spa2_2;
 //	private Image fit1_1, fit1_2; private Image fit2_1, fit2_2;
 	private Image rogo1, rogo2;private Image main1, main2;
 	MainFrame mf;
+	Panel07 p7;
 	public Panel03(MainFrame mf) {
 		this.mf = mf;
 		this.setVisible(true);
@@ -175,13 +174,12 @@ public class Panel03 extends JPanel implements ActionListener{
 		south.add(sauna);
 		south.add(fitnesscenter);
 		this.add("South", south);
-		login = new JButton("·Î±×ÀÎ");
-		login.addActionListener(this);
+
 		north = new JPanel();
 		north.setLayout(new BorderLayout());
 		n_East = new JPanel();
 		n_East.setLayout(new FlowLayout());
-		n_East.add(login);
+
 		north.add("East",n_East);
 		this.add("North", north);
 		center = new JPanel();

@@ -28,13 +28,14 @@ public class MainFrame extends JFrame{
 		
 		check_login = false;
 		
-		p1 = new Panel01(this);
+		p7 = new Panel07(this);
+		p1 = new Panel01(this,p7);
 		p2 = new Panel02(this);
 		p3 = new Panel03(this);
 		p4 = new Panel04(this);
 		p5 = new Panel05(this);
 		p6 = new Panel06(this);
-		p7 = new Panel07(this);
+		
 		
 		pan2 = new JScrollPane(p2);
 		//pan2.setHorizontalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -50,11 +51,14 @@ public class MainFrame extends JFrame{
 		mainTabb.addTab("예약하기", p6);
 		mainTabb.addTab("예약확인", p7);
 		
+		mainTabb.setEnabledAt(6, false);
+		
 		this.add(mainTabb);
 		
 		this.setTitle("호텔예약시스템 ver1.0");
 		this.setSize(850,700);
 		this.setVisible(true);
+		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	public static void main(String[] args) {

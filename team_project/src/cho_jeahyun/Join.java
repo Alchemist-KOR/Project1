@@ -130,6 +130,7 @@ public class Join extends JFrame implements ActionListener{
 		this.setTitle("회원가입");
 		this.setSize(400,500);
 		this.setVisible(true);
+		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);	
 	}
 	public static void main(String[] args) {

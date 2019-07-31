@@ -14,7 +14,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 
-public class Login extends JFrame implements ActionListener	{
+public class Login extends JFrame implements ActionListener{
+	
+
 	JLabel log_label,pwd_label;
 	JTextField id_txt;
 	JPasswordField pwd_txt;
@@ -30,9 +32,11 @@ public class Login extends JFrame implements ActionListener	{
 	Panel05 p5;
 	Panel06 p6;
 	Panel07 p7;
-	public Login(MainFrame mf, Panel01 p1) {
+	public Login(MainFrame mf, Panel01 p1, Panel07 p7) {
 		this.mf = mf;
 		this.p1 = p1;
+		this.p7 = p7;
+
 		log_label=new JLabel("아이디");
 		pwd_label=new JLabel("비밀번호");
 		
@@ -70,6 +74,142 @@ public class Login extends JFrame implements ActionListener	{
 		this.setTitle("로그인/회원가입");
 		this.setSize(350,200);
 		this.setVisible(true);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	}
+	public Login(MainFrame mf, Panel02 p2, Panel07 p7) {
+		this.mf = mf;
+		this.p2 = p2;
+		this.p7 = p7;
+
+		log_label=new JLabel("아이디");
+		pwd_label=new JLabel("비밀번호");
+		
+		id_txt=new JTextField(10);
+		pwd_txt=new JPasswordField(10);
+		
+		log_btn=new JButton("로그인");
+		join_btn=new JButton("회원가입");
+		id_missing_btn=new JButton("아이디 찾기");
+		pwd_missing_btn=new JButton("비밀번호 찾기");
+		
+		id_panel=new JPanel();
+		pwd_panel=new JPanel();
+		id_pwd_panel=new JPanel(new GridLayout(2,1));
+		
+		center=new JPanel();
+		south=new JPanel();
+		east=new JPanel();
+		
+		id_panel.add(log_label);id_panel.add(id_txt);
+		pwd_panel.add(pwd_label);pwd_panel.add(pwd_txt);
+		
+		id_pwd_panel.add(id_panel);id_pwd_panel.add(pwd_panel);
+		
+		log_btn.addActionListener(this);
+		join_btn.addActionListener(this);
+		center.add(id_pwd_panel);
+		south.add(join_btn);south.add(id_missing_btn);south.add(pwd_missing_btn);
+		east.add(log_btn);
+		
+		this.add("Center",center);
+		this.add("South",south);
+		this.add("East",east);
+		
+		this.setTitle("로그인/회원가입");
+		this.setSize(350,200);
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	}
+	public Login(MainFrame mf, Panel03 p3, Panel07 p7) {
+		this.mf = mf;
+		this.p3 = p3;
+		this.p7 = p7;
+
+		log_label=new JLabel("아이디");
+		pwd_label=new JLabel("비밀번호");
+		
+		id_txt=new JTextField(10);
+		pwd_txt=new JPasswordField(10);
+		
+		log_btn=new JButton("로그인");
+		join_btn=new JButton("회원가입");
+		id_missing_btn=new JButton("아이디 찾기");
+		pwd_missing_btn=new JButton("비밀번호 찾기");
+		
+		id_panel=new JPanel();
+		pwd_panel=new JPanel();
+		id_pwd_panel=new JPanel(new GridLayout(2,1));
+		
+		center=new JPanel();
+		south=new JPanel();
+		east=new JPanel();
+		
+		id_panel.add(log_label);id_panel.add(id_txt);
+		pwd_panel.add(pwd_label);pwd_panel.add(pwd_txt);
+		
+		id_pwd_panel.add(id_panel);id_pwd_panel.add(pwd_panel);
+		
+		log_btn.addActionListener(this);
+		join_btn.addActionListener(this);
+		center.add(id_pwd_panel);
+		south.add(join_btn);south.add(id_missing_btn);south.add(pwd_missing_btn);
+		east.add(log_btn);
+		
+		this.add("Center",center);
+		this.add("South",south);
+		this.add("East",east);
+		
+		this.setTitle("로그인/회원가입");
+		this.setSize(350,200);
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	}
+	public Login(MainFrame mf, Panel04 p4, Panel07 p7) {
+		this.mf = mf;
+		this.p4 = p4;
+		this.p7 = p7;
+
+		log_label=new JLabel("아이디");
+		pwd_label=new JLabel("비밀번호");
+		
+		id_txt=new JTextField(10);
+		pwd_txt=new JPasswordField(10);
+		
+		log_btn=new JButton("로그인");
+		join_btn=new JButton("회원가입");
+		id_missing_btn=new JButton("아이디 찾기");
+		pwd_missing_btn=new JButton("비밀번호 찾기");
+		
+		id_panel=new JPanel();
+		pwd_panel=new JPanel();
+		id_pwd_panel=new JPanel(new GridLayout(2,1));
+		
+		center=new JPanel();
+		south=new JPanel();
+		east=new JPanel();
+		
+		id_panel.add(log_label);id_panel.add(id_txt);
+		pwd_panel.add(pwd_label);pwd_panel.add(pwd_txt);
+		
+		id_pwd_panel.add(id_panel);id_pwd_panel.add(pwd_panel);
+		
+		log_btn.addActionListener(this);
+		join_btn.addActionListener(this);
+		center.add(id_pwd_panel);
+		south.add(join_btn);south.add(id_missing_btn);south.add(pwd_missing_btn);
+		east.add(log_btn);
+		
+		this.add("Center",center);
+		this.add("South",south);
+		this.add("East",east);
+		
+		this.setTitle("로그인/회원가입");
+		this.setSize(350,200);
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	public Login(MainFrame mf){
@@ -100,6 +240,10 @@ public class Login extends JFrame implements ActionListener	{
 		
 		log_btn.addActionListener(this);
 		join_btn.addActionListener(this);
+		
+		id_txt.addActionListener(this);
+		//pwd_txt.addActionListener(this);
+		
 		center.add(id_pwd_panel);
 		south.add(join_btn);south.add(id_missing_btn);south.add(pwd_missing_btn);
 		east.add(log_btn);
@@ -111,6 +255,8 @@ public class Login extends JFrame implements ActionListener	{
 		this.setTitle("로그인/회원가입");
 		this.setSize(350,200);
 		this.setVisible(true);
+		
+		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	public boolean Logout() {
@@ -120,9 +266,9 @@ public class Login extends JFrame implements ActionListener	{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Object obj=e.getSource();
-		
-		if(obj==log_btn) {//로그인버튼 눌렀을때
+		Object obj = e.getSource();
+		if(obj==log_btn || pwd_txt == obj || id_txt == obj) {//로그인버튼 눌렀을때
+			System.out.println("엔터");
 			String id=id_txt.getText();
 			String pwd=pwd_txt.getText();
 			Login_info login_info=new Login_info();
@@ -142,8 +288,6 @@ public class Login extends JFrame implements ActionListener	{
 				CrudProcess crud = new CrudProcess();
 				temp = crud.selectLogin(login_info);
 				
-				System.out.println(temp.size());
-				
 				
 				if(temp.size() == 0) {					//로그인 실패
 					JOptionPane.showMessageDialog(this, "아이디 와 비밀번호를 확인하세요.");
@@ -158,8 +302,11 @@ public class Login extends JFrame implements ActionListener	{
 					p1.btn_login.setVisible(false);
 					p1.btn_mypage.setVisible(true);
 					p1.btn_logout.setVisible(true);
+					mf.mainTabb.setEnabledAt(6, true);
+					p7.cid = login_info.getCid();
+					
 					dispose();
-				}	
+				}
 			}
 		}else if(obj==join_btn) {//회원가입 버튼을 눌렀을때
 			new Join();

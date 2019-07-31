@@ -40,13 +40,14 @@ public class CrudProcess {
 			ss.close();
 		}
 	}
-	public List<Reservation_Info> selectAllReservation_Info() {
+	public List<Reservation_Info> selectAllReservation_Info(String cid) {
 		SqlSession s = getSession();
 		List<Reservation_Info> info = null;
 		
 		try {
+
 			String query = NAMESPACE + ".selectAllReservation_Info";
-			info = s.selectList(query);
+			info = s.selectList(query,cid);
 			
 			return info;
 		}finally {

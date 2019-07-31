@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Panel01 extends JPanel implements ActionListener{
@@ -18,10 +19,17 @@ public class Panel01 extends JPanel implements ActionListener{
 	JButton btn_login,btn_mypage,btn_logout;
 	ImageIcon img;
 	MainFrame mf;
+	Panel02 p2;
+	Panel03 p3;
+	Panel04 p4;
+	Panel05 p5;
+	Panel06 p6;
+	Panel07 p7;
 	
 
-	Panel01(MainFrame mf){
+	Panel01(MainFrame mf,Panel07 p7){
 		this.mf = mf;
+		this.p7 = p7;
 		this.setLayout(new BorderLayout());
 		north = new JPanel(new BorderLayout());
 		east = new JPanel(new FlowLayout());
@@ -30,11 +38,9 @@ public class Panel01 extends JPanel implements ActionListener{
 		center2 = new JPanel();
 		south2 = new JLabel();
 		south3 = new JPanel();
-		
-		
+
 		setBtn();
-		
-		
+
 		center.setIcon(new ImageIcon("img//호텔01.png"));
 		center2.add(center);
 		
@@ -50,9 +56,7 @@ public class Panel01 extends JPanel implements ActionListener{
 			btn_mypage.setVisible(true);
 		}
 		north.add("East",east);
-		
-		
-		
+
 		this.add("Center",center2);
 		this.add("North",north);
 		this.add("South",south3);
@@ -76,7 +80,15 @@ public class Panel01 extends JPanel implements ActionListener{
 		JButton bt = (JButton)e.getSource();
 		
 		if(bt == btn_login) {
-			new Login(mf, this);
+			new Login(mf, this, p7);
+
+		}else if(bt == btn_logout) {
+			JOptionPane.showMessageDialog(this, "로그아웃 되었습니다.");
+			btn_login.setVisible(true);
+			btn_mypage.setVisible(false);
+			btn_logout.setVisible(false);
+			p7.cid = null;
+			mf.mainTabb.setEnabledAt(6, false);
 		}
 	}
 

@@ -13,6 +13,7 @@ import javax.swing.AbstractAction;
 import javax.swing.AbstractCellEditor;
 import javax.swing.Action;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -23,46 +24,58 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 //     예약확인
-class Reservation_Info_Model extends AbstractTableModel{
-	
+class Reservation_Info_Model extends AbstractTableModel {
 
 	private Object[][] tableData;
 	int cols, rows;
+	private JPanel temp;
 	private JButton button = new JButton("취소");
-	private String[] columnName = {"예약번호","예약날짜","예약자 명","방 번호","체크인/체크아웃","가격"," "};
+	private String[] columnName = { "예약번호", "예약날짜", "예약자 명", "방 번호", "체크인/체크아웃", "가격", " " };
 	private List list;
-	
-	
+	String cid;
+
 	Reservation_Info_Model(List<Reservation_Info> info) {
 		list = info;
 		setData();
 	}
-	Reservation_Info_Model() {
+
+	Reservation_Info_Model(String cid) {
+		this.cid = cid;
 		CrudProcess crud = new CrudProcess();
-		list = crud.selectAllReservation_Info();
-		System.out.println("list 사이즈 " + list.size());
+		list = crud.selectAllReservation_Info(cid);
 		setData();
 	}
 
 	void setData() {
-		
+
 		Iterator it = list.iterator();
 		rows = list.size();
-		
 		cols = columnName.length;
 		tableData = new Object[rows][cols];
 		int r = 0;
+		temp = new JPanel();
 		while (it.hasNext()) {
 			Reservation_Info res = (Reservation_Info) it.next();
 			tableData[r][0] = res.getOrder_id();
 			tableData[r][1] = res.getReservation_date();
 			tableData[r][2] = res.getName();
 			tableData[r][3] = res.getRoomid();
-			tableData[r][4] = res.getCheck_in_d()+res.getCheck_out_d();
+			tableData[r][4] = res.getCheck_in_d() + res.getCheck_out_d();
 			tableData[r][5] = res.getTotal_price();
-//			tableData[r][6] = button;
 			r++;
+
+			
+			
 		}
+		System.out.println(list.size());
+		if (list.size() == 0) {
+			System.out.println("list가 널");
+			JOptionPane.showMessageDialog(null, "조회내역이 없습니다.");
+		} else {
+			System.out.println("list가 널이 아님");
+			JOptionPane.showMessageDialog(null, "조회 되었습니다.");
+		}
+
 	}
 
 	@Override
@@ -82,15 +95,17 @@ class Reservation_Info_Model extends AbstractTableModel{
 		return tableData[rowIndex][columnIndex];
 	}
 }
-class Column_Model extends AbstractTableModel{
-	
+
+class Column_Model extends AbstractTableModel {
 
 	private Object[][] tableData;
 	int cols, rows;
-	private String[] columnName = {"예약번호","예약날짜","예약자 명","방 번호","체크인/체크아웃","가격"," "};
-
+	
+	private String[] columnName = { "예약번호", "예약날짜", "예약자 명", "방 번호", "체크인/체크아웃", "가격", " " };
 
 	Column_Model() {
+		rows = 0;
+		cols = columnName.length;
 	}
 
 	@Override
@@ -110,16 +125,15 @@ class Column_Model extends AbstractTableModel{
 		return tableData[rowIndex][columnIndex];
 	}
 
-	
-
 }
-public class Panel07 extends JPanel implements ActionListener{
+
+public class Panel07 extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		JButton button = (JButton)e.getSource();
-		if(button == select) {
-			table.setModel(new Reservation_Info_Model());
+		JButton button = (JButton) e.getSource();
+		if (button == select) {
+			table.setModel(new Reservation_Info_Model(cid));
 			table.getColumnModel().getColumn(6).setCellRenderer(new TableCell());
 			table.getColumnModel().getColumn(6).setCellEditor(new TableCell());
 		}
@@ -133,44 +147,38 @@ public class Panel07 extends JPanel implements ActionListener{
 	private JTable table;
 	private JScrollPane tablescroll;
 	private JButton cancel1, cancel2;
-	private String[] columnName = {"예약번호","예약날짜","예약자 명","방 번호","체크인/체크아웃","가격"," "};
+	private String[] columnName = { "예약번호", "예약날짜", "예약자 명", "방 번호", "체크인/체크아웃", "가격", " " };
 	MainFrame mf;
-	
-	Panel07(MainFrame mf){
+	String cid;
+
+	Panel07(MainFrame mf) {
 		this.mf = mf;
 		this.setLayout(new BorderLayout());
 		north_right = new JPanel(new BorderLayout());
 		south = new JPanel(new FlowLayout());
-		
+
 		select = new JButton("조회");
 		select.addActionListener(this);
-		
+
 		north_right.add("East", select);
 
 		table = new JTable();
 		table.setModel(new Column_Model());
 		tablescroll = new JScrollPane(table);
-		
+
 		cancel2 = new JButton("취소");
 		cancel2.addActionListener(this);
-		
-		
+
 		south.add(cancel2);
-		
-		
+
 		this.add("North", north_right);
-		this.add("Center",tablescroll);
+		this.add("Center", tablescroll);
 		this.add("South", south);
-		
+
 		this.setVisible(true);
 	}
-	public void test(){
-		System.out.println("sadasdawq");
-	}
-	
-	class TableCell extends AbstractCellEditor implements TableCellEditor, TableCellRenderer{
 
-		
+	class TableCell extends AbstractCellEditor implements TableCellEditor, TableCellRenderer {
 
 		public TableCell() {
 			// TODO Auto-generated constructor stub
@@ -179,11 +187,12 @@ public class Panel07 extends JPanel implements ActionListener{
 //			cancel.addActionListener(e -> {
 //				System.out.println(table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()));
 //			});
-			cancel1.addActionListener(e ->{
-				test();
-			});
-		
+//			cancel1.addActionListener(e ->{
+//				test();
+//			});
+
 		}
+
 		@Override
 		public Object getCellEditorValue() {
 			// TODO Auto-generated method stub
@@ -203,6 +212,6 @@ public class Panel07 extends JPanel implements ActionListener{
 			// TODO Auto-generated method stub
 			return cancel1;
 		}
-		
+
 	}
 }

@@ -3,9 +3,9 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cho_jeahyun.myMapper">
-	<select id="selectAllReservation_Info"
+	<select id="selectAllReservation_Info" parameterType="String"
 		resultType = "cho_jeahyun.Reservation_Info">
-		select * from Reservation_Info order by to_number(order_id) desc
+		select * from Reservation_Info where cid = #{cid} order by to_number(order_id) desc
 	</select>
 	
 	<select id="selectLogin" parameterType="cho_jeahyun.Login_info"
