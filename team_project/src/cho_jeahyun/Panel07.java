@@ -32,6 +32,7 @@ class Reservation_Info_Model extends AbstractTableModel{
 	private String[] columnName = {"예약번호","예약날짜","예약자 명","방 번호","체크인/체크아웃","가격"," "};
 	private List list;
 	
+	
 	Reservation_Info_Model(List<Reservation_Info> info) {
 		list = info;
 		setData();
@@ -133,10 +134,10 @@ public class Panel07 extends JPanel implements ActionListener{
 	private JScrollPane tablescroll;
 	private JButton cancel1, cancel2;
 	private String[] columnName = {"예약번호","예약날짜","예약자 명","방 번호","체크인/체크아웃","가격"," "};
+	MainFrame mf;
 	
-	
-	Panel07(){
-		
+	Panel07(MainFrame mf){
+		this.mf = mf;
 		this.setLayout(new BorderLayout());
 		north_right = new JPanel(new BorderLayout());
 		south = new JPanel(new FlowLayout());

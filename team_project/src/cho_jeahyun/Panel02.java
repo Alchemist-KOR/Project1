@@ -30,6 +30,7 @@ public class Panel02 extends JPanel implements ActionListener{
 	private Font font;
 	private Image resizeimage;
 	private Image result;
+	MainFrame mf;
 
 	private JComboBox room_select;
 	
@@ -38,7 +39,7 @@ public class Panel02 extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		Object combo = e.getSource();
+		Object ob = e.getSource();
 		if(room_select.getSelectedIndex() == 1) {
 			center_content.removeAll();
 			rating1.setText("스텐다드");
@@ -103,9 +104,12 @@ public class Panel02 extends JPanel implements ActionListener{
 			center_content.repaint();
 		
 		}
+		if(ob == login) {
+			new Login(mf);
+		}
 	}
-	Panel02(){
-		
+	Panel02(MainFrame mf){
+		this.mf = mf;
 		this.setLayout(new BorderLayout());
 		north = new JPanel(new BorderLayout());
 		north_east = new JPanel(new FlowLayout());
@@ -113,6 +117,7 @@ public class Panel02 extends JPanel implements ActionListener{
 		room_select = new JComboBox<String>(room);
 		room_select.addActionListener(this);
 		login = new JButton("로그인");
+		login.addActionListener(this);
 		
 		north_east.add(login);
 		north.add("East",north_east);

@@ -15,11 +15,13 @@ public class Panel01 extends JPanel implements ActionListener{
 
 	JPanel north,east,center2,south3;
 	JLabel south,center,south2;
-	JButton btn_login;
+	JButton btn_login,btn_mypage,btn_logout;
 	ImageIcon img;
+	MainFrame mf;
 	
 
-	Panel01(){
+	Panel01(MainFrame mf){
+		this.mf = mf;
 		this.setLayout(new BorderLayout());
 		north = new JPanel(new BorderLayout());
 		east = new JPanel(new FlowLayout());
@@ -40,7 +42,15 @@ public class Panel01 extends JPanel implements ActionListener{
 		south3.add(south2);
 		
 		east.add(btn_login);
+		east.add(btn_logout);
+		east.add(btn_mypage);
+		btn_mypage.setVisible(false);
+		btn_logout.setVisible(false);
+		if(mf.check_login == true) {
+			btn_mypage.setVisible(true);
+		}
 		north.add("East",east);
+		
 		
 		
 		this.add("Center",center2);
@@ -54,6 +64,10 @@ public class Panel01 extends JPanel implements ActionListener{
 	void setBtn() {
 		btn_login = new JButton("로그인");
 		btn_login.addActionListener(this);
+		btn_mypage = new JButton("마이페이지");
+		btn_mypage.addActionListener(this);
+		btn_logout = new JButton("로그아웃");
+		btn_logout.addActionListener(this);
 	}
 	
 	@Override
@@ -62,7 +76,7 @@ public class Panel01 extends JPanel implements ActionListener{
 		JButton bt = (JButton)e.getSource();
 		
 		if(bt == btn_login) {
-			new Login();
+			new Login(mf, this);
 		}
 	}
 

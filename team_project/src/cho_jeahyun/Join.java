@@ -58,7 +58,7 @@ public class Join extends JFrame implements ActionListener{
 			
 			if(r > 0) {
 				JOptionPane.showMessageDialog(this, "정상적으로 등록되었습니다.");
-				System.exit(0);
+				dispose();
 			}else {
 				JOptionPane.showMessageDialog(this, "등록 중 문제가 발생했습니다.");
 			}

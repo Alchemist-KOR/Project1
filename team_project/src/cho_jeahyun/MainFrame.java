@@ -20,19 +20,21 @@ public class MainFrame extends JFrame{
 	public Panel07 p7;
 	private JScrollPane pan2;
 	private JScrollBar bar;
+	public boolean check_login;
 	
 	
 	MainFrame(){
 		mainTabb = new JTabbedPane();
 		
+		check_login = false;
 		
-		p1 = new Panel01();
-		p2 = new Panel02();
-		p3 = new Panel03();
-		p4 = new Panel04();
-		p5 = new Panel05();
-		p6 = new Panel06();
-		p7 = new Panel07();
+		p1 = new Panel01(this);
+		p2 = new Panel02(this);
+		p3 = new Panel03(this);
+		p4 = new Panel04(this);
+		p5 = new Panel05(this);
+		p6 = new Panel06(this);
+		p7 = new Panel07(this);
 		
 		pan2 = new JScrollPane(p2);
 		//pan2.setHorizontalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);

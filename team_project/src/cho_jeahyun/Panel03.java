@@ -119,6 +119,7 @@ class FitnessPanel extends JPanel{
 	}
 }
 public class Panel03 extends JPanel implements ActionListener{
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Object obj = arg0.getSource();
@@ -141,6 +142,9 @@ public class Panel03 extends JPanel implements ActionListener{
 			fitnesscenter.revalidate();
 			fitnesscenter.repaint();
 		}
+		if(obj == obj) {
+			new Login(mf);
+		}
 		
 	}
 	public PoolPanel poolPanel;
@@ -154,7 +158,9 @@ public class Panel03 extends JPanel implements ActionListener{
 //	private Image spa1_1, spa1_2; private Image spa2_1, spa2_2;
 //	private Image fit1_1, fit1_2; private Image fit2_1, fit2_2;
 	private Image rogo1, rogo2;private Image main1, main2;
-	public Panel03() {
+	MainFrame mf;
+	public Panel03(MainFrame mf) {
+		this.mf = mf;
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
 		
@@ -170,6 +176,7 @@ public class Panel03 extends JPanel implements ActionListener{
 		south.add(fitnesscenter);
 		this.add("South", south);
 		login = new JButton("·Î±×ÀÎ");
+		login.addActionListener(this);
 		north = new JPanel();
 		north.setLayout(new BorderLayout());
 		n_East = new JPanel();
@@ -315,9 +322,5 @@ public class Panel03 extends JPanel implements ActionListener{
 //		ImageIcon fit_2 = new ImageIcon(fit2_2);
 //		images[7] = new JLabel(fit_2);
 //	}
-
-	public static void main(String[] args) {
-		
-	}
 
 }

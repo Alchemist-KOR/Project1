@@ -9,9 +9,9 @@ import javax.swing.JPanel;
 public class Panel05 extends JPanel{
 	JLabel north,center,south;
 	JPanel north1,center1,south1;
-	
-	Panel05(){
-		
+	MainFrame mf;
+	Panel05(MainFrame mf){
+		this.mf = mf;
 		this.setLayout(new BorderLayout());
 		north = new JLabel();
 		north1 = new JPanel();
