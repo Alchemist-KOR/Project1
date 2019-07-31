@@ -39,6 +39,7 @@ class Reservation_Info_Model extends AbstractTableModel{
 	Reservation_Info_Model() {
 		CrudProcess crud = new CrudProcess();
 		list = crud.selectAllReservation_Info();
+		System.out.println("list ªÁ¿Ã¡Ó " + list.size());
 		setData();
 	}
 
@@ -46,6 +47,7 @@ class Reservation_Info_Model extends AbstractTableModel{
 		
 		Iterator it = list.iterator();
 		rows = list.size();
+		
 		cols = columnName.length;
 		tableData = new Object[rows][cols];
 		int r = 0;

@@ -11,13 +11,13 @@
 	<select id="selectLogin" parameterType="cho_jeahyun.Login_info"
 	resultType="cho_jeahyun.Login_info">
 		select * from customer
-		where cid = #{customer_id} and pw = #{customer_pwd}
+		where cid = #{cid} and pw = #{pw}
 	</select>
 	
 	<insert id="insertLogin" parameterType="cho_jeahyun.Login_info" >
-		insert into customer values(#{customer_id},#{customer_pwd},
-		#{customer_name},#{customer_birthday},#{customer_gender},
-		#{customer_email},#{customer_phone},#{customer_address},0)
+		insert into customer values(#{cid},#{pw},
+		#{name},#{birthday},#{gender},
+		#{email},#{phone},#{address},0)
 	</insert>
 </mapper>
 

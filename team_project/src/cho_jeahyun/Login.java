@@ -3,6 +3,7 @@ package cho_jeahyun;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -59,7 +60,7 @@ public class Login extends JFrame implements ActionListener	{
 		this.setTitle("로그인/회원가입");
 		this.setSize(350,200);
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 
 	@Override
@@ -70,6 +71,7 @@ public class Login extends JFrame implements ActionListener	{
 			String id=id_txt.getText();
 			String pwd=pwd_txt.getText();
 			Login_info login_info=new Login_info();
+			List<Login_info> temp;
 			
 			int r;
 			if(id.equals("")) {//id가 빈칸일 경우
@@ -79,23 +81,22 @@ public class Login extends JFrame implements ActionListener	{
 				JOptionPane.showMessageDialog(this, "비밀번호 를 입력하세요");
 				return;
 			}else {
-				login_info.setCustomer_id(id);
-				login_info.setCustomer_pwd(pwd);
-				
-				System.out.println(login_info.getCustomer_id()+"   "+ login_info.getCustomer_pwd());
-				
+				login_info.setCid(id);
+				login_info.setPw(pwd);
+
 				CrudProcess crud = new CrudProcess();
-				r = crud.selectLogin(login_info);
+				temp = crud.selectLogin(login_info);
 				
-				System.out.println(r);
+				System.out.println(temp.size());
 				
 				
-				if(r <= 0) {					//로그인 실패
+				if(temp.size() == 0) {					//로그인 실패
 					JOptionPane.showMessageDialog(this, "아이디 와 비밀번호를 확인하세요.");
+					id_txt.setText("");
+					pwd_txt.setText("");
 				}else {								//로그인 성공
 					JOptionPane.showMessageDialog(this, "로그인 되었습니다.");
 					//윈도위의 title 를 바꾼다 -> 환영합니다 누구누구 님
-					login.setTitle("호텔예약시스템 ver1.0 - 환영합니다 "+id+" 님");
 					System.exit(0);
 				}	
 			}

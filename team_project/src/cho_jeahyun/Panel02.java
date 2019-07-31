@@ -86,15 +86,15 @@ public class Panel02 extends JPanel implements ActionListener{
 			result = resizeimage.getScaledInstance(550, 350, Image.SCALE_SMOOTH);
 			res_img1 = new ImageIcon(result);
 			imglabel1 = new JLabel(res_img1);
-			text1.setText("<html><body>편안함 느낌의 휴양 리조트 인테리어<br>코너 스위트는 본관 1층에서 6층까지 건물 윙의 가장 끝 부분에 위치하여 낮은 층에서는<br>"
-					+ "탁 트인 정원 전망을, 높은 층에서는 제주의 푸른 바다의 한라산의 기품을 함께 즐길 수<br>"
+			text1.setText("<html><body>편안함 느낌의 휴양 리조트 인테리어 코너 스위트는 본관 1층에서 6층까지 건물 윙의 가장 끝 부분에 위치하여 낮은 층에서는<br>"
+					+ "탁 트인 정원 전망을, 높은 층에서는 제주의 푸른 바다의 한라산의 기품을 함께 즐길 수 "
 					+ "있습니다.<br>"
 					+ "침실과 거실, 욕실이 분리되어 있으며 침실과 거실 사이는 루버도어로 장식이 되어 있습<br>"
 					+ "니다. 벽지, 커페트 등에 전체적으로 화이트, 제이드 그린, 블루 톤을 사용했으며, 캐노피<br>"
 					+ "침대와 클래식한 화장대로 스위트의 우아한 느낌을 더욱 살렸습니다."
-					+ "<br>침대옆에는 스툴이 있는 라탄 윙 체어를 놓아 리조트의 편안한 느낌을 연추 하였습니다.</body></html>");
+					+ "<br>침대옆에는 스툴이 있는 라탄 윙 체어를 놓아 리조트의 편안한 느낌을 연출 하였습니다.</body></html>");
 			rating1.setBounds(65,7,55 , 15);
-			text1.setBounds(65, 360, 420, 120);
+			text1.setBounds(65, 380, 420, 200);
 			imglabel1.setBounds(65, 25, 550, 350);
 			center_content.add(rating1);
 			center_content.add(imglabel1);

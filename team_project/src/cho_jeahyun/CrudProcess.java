@@ -2,6 +2,7 @@ package cho_jeahyun;
 
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -11,19 +12,15 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 public class CrudProcess {
 
 	private final String NAMESPACE="cho_jeahyun.myMapper";
-	public Integer selectLogin(Login_info li) {//로그인
+	public List<Login_info> selectLogin(Login_info li) {//로그인
 		SqlSession s = getSession();
-		Integer res;
 		List<Login_info> lg = null;
+		
 		try {
 			String query=NAMESPACE+".selectLogin";
-			lg = s.selectOne(query,li);
-			if(lg != null) {
-				res = 1;
-			}else {
-				res = 0;
-			}
-			return res;
+
+			lg = s.selectList(query,li);
+			return lg;
 		}finally {
 			s.close();
 		}
@@ -39,18 +36,6 @@ public class CrudProcess {
 			if(result>0) ss.commit();
 			else ss.rollback();		
 			return result;
-		}finally {
-			ss.close();
-		}
-	}
-	public Reservation_Info selectItemCode(Integer code){
-		SqlSession ss = getSession();
-		Reservation_Info info = null;
-		try {
-			String query=NAMESPACE+".selectItemCode";
-			info=ss.selectOne(query,code);
-			
-			return info;
 		}finally {
 			ss.close();
 		}

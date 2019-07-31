@@ -25,16 +25,16 @@ public class Join extends JFrame implements ActionListener{
 			Login_info login_info=new Login_info();
 			
 			String id=id_txt.getText();
-			login_info.setCustomer_id(id);
+			login_info.setCid(id);
 			
 			String pwd=pwd_txt.getText();
-			login_info.setCustomer_pwd(pwd);
+			login_info.setPw(pwd);
 			
 			String name=name_txt.getText();
-			login_info.setCustomer_name(name);
+			login_info.setName(name);
 			
 			String birth= birth_txt.getText();
-			login_info.setCustomer_birthday(birth);
+			login_info.setBirthday(birth);
 			
 			String gender="";
 			if(man.isSelected()) {//남자를 선택
@@ -42,16 +42,16 @@ public class Join extends JFrame implements ActionListener{
 			}else if(woman.isSelected()) {//여자를 선택
 				gender="여자";
 			}
-			login_info.setCustomer_gender(gender);
+			login_info.setGender(gender);
 			
 			String email=email_txt.getText();
-			login_info.setCustomer_email(email);
+			login_info.setEmail(email);
 			
 			String addr=addr_txt.getText();
-			login_info.setCustomer_address(addr);
+			login_info.setAddress(addr);
 			
 			String phone=phoneNum_txt.getText();
-			login_info.setCustomer_phone(phone);
+			login_info.setPhone(phone);
 			
 			CrudProcess crud=new CrudProcess();
 			int r = crud.insertLogin(login_info);
@@ -130,7 +130,7 @@ public class Join extends JFrame implements ActionListener{
 		this.setTitle("회원가입");
 		this.setSize(400,500);
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);	
 	}
 	public static void main(String[] args) {
 		new Join();
