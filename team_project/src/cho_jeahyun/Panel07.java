@@ -2,6 +2,7 @@ package cho_jeahyun;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.EventObject;
@@ -77,6 +78,34 @@ class Reservation_Info_Model extends AbstractTableModel{
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		return tableData[rowIndex][columnIndex];
 	}
+}
+class Column_Model extends AbstractTableModel{
+	
+
+	private Object[][] tableData;
+	int cols, rows;
+	private String[] columnName = {"예약번호","예약날짜","예약자 명","방 번호","체크인/체크아웃","가격"," "};
+
+
+	Column_Model() {
+	}
+
+	@Override
+	public String getColumnName(int arg0) {
+		return columnName[arg0];
+	}
+
+	public int getColumnCount() {
+		return cols;
+	}
+
+	public int getRowCount() {
+		return rows;
+	}
+
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		return tableData[rowIndex][columnIndex];
+	}
 
 	
 
@@ -96,31 +125,39 @@ public class Panel07 extends JPanel implements ActionListener{
 //		}
 	}
 
-	private JPanel tabPanel, north_right;
+	private JPanel tabPanel, north_right, south;
 	private JButton select;
 	private JTable table;
 	private JScrollPane tablescroll;
-	private JButton cancel;
+	private JButton cancel1, cancel2;
+	private String[] columnName = {"예약번호","예약날짜","예약자 명","방 번호","체크인/체크아웃","가격"," "};
 	
 	
 	Panel07(){
 		
 		this.setLayout(new BorderLayout());
 		north_right = new JPanel(new BorderLayout());
+		south = new JPanel(new FlowLayout());
 		
 		select = new JButton("조회");
 		select.addActionListener(this);
 		
 		north_right.add("East", select);
-		
-		
-		table = new JTable();
-		
-		tablescroll = new JScrollPane(table);
 
+		table = new JTable();
+		table.setModel(new Column_Model());
+		tablescroll = new JScrollPane(table);
+		
+		cancel2 = new JButton("취소");
+		cancel2.addActionListener(this);
+		
+		
+		south.add(cancel2);
+		
 		
 		this.add("North", north_right);
 		this.add("Center",tablescroll);
+		this.add("South", south);
 		
 		this.setVisible(true);
 	}
@@ -134,12 +171,12 @@ public class Panel07 extends JPanel implements ActionListener{
 
 		public TableCell() {
 			// TODO Auto-generated constructor stub
-			cancel = new JButton("취소");
+			cancel1 = new JButton("취소");
 //			cancel.setOpaque(true);
 //			cancel.addActionListener(e -> {
 //				System.out.println(table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()));
 //			});
-			cancel.addActionListener(e ->{
+			cancel1.addActionListener(e ->{
 				test();
 			});
 		
@@ -154,14 +191,14 @@ public class Panel07 extends JPanel implements ActionListener{
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 				int row, int column) {
 			// TODO Auto-generated method stub
-			return cancel;
+			return cancel1;
 		}
 
 		@Override
 		public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row,
 				int column) {
 			// TODO Auto-generated method stub
-			return cancel;
+			return cancel1;
 		}
 		
 	}
