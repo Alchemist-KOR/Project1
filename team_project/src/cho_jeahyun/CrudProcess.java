@@ -25,6 +25,19 @@ public class CrudProcess {
 			s.close();
 		}
 	}
+	public List<Login_info> selectAccount(String cid) {//마이페이지 조회
+		SqlSession s = getSession();
+		List<Login_info> lg = null;
+		
+		try {
+			String query=NAMESPACE+".selectAccount";
+
+			lg = s.selectList(query,cid);
+			return lg;
+		}finally {
+			s.close();
+		}
+	}
 
 	public Integer insertLogin(Login_info li) {//회원가입
 		SqlSession ss=getSession();
@@ -40,7 +53,7 @@ public class CrudProcess {
 			ss.close();
 		}
 	}
-	public List<Reservation_Info> selectAllReservation_Info(String cid) {
+	public List<Reservation_Info> selectAllReservation_Info(String cid) {//회원 예약내역확인
 		SqlSession s = getSession();
 		List<Reservation_Info> info = null;
 		
@@ -55,41 +68,12 @@ public class CrudProcess {
 		}
 		
 	}
-	public List<Reservation_Info> selectIteminfo(HashMap map) {
-		SqlSession s = getSession();
-		List<Reservation_Info> info = null;
-		
-		try {
-			String query = NAMESPACE + ".selectItem";
-			info = s.selectList(query, map);
-			
-			return info;
-		}finally {
-			s.close();
-		}
-		
-	}
-	public Integer insertItemInfo(Reservation_Info info) {
+
+	public Integer updateCustomer(Login_info info) {
 		SqlSession session = getSession();
 		Integer result = null;
 		try {
-			String query = NAMESPACE+".insertItemInfo";
-			result = session.insert(query, info);
-			if(result > 0) {
-				session.commit();
-			}else {
-				session.close();
-			}
-		return result;
-		}finally {
-			session.close();
-		}
-	}
-	public Integer updateItemInfo(Reservation_Info info) {
-		SqlSession session = getSession();
-		Integer result = null;
-		try {
-			String query = NAMESPACE+".updateItemInfo";
+			String query = NAMESPACE+".updateCustomer";
 			result = session.insert(query, info);
 			if(result > 0) {
 				session.commit();
@@ -100,11 +84,11 @@ public class CrudProcess {
 			session.close();
 		}
 	}
-	public int deleteIteminfoCondition(HashMap map) {
+	public int deleteCustomer(HashMap map) {
 		SqlSession s = getSession();
 		int result = 0;
 		try {
-			String query = NAMESPACE + ".deleteItemInfo";
+			String query = NAMESPACE + ".deleteCustomer";
 			result = s.delete(query,map);
 			if(result > 0) {
 				s.commit();

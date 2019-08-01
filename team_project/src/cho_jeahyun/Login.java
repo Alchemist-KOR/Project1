@@ -23,6 +23,7 @@ public class Login extends JFrame implements ActionListener{
 	JButton log_btn,join_btn,id_missing_btn,pwd_missing_btn;
 	JPanel id_panel,pwd_panel,id_pwd_panel;
 	JPanel center,south,east;
+	public String cid;
 	public boolean login_check = false;
 	MainFrame mf;
 	Panel01 p1;
@@ -32,11 +33,12 @@ public class Login extends JFrame implements ActionListener{
 	Panel05 p5;
 	Panel06 p6;
 	Panel07 p7;
+	MyPage mp;
 	public Login(MainFrame mf, Panel01 p1, Panel07 p7) {
 		this.mf = mf;
 		this.p1 = p1;
 		this.p7 = p7;
-
+		this.mp = mp;
 		log_label=new JLabel("아이디");
 		pwd_label=new JLabel("비밀번호");
 		
@@ -107,7 +109,7 @@ public class Login extends JFrame implements ActionListener{
 		join_btn.addActionListener(this);
 		
 		id_txt.addActionListener(this);
-		//pwd_txt.addActionListener(this);
+		pwd_txt.addActionListener(new Login_EnterEvent());
 		
 		center.add(id_pwd_panel);
 		south.add(join_btn);south.add(id_missing_btn);south.add(pwd_missing_btn);
@@ -171,6 +173,7 @@ public class Login extends JFrame implements ActionListener{
 					p1.btn_logout.setVisible(true);
 					mf.mainTabb.setEnabledAt(6, true);
 					p7.cid = login_info.getCid();
+					p1.cid = login_info.getCid();
 					
 					dispose();
 				}
@@ -184,4 +187,13 @@ public class Login extends JFrame implements ActionListener{
 //
 //	}
 
+}
+class Login_EnterEvent implements ActionListener{
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("asdasda");
+	}
+	
 }

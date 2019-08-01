@@ -19,6 +19,7 @@ public class Panel01 extends JPanel implements ActionListener{
 	JButton btn_login,btn_mypage,btn_logout;
 	ImageIcon img;
 	MainFrame mf;
+	String cid;
 	Panel02 p2;
 	Panel03 p3;
 	Panel04 p4;
@@ -30,6 +31,7 @@ public class Panel01 extends JPanel implements ActionListener{
 	Panel01(MainFrame mf,Panel07 p7){
 		this.mf = mf;
 		this.p7 = p7;
+
 		this.setLayout(new BorderLayout());
 		north = new JPanel(new BorderLayout());
 		east = new JPanel(new FlowLayout());
@@ -89,7 +91,10 @@ public class Panel01 extends JPanel implements ActionListener{
 			btn_logout.setVisible(false);
 			p7.cid = null;
 			mf.mainTabb.setEnabledAt(6, false);
+		}else if(bt == btn_mypage) {
+			new MyPage(this);
 		}
+		
 	}
 
 }
