@@ -37,14 +37,10 @@ public class MainFrame extends JFrame{
 		p6 = new Panel06(this);
 		
 		
-		pan2 = new JScrollPane(p2);
-		//pan2.setHorizontalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-//		pan2.setPreferredSize(new Dimension(800,700));
-		pan2.setMinimumSize(new Dimension(800,10));
-//		pan2.setMaximumSize(new Dimension(850,1200));
+
 		
 		mainTabb.addTab("메인", p1);
-		mainTabb.addTab("객실정보", pan2);
+		mainTabb.addTab("객실정보", p2);
 		mainTabb.addTab("서비스", p3);
 		mainTabb.addTab("갤러리", p4);
 		mainTabb.addTab("소개및 위치", p5);
