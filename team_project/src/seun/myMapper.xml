@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seun.myMapper">
+	<select id="selectLogin" parameterType="seun.Login_info" resultType="seun.Login_info">
+		select * from customer
+		where cid = #{cid} and pw = #{pw}
+	</select>
+	
+	<insert id="insertLogin" parameterType="seun.Login_info" >
+		insert into customer values(#{cid},#{pw},
+		#{name},#{birthday},#{gender},
+		#{email},#{phone},#{address},0)
+	</insert>
+
+	<select id="selectId" parameterType="seun.Login_info" resultType="seun.Login_info">
+		select cid from customer
+		where name=#{name} and email=#{email}
+	</select>
+	<select id="selectPwd" parameterType="seun.Login_info" resultType="seun.Login_info">
+		select pw from customer
+		where cid=#{cid} and email=#{email}
+	</select>
+</mapper>
+
