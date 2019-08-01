@@ -13,12 +13,34 @@
 		select * from customer
 		where cid = #{cid} and pw = #{pw}
 	</select>
+	<select id="selectAccount" parameterType="String"
+	resultType="cho_jeahyun.Login_info">
+		select * from customer
+		where cid = #{cid}
+	</select>
 	
 	<insert id="insertLogin" parameterType="cho_jeahyun.Login_info" >
 		insert into customer values(#{cid},#{pw},
 		#{name},#{birthday},#{gender},
 		#{email},#{phone},#{address},0)
 	</insert>
+	<delete id="deleteCustomer" parameterType = "HashMap">
+		delete from customer
+		<where>
+			<if test="cid != null">and cid = #{cid}</if>
+			<if test="phone != null">and phone = #{phone}</if>
+		</where>
+	</delete>
+	<update id="updateCustomer" parameterType = "cho_jeahyun.Login_info">
+		update customer set name = #{name},
+		pw = #{pw},
+		birthday = #{birthday},
+		gender = #{gender},
+		email = #{email},
+		address = #{address},
+		phone = #{phone}
+		where cid = #{cid}
+	</update>
 </mapper>
 
 

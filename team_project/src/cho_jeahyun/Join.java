@@ -133,8 +133,8 @@ public class Join extends JFrame implements ActionListener{
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);	
 	}
-	public static void main(String[] args) {
-		new Join();
-	}
+//	public static void main(String[] args) {
+//		new Join();
+//	}
 	
 }

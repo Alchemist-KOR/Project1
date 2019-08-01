@@ -21,6 +21,7 @@ public class MainFrame extends JFrame{
 	private JScrollPane pan2;
 	private JScrollBar bar;
 	public boolean check_login;
+	public MyPage mp;
 	
 	
 	MainFrame(){
