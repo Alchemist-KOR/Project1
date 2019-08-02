@@ -84,6 +84,7 @@ public class Panel01 extends JPanel implements ActionListener{
 		if(bt == btn_login) {
 			new Login(mf, this, p7);
 
+			
 		}else if(bt == btn_logout) {
 			JOptionPane.showMessageDialog(this, "로그아웃 되었습니다.");
 			btn_login.setVisible(true);

@@ -1,6 +1,7 @@
 package cho_jeahyun;
 
 public class Reservation_Info {
+	
 	private Integer order_id;
 	private String cid;
 	private String name;
@@ -11,7 +12,15 @@ public class Reservation_Info {
 	private String reservation_date;
 	private String check_in_d;
 	private String check_out_d;
+	private String phone;
 	
+	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	
 	public String getName() {
 		return name;

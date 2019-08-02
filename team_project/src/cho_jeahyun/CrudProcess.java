@@ -38,6 +38,35 @@ public class CrudProcess {
 			s.close();
 		}
 	}
+	
+	public String selectId(Login_info lg) {//마이페이지 조회
+		SqlSession s = getSession();
+		String id = null;
+		
+		try {
+			String query=NAMESPACE+".selectId";
+
+			id = s.selectOne(query,lg);
+
+			return id;
+		}finally {
+			s.close();
+		}
+	}
+	public String selectPw(Login_info lg) {//마이페이지 조회
+		SqlSession s = getSession();
+		String pw = null;
+		
+		try {
+			String query=NAMESPACE+".selectPw";
+
+			pw = s.selectOne(query,lg);
+
+			return pw;
+		}finally {
+			s.close();
+		}
+	}
 
 	public Integer insertLogin(Login_info li) {//회원가입
 		SqlSession ss=getSession();
@@ -63,6 +92,23 @@ public class CrudProcess {
 			info = s.selectList(query,cid);
 			
 			return info;
+		}finally {
+			s.close();
+		}
+		
+	}
+	public List<Reservation_Info> selectAllReservation_Info_non(Reservation_Info info) {//비회원 예약내역확인
+		SqlSession s = getSession();
+		List<Reservation_Info> res = null;
+		
+		try {
+
+			String query = NAMESPACE + ".selectAllReservation_Info_non";
+			System.out.println(info.getOrder_id()+" "+ info.getName() +" "+ info.getPhone());
+			
+			res = s.selectList(query,info);
+			
+			return res;
 		}finally {
 			s.close();
 		}

@@ -18,8 +18,7 @@ public class MainFrame extends JFrame{
 	public Panel05 p5;
 	public Panel06 p6;
 	public Panel07 p7;
-	private JScrollPane pan2;
-	private JScrollBar bar;
+	public Panel08 p8;
 	public boolean check_login;
 	public MyPage mp;
 	
@@ -32,13 +31,13 @@ public class MainFrame extends JFrame{
 		p7 = new Panel07(this);
 		p1 = new Panel01(this,p7);
 		p2 = new Panel02(this);
-		p3 = new Panel03(this);
-		p4 = new Panel04(this);
+		p3 = new Panel03();
+		p4 = new Panel04();
 		p5 = new Panel05(this);
 		p6 = new Panel06(this);
+		p8 = new Panel08();
 		
 		
-
 		
 		mainTabb.addTab("메인", p1);
 		mainTabb.addTab("객실정보", p2);
@@ -47,6 +46,7 @@ public class MainFrame extends JFrame{
 		mainTabb.addTab("소개및 위치", p5);
 		mainTabb.addTab("예약하기", p6);
 		mainTabb.addTab("예약확인", p7);
+		mainTabb.addTab("예약확인", p8);
 		
 		mainTabb.setEnabledAt(6, false);
 		

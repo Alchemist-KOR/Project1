@@ -5,9 +5,15 @@
 <mapper namespace="cho_jeahyun.myMapper">
 	<select id="selectAllReservation_Info" parameterType="String"
 		resultType = "cho_jeahyun.Reservation_Info">
-		select * from Reservation_Info where cid = #{cid} order by to_number(order_id) desc
+		select * from Reservation_Info
+		where cid = #{cid} order by to_date(reservation_date) desc
 	</select>
-	
+	<select id="selectAllReservation_Info_non" parameterType="cho_jeahyun.Login_info"
+		resultType = "cho_jeahyun.Reservation_Info">
+		select * from Reservation_Info
+		where order_id = #{order_id} and name = #{name} and phone = #{phone}
+		order by to_date(reservation_date) desc
+	</select>
 	<select id="selectLogin" parameterType="cho_jeahyun.Login_info"
 	resultType="cho_jeahyun.Login_info">
 		select * from customer
@@ -17,6 +23,16 @@
 	resultType="cho_jeahyun.Login_info">
 		select * from customer
 		where cid = #{cid}
+	</select>
+	<select id="selectId" parameterType="cho_jeahyun.Login_info"
+	resultType="String">
+		select cid from customer
+		where email = #{email} and name = #{name}
+	</select>
+	<select id="selectPw" parameterType="cho_jeahyun.Login_info"
+	resultType="String">
+		select pw from customer
+		where cid = #{cid} and email = #{email}
 	</select>
 	
 	<insert id="insertLogin" parameterType="cho_jeahyun.Login_info" >
