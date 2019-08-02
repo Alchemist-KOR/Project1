@@ -138,7 +138,6 @@ public class Panel02 extends JPanel implements ActionListener{
 		this.add("North", north);
 		
 		this.setVisible(true);
-		
 	}
 
 }

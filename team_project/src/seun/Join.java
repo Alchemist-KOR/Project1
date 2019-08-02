@@ -1,9 +1,8 @@
-package cho_jeahyun;
+package seun;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -15,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+
 
 public class Join extends JFrame implements ActionListener{
 	
@@ -58,7 +58,7 @@ public class Join extends JFrame implements ActionListener{
 			
 			if(r > 0) {
 				JOptionPane.showMessageDialog(this, "정상적으로 등록되었습니다.");
-				dispose();
+				System.exit(0);
 			}else {
 				JOptionPane.showMessageDialog(this, "등록 중 문제가 발생했습니다.");
 			}
@@ -130,11 +130,10 @@ public class Join extends JFrame implements ActionListener{
 		this.setTitle("회원가입");
 		this.setSize(400,500);
 		this.setVisible(true);
-		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	
 	}
-//	public static void main(String[] args) {
-//		new Join();
-//	}
+	public static void main(String[] args) {
+		new Join();
+	}
 	
 }
