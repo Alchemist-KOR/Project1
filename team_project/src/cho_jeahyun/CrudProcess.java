@@ -39,7 +39,7 @@ public class CrudProcess {
 		}
 	}
 	
-	public String selectId(Login_info lg) {//마이페이지 조회
+	public String selectId(Login_info lg) {//아이디 찾기
 		SqlSession s = getSession();
 		String id = null;
 		
@@ -53,7 +53,7 @@ public class CrudProcess {
 			s.close();
 		}
 	}
-	public String selectPw(Login_info lg) {//마이페이지 조회
+	public String selectPw(Login_info lg) {//비밀번호 찾기
 		SqlSession s = getSession();
 		String pw = null;
 		

@@ -37,7 +37,6 @@ class Reservation_Info_Model_norl extends AbstractTableModel {
 		list = crud.selectAllReservation_Info_non(info);
 
 		if (list.size() > 0) {
-			JOptionPane.showMessageDialog(null, "조회 되었습니다.");
 			setData();
 		} else {
 			JOptionPane.showMessageDialog(null, "조회내역이 없습니다.");
@@ -55,10 +54,10 @@ class Reservation_Info_Model_norl extends AbstractTableModel {
 		while (it.hasNext()) {
 			Reservation_Info res = (Reservation_Info) it.next();
 			tableData[r][0] = res.getOrder_id();
-			tableData[r][1] = res.getReservation_date();
+			tableData[r][1] = res.getReservation_date().substring(0,10);
 			tableData[r][2] = res.getName();
 			tableData[r][3] = res.getRoomid();
-			tableData[r][4] = res.getCheck_in_d() + res.getCheck_out_d();
+			tableData[r][4] = res.getCheck_in_d().substring(0,10) +" ~ "+ res.getCheck_out_d().substring(0,10);
 			tableData[r][5] = res.getTotal_price();
 			r++;
 		}
