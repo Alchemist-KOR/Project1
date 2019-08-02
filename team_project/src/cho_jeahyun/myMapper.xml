@@ -37,7 +37,7 @@
 	
 	<insert id="insertLogin" parameterType="cho_jeahyun.Login_info" >
 		insert into customer values(#{cid},#{pw},
-		#{name},(#{birthday}, 'YYYY-MM-DD'),#{gender},
+		#{name},#{birthday},#{gender},
 		#{email},#{phone},#{address},0)
 	</insert>
 	<delete id="deleteCustomer" parameterType = "HashMap">
@@ -50,7 +50,7 @@
 	<update id="updateCustomer" parameterType = "cho_jeahyun.Login_info">
 		update customer set name = #{name},
 		pw = #{pw},
-		(birthday, 'yyyy-mm-dd') = #{birthday},
+		birthday = #{birthday},
 		gender = #{gender},
 		email = #{email},
 		address = #{address},
