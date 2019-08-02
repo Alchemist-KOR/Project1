@@ -34,6 +34,32 @@
 		select pw from customer
 		where cid = #{cid} and email = #{email}
 	</select>
+	<select id="selectAllCustomer"
+		resultType = "cyc.Login_info">
+		select * from customer order by cid desc
+	</select>
+	
+	<select id="selectCustomer" parameterType ="HashMap"
+						resultType="cyc.Login_info">
+		select * from customer
+		<where>
+		<if test="cid != null">and cid=#{cid}</if>
+		<if test="name != null">and name=#{name}</if>
+		</where>
+	</select>
+	<insert id="Check_in_t" parameterType="cyc.Check_inout">
+		insert into check_inout(order_id,check_in_d)
+		values(#{order_id},#{check_in_d})
+	</insert>
+	<update id="Check_out_t" parameterType="cyc.Check_inout">
+		update check_inout set check_out_d=#{check_out_d}
+		where order_id =#{order_id}
+	</update>
+	
+	<select id="selectAllCheck_inout"
+		resultType = "cyc.Check_inout">
+		select * from check_inout order by order_id desc
+	</select>
 	
 	<insert id="insertLogin" parameterType="cho_jeahyun.Login_info" >
 		insert into customer values(#{cid},#{pw},
