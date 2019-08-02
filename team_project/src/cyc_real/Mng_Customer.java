@@ -43,7 +43,7 @@ class CustomerModel extends AbstractTableModel{
 			data[r][0] = cust.getCid();
 			data[r][1] = cust.getPw();
 			data[r][2] = cust.getName();
-			data[r][3] = cust.getBirthday();
+			data[r][3] = cust.getBirthday().substring(0, 10);
 			data[r][4] = cust.getGender();
 			data[r][5] = cust.getEmail();
 			data[r][6] = cust.getPhone();
