@@ -12,7 +12,7 @@ public class Mng extends JFrame {
 	public Mng_Customer customer = null;
 	public Mng(){
 		this.setVisible(true);
-		this.setSize(850, 700);
+		this.setSize(950, 700);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		customer = new Mng_Customer();
