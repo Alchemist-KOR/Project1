@@ -13,32 +13,21 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-
-public class Login extends JFrame implements ActionListener{
-	
-
+public final class Login_Manager extends JFrame implements ActionListener{
 	JLabel log_label,pwd_label;
 	JTextField id_txt;
 	JPasswordField pwd_txt;
-	JButton log_btn,join_btn,id_missing_btn,pwd_missing_btn, manager_login_btn;
+	JButton log_btn;
 	JPanel id_panel,pwd_panel,id_pwd_panel;
 	JPanel center,south,east;
 	public String cid;
 	public boolean login_check = false;
-	MainFrame mf;
 	Panel01 p1;
-	Panel02 p2;
-	Panel03 p3;
-	Panel04 p4;
-	Panel05 p5;
-	Panel06 p6;
-	Panel07 p7;
-	MyPage mp;
-	public Login(MainFrame mf, Panel01 p1, Panel07 p7) {
-		this.mf = mf;
+
+	public Login_Manager(Panel01 p1) {
+
 		this.p1 = p1;
-		this.p7 = p7;
-		this.mp = mp;
+
 		log_label=new JLabel("아이디");
 		pwd_label=new JLabel("비밀번호");
 		
@@ -46,10 +35,6 @@ public class Login extends JFrame implements ActionListener{
 		pwd_txt=new JPasswordField(10);
 		
 		log_btn=new JButton("로그인");
-		join_btn=new JButton("회원가입");
-		id_missing_btn=new JButton("아이디 찾기");
-		pwd_missing_btn=new JButton("비밀번호 찾기");
-		manager_login_btn = new JButton("관리자");
 		
 		id_panel=new JPanel();
 		pwd_panel=new JPanel();
@@ -65,10 +50,6 @@ public class Login extends JFrame implements ActionListener{
 		id_pwd_panel.add(id_panel);id_pwd_panel.add(pwd_panel);
 		
 		log_btn.addActionListener(this);
-		join_btn.addActionListener(this);
-		id_missing_btn.addActionListener(this);
-		pwd_missing_btn.addActionListener(this);
-		manager_login_btn.addActionListener(this);
 		
 		
 		id_txt.addActionListener(this);
@@ -76,15 +57,14 @@ public class Login extends JFrame implements ActionListener{
 		
 		
 		center.add(id_pwd_panel);
-		south.add(join_btn);south.add(id_missing_btn);south.add(pwd_missing_btn);
-		south.add(manager_login_btn);
+
 		east.add(log_btn);
 		
 		this.add("Center",center);
 		this.add("South",south);
 		this.add("East",east);
 		
-		this.setTitle("로그인/회원가입");
+		this.setTitle("관리자 로그인");
 		this.setSize(450,200);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
@@ -102,8 +82,8 @@ public class Login extends JFrame implements ActionListener{
 		if(obj==log_btn || pwd_txt == obj || id_txt == obj) {
 			String id=id_txt.getText();
 			String pwd=pwd_txt.getText();
-			Login_info login_info=new Login_info();
-			List<Login_info> temp;
+			Manager_info mlogin_info = new Manager_info();
+			List<Manager_info> temp;
 			
 			int r;
 			if(id.equals("")) {//id가 빈칸일 경우
@@ -113,11 +93,11 @@ public class Login extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(this, "비밀번호 를 입력하세요");
 				return;
 			}else {
-				login_info.setCid(id);
-				login_info.setPw(pwd);
+				mlogin_info.setMid(id);
+				mlogin_info.setPw(pwd);
 
 				CrudProcess crud = new CrudProcess();
-				temp = crud.selectLogin(login_info);
+				temp = crud.select_managerLogin(mlogin_info);
 				
 				
 				if(temp.size() == 0) {					//로그인 실패
@@ -128,25 +108,13 @@ public class Login extends JFrame implements ActionListener{
 					JOptionPane.showMessageDialog(this, "로그인 되었습니다.");
 					//윈도위의 title 를 바꾼다 -> 환영합니다 누구누구 님
 					login_check = true;
-					mf.check_login = login_check;
 					p1.btn_login.setVisible(false);
-					p1.btn_mypage.setVisible(true);
-					p1.btn_logout.setVisible(true);
-					mf.mainTabb.setEnabledAt(6, true);
-					p7.cid = login_info.getCid();
-					p1.cid = login_info.getCid();
+					p1.manager_page_bth.setVisible(true);
+					p1.btn_mlogout.setVisible(true);
+//					p1.cid = mlogin_info.getMid();
 					dispose();
 				}
 			}
-		}else if(obj == join_btn) {//회원가입 버튼을 눌렀을때
-			new Join();
-		}if(obj == id_missing_btn) {// ID 찾기버튼을 눌렀을때
-			new Id_missing();
-		}else if(obj == pwd_missing_btn) {// 비밀번호 찾기버튼을 눌렀을때
-			new Pwd_missing();
-		}else if(obj == manager_login_btn) {
-			new Login_Manager(p1);
-			dispose();
 		}
 	}
 	public static void main(String[] args) {

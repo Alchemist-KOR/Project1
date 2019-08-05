@@ -16,7 +16,7 @@ public class Panel01 extends JPanel implements ActionListener{
 
 	JPanel north,east,center2,south3;
 	JLabel south,center,south2;
-	JButton btn_login,btn_mypage,btn_logout;
+	JButton btn_login,btn_mypage,btn_logout, manager_page_bth,btn_mlogout;
 	ImageIcon img;
 	MainFrame mf;
 	String cid;
@@ -52,11 +52,15 @@ public class Panel01 extends JPanel implements ActionListener{
 		east.add(btn_login);
 		east.add(btn_logout);
 		east.add(btn_mypage);
+		east.add(btn_mlogout);
+		east.add(manager_page_bth);
 		btn_mypage.setVisible(false);
 		btn_logout.setVisible(false);
+		manager_page_bth.setVisible(false);
 		if(mf.check_login == true) {
 			btn_mypage.setVisible(true);
 		}
+		btn_mlogout.setVisible(false);
 		north.add("East",east);
 
 		this.add("Center",center2);
@@ -74,6 +78,10 @@ public class Panel01 extends JPanel implements ActionListener{
 		btn_mypage.addActionListener(this);
 		btn_logout = new JButton("로그아웃");
 		btn_logout.addActionListener(this);
+		manager_page_bth = new JButton("관리자 페이지");
+		manager_page_bth.addActionListener(this);
+		btn_mlogout = new JButton("로그아웃");
+		btn_mlogout.addActionListener(this);
 	}
 	
 	@Override
@@ -94,6 +102,14 @@ public class Panel01 extends JPanel implements ActionListener{
 			mf.mainTabb.setEnabledAt(6, false);
 		}else if(bt == btn_mypage) {
 			new MyPage(this);
+		}
+		if(bt == manager_page_bth) {
+			new Mng(this);
+		}else if(bt == btn_mlogout) {
+			JOptionPane.showMessageDialog(this, "로그아웃 되었습니다.");
+			btn_login.setVisible(true);
+			manager_page_bth.setVisible(false);
+			btn_mlogout.setVisible(false);
 		}
 		
 	}

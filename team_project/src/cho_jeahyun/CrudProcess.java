@@ -11,8 +11,22 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class CrudProcess {
-
 	private final String NAMESPACE="cho_jeahyun.myMapper";
+	
+	
+	public List<Manager_info> select_managerLogin(Manager_info li) {//관리자 로그인
+		SqlSession s = getSession();
+		List<Manager_info> lg = null;
+		
+		try {
+			String query=NAMESPACE+".select_managerLogin";
+
+			lg = s.selectList(query,li);
+			return lg;
+		}finally {
+			s.close();
+		}
+	}
 	public List<Login_info> selectLogin(Login_info li) {//로그인
 		SqlSession s = getSession();
 		List<Login_info> lg = null;
@@ -130,8 +144,7 @@ public class CrudProcess {
 		try {
 
 			String query = NAMESPACE + ".selectAllReservation_Info_non";
-			System.out.println(info.getOrder_id()+" "+ info.getName() +" "+ info.getPhone());
-			
+	
 			res = s.selectList(query,info);
 			
 			return res;
@@ -173,11 +186,31 @@ public class CrudProcess {
 			String query = NAMESPACE + ".selectAllCheck_inout";
 			info = s.selectList(query);
 			
+			Iterator it = info.iterator();
+			while(it.hasNext()) {
+				Check_inout ck = (Check_inout) it.next();
+			}
+			
 			return info;
 		}finally {
 			s.close();
 		}
 		
+	}
+	public List<Check_inout> selectCheck_inout(Check_inout info) {//관리자가 특정 예약내역확인
+		SqlSession s = getSession();
+		List<Check_inout> res = null;
+		
+		try {
+
+			String query = NAMESPACE + ".selectCheck_inout";
+	
+			res = s.selectList(query,info);
+			
+			return res;
+		}finally {
+			s.close();
+		}
 	}
 	public Integer check_in_true(Check_inout cio) {// 테이블에 체크인 날짜 입력
 		SqlSession ss = getSession();

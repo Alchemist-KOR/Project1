@@ -78,7 +78,7 @@ public class Join extends JFrame implements ActionListener{
 	ButtonGroup group;
 	JCheckBox info_check;
 	JPanel gender_panel,center,south, calendar_panel;
-	JButton join_btn ,calendar_btn;
+	JButton join_btn, calendar_btn;
 	
 	public Join(){
 		name_label=new JLabel("¿Ã∏ß");

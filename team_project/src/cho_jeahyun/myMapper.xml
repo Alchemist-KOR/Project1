@@ -8,11 +8,31 @@
 		select * from Reservation_Info
 		where cid = #{cid} order by to_date(reservation_date) desc
 	</select>
+
 	<select id="selectAllReservation_Info_non" parameterType="cho_jeahyun.Login_info"
 		resultType = "cho_jeahyun.Reservation_Info">
 		select * from Reservation_Info
 		where order_id = #{order_id} and name = #{name} and phone = #{phone}
 		order by to_date(reservation_date) desc
+	</select>
+	<select id="selectAllReservation"
+		resultType = "cho_jeahyun.Reservation_Info">
+		select * from reservation_info order by order_id desc
+	</select>
+	
+	<select id="selectReservation" parameterType ="HashMap"
+						resultType="cho_jeahyun.Reservation_Info">
+		select * from reservation_info
+		<where>
+		<if test="order_id != null">and order_id=#{order_id}</if>
+		<if test="name != null">and name=#{name}</if>
+		<if test="phone != null">and phone=#{phone}</if>
+		</where>
+	</select>
+	<select id="select_managerLogin" parameterType="cho_jeahyun.Manager_info"
+	resultType="cho_jeahyun.Manager_info">
+		select * from manager
+		where mid = #{mid} and pw = #{pw}
 	</select>
 	<select id="selectLogin" parameterType="cho_jeahyun.Login_info"
 	resultType="cho_jeahyun.Login_info">
@@ -35,29 +55,38 @@
 		where cid = #{cid} and email = #{email}
 	</select>
 	<select id="selectAllCustomer"
-		resultType = "cyc.Login_info">
+		resultType = "cho_jeahyun.Login_info">
 		select * from customer order by cid desc
 	</select>
 	
 	<select id="selectCustomer" parameterType ="HashMap"
-						resultType="cyc.Login_info">
+						resultType="cho_jeahyun.Login_info">
 		select * from customer
 		<where>
 		<if test="cid != null">and cid=#{cid}</if>
 		<if test="name != null">and name=#{name}</if>
 		</where>
 	</select>
-	<insert id="Check_in_t" parameterType="cyc.Check_inout">
+	<insert id="Check_in_t" parameterType="cho_jeahyun.Check_inout">
 		insert into check_inout(order_id,check_in_d)
-		values(#{order_id},#{check_in_d})
+		values(#{order_id}, SYSDATE)
 	</insert>
-	<update id="Check_out_t" parameterType="cyc.Check_inout">
-		update check_inout set check_out_d=#{check_out_d}
+	<update id="Check_out_t" parameterType="cho_jeahyun.Check_inout">
+		update check_inout set check_out_d = SYSDATE
 		where order_id =#{order_id}
 	</update>
+	<select id="selectCheck_inout" parameterType ="HashMap"
+						resultType="cho_jeahyun.Check_inout">
+		select * from check_inout
+		<where>
+		<if test="order_id != null">and order_id=#{order_id}</if>
+		<if test="check_in_d != null">and check_in_d=#{check_in_d}</if>
+		<if test="check_out_d != null">and check_out_d=#{check_out_d}</if>
+		</where>
+	</select>
 	
 	<select id="selectAllCheck_inout"
-		resultType = "cyc.Check_inout">
+		resultType = "cho_jeahyun.Check_inout">
 		select * from check_inout order by order_id desc
 	</select>
 	
