@@ -98,7 +98,7 @@ public class Confirm_Account extends JPanel implements ActionListener{
 			
 				account[1].setText(data.getName());
 				account[3].setText(data.getCid());
-				account[5].setText(data.getBirthday());
+				account[5].setText(data.getBirthday().substring(0, 10));
 				account[7].setText(data.getGender());
 				account[9].setText(data.getEmail());
 				account[11].setText(data.getAddress());
@@ -107,7 +107,7 @@ public class Confirm_Account extends JPanel implements ActionListener{
 				
 			}
 		}else if(e.getSource() == delete) {
-			int result = JOptionPane.showConfirmDialog(this, "정말로 삭제하시겠습니까?", "작업 확인", JOptionPane.YES_NO_OPTION);
+			int result = JOptionPane.showConfirmDialog(this, "정말로 탈퇴하시겠습니까?", "회원 탈퇴", JOptionPane.YES_NO_OPTION);
 
 			if (result == JOptionPane.YES_OPTION) {
 				HashMap<String, Object> map = new HashMap<String, Object>();

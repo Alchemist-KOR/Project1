@@ -17,7 +17,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 class ReservationModel extends AbstractTableModel {
 	Object[][] data;
@@ -271,10 +274,22 @@ public class Mng_Reservation extends JPanel implements ActionListener, MouseList
 
 				if(rinfo.size() == 0 || rinfo2.size() == 0) {
 					table.setModel(new ReservationModel2());
+					DefaultTableCellRenderer tScheduleCellRenderer = new DefaultTableCellRenderer();
+					tScheduleCellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+					TableColumnModel tcmSchedule = table.getColumnModel();
+					for (int i = 0; i < tcmSchedule.getColumnCount(); i++) {
+						tcmSchedule.getColumn(i).setCellRenderer(tScheduleCellRenderer);
+					}
 					JOptionPane.showMessageDialog(this, "조회 내역이 없습니다.");
 				}else {
 					ReservationModel booking = new ReservationModel(rinfo, rinfo2);
 					this.table.setModel(booking);
+					DefaultTableCellRenderer tScheduleCellRenderer = new DefaultTableCellRenderer();
+					tScheduleCellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+					TableColumnModel tcmSchedule = table.getColumnModel();
+					for (int i = 0; i < tcmSchedule.getColumnCount(); i++) {
+						tcmSchedule.getColumn(i).setCellRenderer(tScheduleCellRenderer);
+					}
 					JOptionPane.showMessageDialog(this, "조회되었습니다.");
 				}
 			}
@@ -292,6 +307,12 @@ public class Mng_Reservation extends JPanel implements ActionListener, MouseList
 				if (r > 0) {
 					JOptionPane.showMessageDialog(this, "체크인 되었습니다.");
 					table.setModel(new ReservationModel());
+					DefaultTableCellRenderer tScheduleCellRenderer = new DefaultTableCellRenderer();
+					tScheduleCellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+					TableColumnModel tcmSchedule = table.getColumnModel();
+					for (int i = 0; i < tcmSchedule.getColumnCount(); i++) {
+						tcmSchedule.getColumn(i).setCellRenderer(tScheduleCellRenderer);
+					}
 				}else if(r == 0) {
 					JOptionPane.showMessageDialog(this, "예약건을 선택하여 주십시오.");
 				}else {
@@ -312,6 +333,12 @@ public class Mng_Reservation extends JPanel implements ActionListener, MouseList
 				if (r > 0) {
 					JOptionPane.showMessageDialog(this, "체크아웃 되었습니다.");
 					table.setModel(new ReservationModel());
+					DefaultTableCellRenderer tScheduleCellRenderer = new DefaultTableCellRenderer();
+					tScheduleCellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+					TableColumnModel tcmSchedule = table.getColumnModel();
+					for (int i = 0; i < tcmSchedule.getColumnCount(); i++) {
+						tcmSchedule.getColumn(i).setCellRenderer(tScheduleCellRenderer);
+					}
 				}else if(r == 0) {
 					JOptionPane.showMessageDialog(this, "예약건을 선택하여 주십시오.");
 				}else {

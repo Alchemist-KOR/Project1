@@ -14,7 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 class Reservation_Info_Model_norl extends AbstractTableModel {
 
@@ -134,6 +137,12 @@ public class Panel08 extends JPanel implements ActionListener {
 					info.setPhone(t3.getText());
 
 					table.setModel(new Reservation_Info_Model_norl(info));
+					DefaultTableCellRenderer tScheduleCellRenderer = new DefaultTableCellRenderer();
+					tScheduleCellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+					TableColumnModel tcmSchedule = table.getColumnModel();
+					for (int i = 0; i < tcmSchedule.getColumnCount(); i++) {
+						tcmSchedule.getColumn(i).setCellRenderer(tScheduleCellRenderer);
+					}
 				}
 				else {
 					JOptionPane.showMessageDialog(this, "주문번호를 숫자로 입력하여 주십시오.");

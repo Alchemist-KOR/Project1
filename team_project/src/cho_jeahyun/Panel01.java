@@ -26,6 +26,7 @@ public class Panel01 extends JPanel implements ActionListener{
 	Panel05 p5;
 	Panel06 p6;
 	Panel07 p7;
+	Mng mng;
 	
 
 	Panel01(MainFrame mf,Panel07 p7){
@@ -104,12 +105,13 @@ public class Panel01 extends JPanel implements ActionListener{
 			new MyPage(this);
 		}
 		if(bt == manager_page_bth) {
-			new Mng(this);
+			mng = new Mng(this);
 		}else if(bt == btn_mlogout) {
 			JOptionPane.showMessageDialog(this, "로그아웃 되었습니다.");
 			btn_login.setVisible(true);
 			manager_page_bth.setVisible(false);
 			btn_mlogout.setVisible(false);
+			mng.dispose();
 		}
 		
 	}
