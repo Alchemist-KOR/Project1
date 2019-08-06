@@ -1,7 +1,9 @@
 package cho_jeahyun;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,8 +18,12 @@ public class Panel01 extends JPanel implements ActionListener{
 
 	JPanel north,east,center2,south3;
 	JLabel south,center,south2;
-	JButton btn_login,btn_mypage,btn_logout;
-	ImageIcon img;
+	JButton btn_login,btn_mypage,btn_logout, manager_page_bth,btn_mlogout;
+	private Image resizeimage;
+	private Image result;
+	private ImageIcon img1;
+	private ImageIcon res_img1;
+	private JLabel imglabel1;
 	MainFrame mf;
 	String cid;
 	Panel02 p2;
@@ -26,6 +32,7 @@ public class Panel01 extends JPanel implements ActionListener{
 	Panel05 p5;
 	Panel06 p6;
 	Panel07 p7;
+	Mng mng;
 	
 
 	Panel01(MainFrame mf,Panel07 p7){
@@ -43,7 +50,20 @@ public class Panel01 extends JPanel implements ActionListener{
 
 		setBtn();
 
-		center.setIcon(new ImageIcon("img//호텔01.png"));
+//		center.setIcon(new ImageIcon("img//호텔01.png"));
+		
+		ImageIcon img1;
+		
+		
+		img1 = new ImageIcon("img//호텔01.png");
+		resizeimage = img1.getImage();
+		result = resizeimage.getScaledInstance(1050, 400, Image.SCALE_SMOOTH);
+		res_img1 = new ImageIcon(result);
+		imglabel1 = new JLabel(res_img1);
+		
+		center.setIcon(res_img1);
+		
+		
 		center2.add(center);
 		
 		south2.setIcon(new ImageIcon("img//객실텍스트.png"));
@@ -52,16 +72,26 @@ public class Panel01 extends JPanel implements ActionListener{
 		east.add(btn_login);
 		east.add(btn_logout);
 		east.add(btn_mypage);
+		east.add(btn_mlogout);
+		east.add(manager_page_bth);
 		btn_mypage.setVisible(false);
 		btn_logout.setVisible(false);
+		manager_page_bth.setVisible(false);
 		if(mf.check_login == true) {
 			btn_mypage.setVisible(true);
 		}
+		btn_mlogout.setVisible(false);
 		north.add("East",east);
-
+		
+		north.setBackground(Color.white);
+		center2.setBackground(Color.white);
+		south3.setBackground(Color.white);
+		btn_login.setBackground(Color.white);
+		
 		this.add("Center",center2);
 		this.add("North",north);
 		this.add("South",south3);
+		
 		
 		this.setVisible(true);
 
@@ -74,6 +104,10 @@ public class Panel01 extends JPanel implements ActionListener{
 		btn_mypage.addActionListener(this);
 		btn_logout = new JButton("로그아웃");
 		btn_logout.addActionListener(this);
+		manager_page_bth = new JButton("관리자 페이지");
+		manager_page_bth.addActionListener(this);
+		btn_mlogout = new JButton("로그아웃");
+		btn_mlogout.addActionListener(this);
 	}
 	
 	@Override
@@ -94,6 +128,15 @@ public class Panel01 extends JPanel implements ActionListener{
 			mf.mainTabb.setEnabledAt(6, false);
 		}else if(bt == btn_mypage) {
 			new MyPage(this);
+		}
+		if(bt == manager_page_bth) {
+			mng = new Mng(this);
+		}else if(bt == btn_mlogout) {
+			JOptionPane.showMessageDialog(this, "로그아웃 되었습니다.");
+			btn_login.setVisible(true);
+			manager_page_bth.setVisible(false);
+			btn_mlogout.setVisible(false);
+			mng.dispose();
 		}
 		
 	}

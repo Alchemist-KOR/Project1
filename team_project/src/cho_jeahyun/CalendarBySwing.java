@@ -33,8 +33,27 @@ public class CalendarBySwing extends JFrame implements WindowListener, ActionLis
 	private Dimension dimen, dimen1;
 	private int xpos, ypos;
 	private Join join;
+	private Update_Account ua;
 	public CalendarBySwing(Join join) {
 		this.join = join;
+		setTitle("달력 - 오늘:"+ca.get(Calendar.YEAR)+"/"+(ca.get(Calendar.MONTH)+1)+"/"+ca.get(Calendar.DATE));
+		setSize(550,500);
+		dimen = Toolkit.getDefaultToolkit().getScreenSize();
+		dimen1 = this.getSize();
+		xpos = (int)(dimen.getWidth()/2 - dimen1.getWidth()/2);
+		ypos = (int)(dimen.getHeight()/2 - dimen1.getHeight()/2);
+		setLocation(xpos, ypos);//화면의 가운데에 출력
+		setResizable(false);
+		setVisible(true);
+		chyear = new Choice(); chmonth = new Choice();
+		yLabel = new JLabel("년"); mLabel = new JLabel("월");
+//		addWindowListener(this);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		init();
+	}
+	public CalendarBySwing(Update_Account ua) {
+		this.ua = ua;
 		setTitle("달력 - 오늘:"+ca.get(Calendar.YEAR)+"/"+(ca.get(Calendar.MONTH)+1)+"/"+ca.get(Calendar.DATE));
 		setSize(550,500);
 		dimen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -61,7 +80,9 @@ public class CalendarBySwing extends JFrame implements WindowListener, ActionLis
 		if(join != null) {
 			join.birth_txt.setText(year+"-"+month+"-"+day);
 		}
-		System.out.println(year+","+month+","+day);
+		if(ua != null) {
+			ua.t1[2].setText(year+"-"+month+"-"+day);
+		}
 //		if(index != 0) {
 //			
 //			if(index != 0) {

@@ -7,13 +7,12 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 public class Mng extends JFrame {
-//	private CardLayout card;
+
 	private JPanel sales, reservation;
 	public Mng_Customer customer = null;
-	public Mng(){
-		this.setVisible(true);
-		this.setSize(850, 700);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	private Panel01 p1;
+	public Mng(Panel01 p1){
+		this.p1 = p1;
 		
 		customer = new Mng_Customer();
 		sales = new JPanel();
@@ -23,11 +22,17 @@ public class Mng extends JFrame {
 		tab.addTab("概免包府", sales);
 		tab.addTab("抗距包府", reservation);
 		this.add("Center",tab);
+		
+		this.setTitle("包府磊其捞瘤");
+		this.setVisible(true);
+		this.setSize(1200, 700);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 	}
 	public static void main(String[] args) {
-		
-		new Mng();
+//		Login login = new Login();
+//		new Mng(login);
 	}
 
 }

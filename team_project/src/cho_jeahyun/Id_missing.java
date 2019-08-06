@@ -31,7 +31,7 @@ public class Id_missing extends JFrame implements ActionListener {
 			
 			if(res != null && res.length() != 0) {
 				JOptionPane.showMessageDialog(this, "ID가 조회되었습니다.");
-				id_show_label.setText(res);
+				id_show_label.setText(name_txt.getText()+"님의 ID "+res);
 				
 			}else {
 				JOptionPane.showMessageDialog(this, "해당 정보가 존재하지 않습니다.");

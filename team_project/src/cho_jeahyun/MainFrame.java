@@ -1,12 +1,7 @@
 package cho_jeahyun;
 
-import java.awt.Dimension;
-
 import javax.swing.JFrame;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.ScrollPaneConstants;
 
 public class MainFrame extends JFrame{
 	
@@ -46,14 +41,14 @@ public class MainFrame extends JFrame{
 		mainTabb.addTab("소개및 위치", p5);
 		mainTabb.addTab("예약하기", p6);
 		mainTabb.addTab("예약확인", p7);
-		mainTabb.addTab("예약확인", p8);
+		mainTabb.addTab("비회원 예약확인", p8);
 		
 		mainTabb.setEnabledAt(6, false);
 		
 		this.add(mainTabb);
 		
 		this.setTitle("호텔예약시스템 ver1.0");
-		this.setSize(850,700);
+		this.setSize(1200,750);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);

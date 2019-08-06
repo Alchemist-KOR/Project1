@@ -40,7 +40,7 @@ public class Panel04 extends JPanel implements ActionListener{
 		center.add("North",gallery);
 
 		
-		ImageIcon icon_rogo = new ImageIcon("src//img//rogo.jpg");
+		ImageIcon icon_rogo = new ImageIcon("img//rogo.jpg");
 		rogo1 = icon_rogo.getImage();
 		rogo2 = rogo1.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
 		ImageIcon icon_rogo2 = new ImageIcon(rogo2);
@@ -50,11 +50,11 @@ public class Panel04 extends JPanel implements ActionListener{
 		
 		
 		//왼쪽오른쪽버튼설계
-		left = new JButton(new ImageIcon("src//img//left.png"));
+		left = new JButton(new ImageIcon("img//left.png"));
 		left.addActionListener(this);
 		left.setBorderPainted(false); left.setContentAreaFilled(false);
 //		left.setFocusPainted(false);
-		right = new JButton(new ImageIcon("src//img//right.png"));
+		right = new JButton(new ImageIcon("img//right.png"));
 		right.addActionListener(this);
 		right.setBorderPainted(false); right.setContentAreaFilled(false);
 		c_west = new JPanel();
@@ -70,9 +70,9 @@ public class Panel04 extends JPanel implements ActionListener{
 		gall = new JLabel();
 		center.add("Center",gall);
 		
-		ImageIcon img = new ImageIcon("src//img//사진1.jpg");
+		ImageIcon img = new ImageIcon("img//사진1.jpg");
 		img1 = img.getImage();
-		img2 = img1.getScaledInstance(550, 450, Image.SCALE_SMOOTH);
+		img2 = img1.getScaledInstance(1000, 550, Image.SCALE_SMOOTH);
 		ImageIcon imge = new ImageIcon(img2);
 		gall.setIcon(imge);
 		
@@ -91,9 +91,9 @@ public class Panel04 extends JPanel implements ActionListener{
 		if(obj == right) {
 			if(count <6) count++;
 			if(count == 6) count=1;
-			ImageIcon img = new ImageIcon("src//img//사진"+count+".jpg");
+			ImageIcon img = new ImageIcon("img//사진"+count+".jpg");
 			img1 = img.getImage();
-			img2 = img1.getScaledInstance(550, 450, Image.SCALE_SMOOTH);
+			img2 = img1.getScaledInstance(1000, 550, Image.SCALE_SMOOTH);
 			ImageIcon imge = new ImageIcon(img2);
 			gall.setIcon(imge);
 			gall.repaint();
@@ -102,9 +102,9 @@ public class Panel04 extends JPanel implements ActionListener{
 		}else if(obj == left) {
 			if(count > 0 )count--;
 			if(count == 0) count = 5;
-			ImageIcon img = new ImageIcon("src//img//사진"+count+".jpg");
+			ImageIcon img = new ImageIcon("img//사진"+count+".jpg");
 			img1 = img.getImage();
-			img2 = img1.getScaledInstance(550, 450, Image.SCALE_SMOOTH);
+			img2 = img1.getScaledInstance(1000, 550, Image.SCALE_SMOOTH);
 			ImageIcon imge = new ImageIcon(img2);
 			gall.setIcon(imge);
 			gall.repaint();

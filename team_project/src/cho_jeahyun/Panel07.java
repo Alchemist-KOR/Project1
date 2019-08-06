@@ -11,7 +11,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 //     예약확인
 class Reservation_Info_Model extends AbstractTableModel {
@@ -47,10 +50,11 @@ class Reservation_Info_Model extends AbstractTableModel {
 		while (it.hasNext()) {
 			Reservation_Info res = (Reservation_Info) it.next();
 			tableData[r][0] = res.getOrder_id();
-			tableData[r][1] = res.getReservation_date();
+			tableData[r][1] = res.getReservation_date().substring(0, 10);
 			tableData[r][2] = res.getName();
 			tableData[r][3] = res.getRoomid();
-			tableData[r][4] = res.getCheck_in_d() + res.getCheck_out_d();
+			tableData[r][4] = res.getCheck_in_d().substring(0, 10) +
+					res.getCheck_out_d().substring(0, 10);
 			tableData[r][5] = res.getTotal_price();
 			r++;
 
@@ -122,6 +126,12 @@ public class Panel07 extends JPanel implements ActionListener {
 		JButton button = (JButton) e.getSource();
 		if (button == select) {
 			table.setModel(new Reservation_Info_Model(cid));
+			DefaultTableCellRenderer tScheduleCellRenderer = new DefaultTableCellRenderer();
+			tScheduleCellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+			TableColumnModel tcmSchedule = table.getColumnModel();
+			for (int i = 0; i < tcmSchedule.getColumnCount(); i++) {
+				tcmSchedule.getColumn(i).setCellRenderer(tScheduleCellRenderer);
+			}
 		}
 	}
 
@@ -149,6 +159,7 @@ public class Panel07 extends JPanel implements ActionListener {
 
 		table = new JTable();
 		table.setModel(new Column_Model());
+		
 		tablescroll = new JScrollPane(table);
 
 		cancel = new JButton("취소");

@@ -9,6 +9,7 @@ import java.sql.Date;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -45,7 +46,7 @@ public class Join extends JFrame implements ActionListener{
 			}
 			login_info.setGender(gender);
 			
-			String email=email_txt.getText();
+			String email=email_txt.getText()+"@"+email_default.getSelectedItem();
 			login_info.setEmail(email);
 			
 			String addr=addr_txt.getText();
@@ -69,7 +70,7 @@ public class Join extends JFrame implements ActionListener{
 	}
 	JLabel name_label,id_label,pwd_label,
 			birth_label,gender_label,
-			email_label,addr_label,
+			email_label,email_label2,addr_label,
 			phoneNum_label,information_label,temp;
 	JTextField name_txt,id_txt,birth_txt,
 				email_txt,addr_txt,phoneNum_txt;
@@ -77,8 +78,12 @@ public class Join extends JFrame implements ActionListener{
 	JRadioButton man,woman;
 	ButtonGroup group;
 	JCheckBox info_check;
-	JPanel gender_panel,center,south, calendar_panel;
-	JButton join_btn ,calendar_btn;
+	JComboBox email_default;
+	String[] email_d = {"직접입력","naver.com","daum.net","hanmail.net","nate.com","gmail.com",
+			"lycos.co.kr","yahoo.co.kr","empal.com","dream wiz.com","paran.com",
+			"korea.com","choi.com","hanmir.com","hanafos.com","hotmail.com"};
+	JPanel gender_panel,center,south, calendar_panel, email_panel;
+	JButton join_btn, calendar_btn;
 	
 	public Join(){
 		name_label=new JLabel("이름");
@@ -87,6 +92,8 @@ public class Join extends JFrame implements ActionListener{
 		birth_label=new JLabel("생년월일");
 		gender_label=new JLabel("성별");
 		email_label=new JLabel("이메일");
+		email_label2 = new JLabel("@");
+		email_default = new JComboBox<String>(email_d);
 		addr_label=new JLabel("주소");
 		phoneNum_label=new JLabel("전화번호");
 		information_label=new JLabel("제 3자 정보 제공 동의");
@@ -96,8 +103,10 @@ public class Join extends JFrame implements ActionListener{
 		id_txt=new JTextField(15);
 		pwd_txt=new JPasswordField(15);
 		birth_txt=new JTextField("예시)2000/01/01",11);
+
 		calendar_btn = new JButton("달력");
-		email_txt=new JTextField(15);
+		email_txt=new JTextField(6);
+		
 		addr_txt=new JTextField(15);
 		phoneNum_txt=new JTextField("예시)01012345678",15);
 		
@@ -119,6 +128,11 @@ public class Join extends JFrame implements ActionListener{
 		center=new JPanel(new GridLayout(10,2));
 		calendar_panel = new JPanel(new FlowLayout());
 		
+		email_panel = new JPanel(new FlowLayout());
+		email_panel.add(email_txt);
+		email_panel.add(email_label2);
+		email_panel.add(email_default);
+		
 		center.add(name_label);center.add(name_txt);
 		center.add(id_label);center.add(id_txt);
 		center.add(pwd_label);center.add(pwd_txt);
@@ -126,7 +140,7 @@ public class Join extends JFrame implements ActionListener{
 		center.add(birth_label);center.add(calendar_panel);
 //		center.add(temp); center.add(temp);
 		center.add(gender_label);center.add(gender_panel);
-		center.add(email_label);center.add(email_txt);
+		center.add(email_label);center.add(email_panel);
 		center.add(addr_label);center.add(addr_txt);
 		center.add(phoneNum_label);center.add(phoneNum_txt);
 		center.add(information_label);center.add(info_check);
