@@ -127,7 +127,7 @@ public class Panel02 extends JPanel implements ActionListener{
 		text1 = new JLabel();
 
 
-		room_select.setBounds(650, 7, 150, 25);
+		room_select.setBounds(1000, 7, 150, 25);
 		
 		
 		center_content.add(room_select);

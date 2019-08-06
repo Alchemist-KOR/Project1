@@ -1,7 +1,9 @@
 package cho_jeahyun;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,7 +19,11 @@ public class Panel01 extends JPanel implements ActionListener{
 	JPanel north,east,center2,south3;
 	JLabel south,center,south2;
 	JButton btn_login,btn_mypage,btn_logout, manager_page_bth,btn_mlogout;
-	ImageIcon img;
+	private Image resizeimage;
+	private Image result;
+	private ImageIcon img1;
+	private ImageIcon res_img1;
+	private JLabel imglabel1;
 	MainFrame mf;
 	String cid;
 	Panel02 p2;
@@ -44,7 +50,20 @@ public class Panel01 extends JPanel implements ActionListener{
 
 		setBtn();
 
-		center.setIcon(new ImageIcon("img//호텔01.png"));
+//		center.setIcon(new ImageIcon("img//호텔01.png"));
+		
+		ImageIcon img1;
+		
+		
+		img1 = new ImageIcon("img//호텔01.png");
+		resizeimage = img1.getImage();
+		result = resizeimage.getScaledInstance(1050, 400, Image.SCALE_SMOOTH);
+		res_img1 = new ImageIcon(result);
+		imglabel1 = new JLabel(res_img1);
+		
+		center.setIcon(res_img1);
+		
+		
 		center2.add(center);
 		
 		south2.setIcon(new ImageIcon("img//객실텍스트.png"));
@@ -63,10 +82,16 @@ public class Panel01 extends JPanel implements ActionListener{
 		}
 		btn_mlogout.setVisible(false);
 		north.add("East",east);
-
+		
+		north.setBackground(Color.white);
+		center2.setBackground(Color.white);
+		south3.setBackground(Color.white);
+		btn_login.setBackground(Color.white);
+		
 		this.add("Center",center2);
 		this.add("North",north);
 		this.add("South",south3);
+		
 		
 		this.setVisible(true);
 
