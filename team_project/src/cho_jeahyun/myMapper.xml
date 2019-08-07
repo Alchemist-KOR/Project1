@@ -29,6 +29,21 @@
 		<if test="phone != null">and phone=#{phone}</if>
 		</where>
 	</select>
+	<insert id="insertReservation_cancel" parameterType="cho_jeahyun.Reservation_cancel_info" >
+		insert into reservation_cancel values(#{order_id},#{refund},
+		#{reservation_date},SYSDATE)
+	</insert>
+	<update id="updateReservation_cancel" parameterType = "cho_jeahyun.Reservation_cancel_info">
+		update Reservation_cancel set check_info = #{check_info},
+		where order_id = #{order_id}
+	</update>
+	<delete id="deleteReservation" parameterType = "Integer">
+		delete from Reservation_info where order_id = #{order_id}
+	</delete>
+	<select id="selectReservation_cancel"
+	resultType="cho_jeahyun.Reservation_cancel_info">
+		select * from Reservation_cancel
+	</select>
 	<select id="select_managerLogin" parameterType="cho_jeahyun.Manager_info"
 	resultType="cho_jeahyun.Manager_info">
 		select * from manager
@@ -75,6 +90,9 @@
 		update check_inout set check_out_d = SYSDATE
 		where order_id =#{order_id}
 	</update>
+	<delete id="deleteCheck_inout" parameterType = "Integer">
+		delete from Check_inout where order_id = #{order_id}
+	</delete>
 	<select id="selectCheck_inout" parameterType ="HashMap"
 						resultType="cho_jeahyun.Check_inout">
 		select * from check_inout
@@ -112,6 +130,23 @@
 		phone = #{phone}
 		where cid = #{cid}
 	</update>
+	<select id="selectSalesSum" 	resultType="Integer"
+								parameterType="cho_jeahyun.Sales_management">
+		select sum(benefit) ben
+		from sales_management
+		where reservation_date between to_date(#{start_d}, 'YYYY/MM/DD')
+		and to_date(#{last_d} || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS')
+		group by to_char(reservation_date, 'yyyy-mm')
+		order by to_char(reservation_date, 'yyyy-mm')
+	</select>
+	<select id="selectSalesAvg"  parameterType="cho_jeahyun.Sales_management"	resultType="Integer">
+		select avg(benefit) ben
+		from sales_management
+		where reservation_date between to_date(#{start_d}, 'YYYY/MM/DD')
+		and to_date(#{last_d} || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS')
+		group by to_char(reservation_date, 'yyyy-mm')
+		order by to_char(reservation_date, 'yyyy-mm')
+	</select>
 </mapper>
 
 

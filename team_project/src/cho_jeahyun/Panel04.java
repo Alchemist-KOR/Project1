@@ -25,12 +25,12 @@ public class Panel04 extends JPanel implements ActionListener{
 		this.setLayout(new BorderLayout());
 		north = new JPanel();
 		north.setLayout(new BorderLayout());
-		north.setBackground(new Color(0xFFFFFF));
+		north.setBackground(Color.white);
 		n_East = new JPanel();
-		n_East.setBackground(new Color(0xFFFFFF));
+		n_East.setBackground(Color.white);
 		center = new JPanel();
 		center.setLayout(new BorderLayout());
-		center.setBackground(new Color(0xFFFFFF));
+		center.setBackground(Color.white);
 		
 		north.add("East", n_East);
 		
@@ -53,7 +53,7 @@ public class Panel04 extends JPanel implements ActionListener{
 		left = new JButton(new ImageIcon("img//left.png"));
 		left.addActionListener(this);
 		left.setBorderPainted(false); left.setContentAreaFilled(false);
-//		left.setFocusPainted(false);
+
 		right = new JButton(new ImageIcon("img//right.png"));
 		right.addActionListener(this);
 		right.setBorderPainted(false); right.setContentAreaFilled(false);

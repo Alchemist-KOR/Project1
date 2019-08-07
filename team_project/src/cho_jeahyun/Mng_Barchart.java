@@ -1,4 +1,4 @@
-package cyc_real;
+package cho_jeahyun;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,12 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 class BarchartPanel extends JPanel{
 	private Integer[] data; //25단위
-	private Integer[] avg;
-	public List salesList;
+	public List salessumList, saleavgList;
 	Sales_management_M sm;
 	Mng_Barchart bar;
+	private int flag_avg_sum;
 	BarchartPanel(){
-		Sales_management_M smm = new Sales_management_M();
 		data = new Integer[12];
 
 		for(int i=0; i<data.length;i++) {
@@ -29,20 +28,32 @@ class BarchartPanel extends JPanel{
 		
 	}
 
-	void setData(Sales_management_M smm) {
+	void setData(Sales_management_M smm, int flag_avg_sum) {
 		this.sm = smm;
 		data = new Integer[12];
-//		avg = new Integer[12];
 
+		this.flag_avg_sum = flag_avg_sum;
 		CrudProcess crud = new CrudProcess();
-		salesList = crud.selectSalesSum(sm); 
+		salessumList = crud.selectSalesSum(sm);
+		saleavgList = crud.selectSalesAvg(sm);
 		
-		for(int i=0; i<data.length;i++) {
-			data[i] = 0;
+		if(flag_avg_sum == 1) {
+			for(int i=0; i<data.length;i++) {
+				data[i] = 0;
+			}
+			for(int i=0; i<salessumList.size(); i++) {
+				data[i] = (Integer) salessumList.get(i);
+			}
+		}else if(flag_avg_sum == 2) {
+			for(int i=0; i<data.length;i++) {
+				data[i] = 0;
+			}
+			for(int i=0; i<saleavgList.size(); i++) {
+				data[i] = (Integer) saleavgList.get(i);
+			}
 		}
-		for(int i=0; i<salesList.size(); i++) {
-			data[i] = (Integer) salesList.get(i);
-		}
+		
+		
 		repaint();
 	}
 	@Override
@@ -119,27 +130,42 @@ public class Mng_Barchart extends JPanel implements ItemListener, ActionListener
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		CrudProcess crud = new CrudProcess();
-
-		
-		
-		String y = year.getSelectedItem().toString();
-		if(year.getSelectedIndex() != 0) {
+		int flag_avg_sum = 0;
+		if(e.getSource() == select_sum) {
+			CrudProcess crud = new CrudProcess();
+			flag_avg_sum = 1;
 			
-			smm.setStart_d(y+"/01/01");
-			smm.setLast_d(y+"/12/31");
-			list = crud.selectSalesSum(smm);
-
-			center.setData(smm);
-			System.out.println(Integer.parseInt(y)+"/01/01");
-
 			
+			String y = year.getSelectedItem().toString();
+			if(year.getSelectedIndex() != 0) {
+				
+				smm.setStart_d(y+"/01/01");
+				smm.setLast_d(y+"/12/31");
+
+				center.setData(smm, flag_avg_sum);
+				System.out.println(Integer.parseInt(y)+"/01/01");
+			}
+		}else if(e.getSource() == select_avg) {
+			CrudProcess crud = new CrudProcess();
+			flag_avg_sum = 2;
+			
+			
+			String y = year.getSelectedItem().toString();
+			if(year.getSelectedIndex() != 0) {
+				
+				smm.setStart_d(y+"/01/01");
+				smm.setLast_d(y+"/12/31");
+
+				center.setData(smm, flag_avg_sum);
+				System.out.println(Integer.parseInt(y)+"/01/01");
+			}
 		}
+		
 	}
 	Sales_management_M smm = new Sales_management_M();
 	List list;
 	public JComboBox year;
-	private JButton select;
+	private JButton select_sum, select_avg;
 	private JPanel north;
 	public BarchartPanel center;
 	private JLabel swungdash;
@@ -148,10 +174,13 @@ public class Mng_Barchart extends JPanel implements ItemListener, ActionListener
 		this.setLayout(new BorderLayout());
 		north = new JPanel();
 		center = new BarchartPanel();
-		select = new JButton("조회");
-		select.addActionListener(this);
+		select_sum = new JButton("총합 조회");
+		select_sum.addActionListener(this);
+		select_avg = new JButton("평균 조회");
+		select_avg.addActionListener(this);
 		setComboBox();
-		north.add(select);
+		north.add(select_sum);
+		north.add(select_avg);
 		this.add("North", north);this.add("Center", center);
 		
 	}
@@ -172,11 +201,7 @@ public class Mng_Barchart extends JPanel implements ItemListener, ActionListener
 			if(jb == year) {
 				String y = year.getSelectedItem().toString();
 				System.out.println(y);
-			}
-			
-			
-			
-		}//if
-	}//itemStateChanged
- 
+			}	
+		}
+	}
 }

@@ -107,20 +107,12 @@ class ReservationModel2 extends AbstractTableModel {
 	private int cols, rows;// 열의 갯수, 행의 갯수용 변수
 	private String[] colName = { "예약번호", "CID", "이름", "전화번호", "방호수", "성인(명)", "아이(명)", "총액", "예약 날짜", "체크인", "체크아웃",
 			"체크인확인", "체크아웃확인" };
-	private List<Reservation_Info> bookingList;// DB조회 결과용 변수
-	private List<Check_inout> check_inout;
 
 	ReservationModel2() {
 
 		setData();
 	}
 
-	ReservationModel2(List<Reservation_Info> info, List<Check_inout> info2) {
-		bookingList = info;
-		check_inout = info2;
-	
-		setData();
-	}
 
 	void setData() {// 목적 : empList에 있는 조회결과를 data에 저장
 		rows = 0;// 조회건수로 행의 갯수를 지정
@@ -214,6 +206,7 @@ public class Mng_Reservation extends JPanel implements ActionListener, MouseList
 		int selectedRow = table.getSelectedRow();
 		int columnCount = table.getColumnCount();
 		orderID = Integer.parseInt(table.getValueAt(selectedRow, 0) + "");
+		System.out.println(orderID);
 
 	}
 	public static boolean isNumeric(String s) {
