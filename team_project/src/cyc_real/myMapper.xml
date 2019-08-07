@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cyc.myMapper">
+	<select id="selectAllCustomer"
+		resultType = "cyc.Login_info">
+		select * from customer order by cid desc
+	</select>
+	
+	<select id="selectCustomer" parameterType ="HashMap"
+						resultType="cyc.Login_info">
+		select * from customer
+		<where>
+		<if test="cid != null">and cid=#{cid}</if>
+		<if test="name != null">and name=#{name}</if>
+		</where>
+	</select>
+	
+	
+	
+	
+	<select id="selectAllReservation"
+		resultType = "cyc.Reservation_Info">
+		select * from reservation_info order by order_id desc
+	</select>
+	
+	<select id="selectReservation" parameterType ="HashMap"
+						resultType="cyc.Reservation_Info">
+		select * from reservation_info
+		<where>
+		<if test="cid != null">and cid=#{cid}</if>
+		<if test="name != null">and name=#{name}</if>
+		<if test="phone != null">and phone=#{phone}</if>
+		</where>
+	</select>
+	
+	
+	
+	
+	<insert id="Check_in_t" parameterType="cyc.Check_inout">
+		insert into check_inout(order_id,check_in_d)
+		values(#{order_id},#{check_in_d})
+	</insert>
+	<update id="Check_out_t" parameterType="cyc.Check_inout">
+		update check_inout set check_out_d=#{check_out_d}
+		where order_id =#{order_id}
+	</update>
+	
+	<select id="selectAllCheck_inout"
+		resultType = "cyc.Check_inout">
+		select * from check_inout order by order_id desc
+	</select>
+	
+	<update id="updateCheck-in" parameterType="cyc.Reservation_Info">
+		update check_inout set check_in_d=(#{check_in_d}, 'yyyy/MM/dd')
+		where cid=#{cid}
+	</update>
+	
+	<update id="updateCheck-out" parameterType="cyc.Reservation_Info">
+		update reservation_info set check_out_d=#{check_out_d}
+		where cid=#{cid}
+	</update>
+
+
+
+
+	<select id="selectSalesSum" 	resultType="Integer"
+								parameterType="cyc.Sales_management">
+		select sum(benefit) ben
+		from sales_management
+		where reservation_date between to_date(#{start_d}||'/01/01', 'YYYY/MM/DD')
+		and to_date(#{last_d}||'/12/31' || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS')
+		group by to_char(reservation_date, 'yyyy-mm')
+		order by to_char(reservation_date, 'yyyy-mm')
+	</select>
+	
+	<select id="selectSalesAvg" 	resultType="Integer"
+								parameterType="cyc.Sales_management">
+		select avg(benefit) ben
+		from sales_management
+		where reservation_date between to_date('2019/01/01', 'YYYY-MM-DD')
+		and to_date('2019/12/31' || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS')
+		group by to_char(reservation_date, 'yyyy-mm')
+		order by to_char(reservation_date, 'yyyy-mm')
+	</select>
+
+
+</mapper>
+
+
+
+
+
+
+

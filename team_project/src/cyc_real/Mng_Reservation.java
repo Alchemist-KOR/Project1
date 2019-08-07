@@ -210,7 +210,7 @@ public class Mng_Reservation extends JPanel implements ActionListener, MouseList
 	}
 
 	private Integer orderID;
-
+	private String indate;
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		int selectedRow = table.getSelectedRow();
@@ -219,7 +219,7 @@ public class Mng_Reservation extends JPanel implements ActionListener, MouseList
 		
 //		setOrder_id(Integer.parseInt(table.getValueAt(selectedRow, 0) + ""));
 		orderID = Integer.parseInt(table.getValueAt(selectedRow, 0) + "");
-		
+		indate = table.getValueAt(selectedRow, 9)+"";
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
@@ -276,7 +276,24 @@ public class Mng_Reservation extends JPanel implements ActionListener, MouseList
 				
 			}
 		} else if (obj == check_out) {
+			Calendar today = new GregorianCalendar();
+			int year = today.get(Calendar.YEAR);
+			int mon = today.get(Calendar.MONTH) + 1;// 0부터 출력되기 때문에 1을 더해줘야함
+			int date = today.get(Calendar.DATE);
+			String order_date = year + "/" + mon + "/" + date;
 
+			Check_inout inout = new Check_inout();
+			inout.setOrder_id(orderID);
+			inout.setCheck_out_d(order_date);	
+			CrudProcess crud = new CrudProcess();
+			int r = crud.check_out_true(inout);// DB update
+			if (r > 0) {
+				JOptionPane.showMessageDialog(this, "체크아웃 되었습니다.");
+				table.setModel(rm);
+			} else {
+				
+				JOptionPane.showMessageDialog(this, "작업 중 문제가 발생했습니다.");
+			}
 		}
 	}
 
