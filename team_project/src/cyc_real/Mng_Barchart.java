@@ -120,8 +120,8 @@ public class Mng_Barchart extends JPanel implements ItemListener, ActionListener
 		
 		String y = year.getSelectedItem().toString();
 		if(year.getSelectedIndex() != 0) {
-			smm.setStart_d(Integer.parseInt(y));
-			smm.setLast_d(Integer.parseInt(y));
+			smm.setStart_d(y+"/01/01");
+			smm.setLast_d(y+"/12/31");
 //			System.out.println(Integer.parseInt(y)+"/01/01");
 
 			

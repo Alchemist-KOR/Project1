@@ -9,16 +9,21 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Panel06 extends JPanel implements ActionListener{
+public class Panel06 extends JFrame implements ActionListener{
 	private JPanel north, n_East, center, c_west, c_East;
 	private JLabel rogo, gall;
 	private JLabel gallery;
 	private Image rogo1, rogo2;
 	private JButton login, logout, left, right;
 	public Panel06() {
+		this.setVisible(true);
+		this.setSize(850, 700);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		
 		this.setLayout(new BorderLayout());
 		north = new JPanel();
@@ -115,4 +120,9 @@ public class Panel06 extends JPanel implements ActionListener{
 		}
 		
 	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new Panel06();
+	}
+
 }

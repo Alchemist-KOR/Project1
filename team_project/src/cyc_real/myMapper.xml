@@ -69,21 +69,13 @@
 								parameterType="cyc.Sales_management">
 		select sum(benefit) ben
 		from sales_management
-		where reservation_date between to_date(#{start_d}||'/01/01', 'YYYY/MM/DD')
-		and to_date(#{last_d}||'/12/31' || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS')
+		where reservation_date between to_date(#{start_d}, 'YYYY/MM/DD')
+		and to_date(#{last_d} || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS')
 		group by to_char(reservation_date, 'yyyy-mm')
 		order by to_char(reservation_date, 'yyyy-mm')
 	</select>
 	
-	<select id="selectSalesAvg" 	resultType="Integer"
-								parameterType="cyc.Sales_management">
-		select avg(benefit) ben
-		from sales_management
-		where reservation_date between to_date('2019/01/01', 'YYYY-MM-DD')
-		and to_date('2019/12/31' || ' 23:59:59', 'YYYY/MM/DD HH24:MI:SS')
-		group by to_char(reservation_date, 'yyyy-mm')
-		order by to_char(reservation_date, 'yyyy-mm')
-	</select>
+	
 
 
 </mapper>
