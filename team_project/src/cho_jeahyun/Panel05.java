@@ -11,6 +11,7 @@ public class Panel05 extends JPanel{
 	JLabel north,center,south;
 	JPanel north1,center1,south1;
 	MainFrame mf;
+	int a;
 	Panel05(MainFrame mf){
 		this.mf = mf;
 		this.setLayout(new BorderLayout());
