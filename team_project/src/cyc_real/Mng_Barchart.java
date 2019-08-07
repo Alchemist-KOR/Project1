@@ -18,20 +18,36 @@ class BarchartPanel extends JPanel{
 	private Integer[] avg;
 	public List salesList;
 	Sales_management_M sm;
-
+	Mng_Barchart bar;
 	BarchartPanel(){
+		Sales_management_M smm = new Sales_management_M();
 		data = new Integer[12];
-		avg = new Integer[12];
-		sm = new Sales_management_M();
+//		CrudProcess crud = new CrudProcess();
+//		salesList = crud.selectSalesSum(sm);
+		for(int i=0; i<data.length;i++) {
+			data[i] = 0;
+		}
+//		for(int i=0; i<salesList.size(); i++) {
+//			data[i] = (Integer) salesList.get(i);
+//		}
+		
+	}
+
+	void setData(Sales_management_M smm) {
+		this.sm = smm;
+		data = new Integer[12];
+//		avg = new Integer[12];
+
 		CrudProcess crud = new CrudProcess();
 		salesList = crud.selectSalesSum(sm); 
+		
 		for(int i=0; i<data.length;i++) {
 			data[i] = 0;
 		}
 		for(int i=0; i<salesList.size(); i++) {
 			data[i] = (Integer) salesList.get(i);
 		}
-		
+		repaint();
 	}
 	@Override
 	public void paint(Graphics g) {
@@ -59,6 +75,7 @@ class BarchartPanel extends JPanel{
 		g.drawString("11월", 950, 570);
 		g.drawString("12월", 1030, 570);
 		g.setColor(Color.RED);
+
 		if(data[0]>0) {
 			g.fillRect(145, 545-data[0]/100000, 30, data[0]/100000);
 		}
@@ -95,14 +112,7 @@ class BarchartPanel extends JPanel{
 		if(data[11]>0) {
 			g.fillRect(1025, 545-data[11]/100000, 30, data[11]/100000);
 		}
-		
-		
-		
-		
-		
-		
-		
-		
+
 		this.repaint();//데이터 입력 후 그리기 버튼 누르면 갱신되는 메소드
 	}
 	
@@ -116,19 +126,23 @@ public class Mng_Barchart extends JPanel implements ItemListener, ActionListener
 		CrudProcess crud = new CrudProcess();
 
 		
-		Sales_management_M smm = new Sales_management_M();
 		
 		String y = year.getSelectedItem().toString();
 		if(year.getSelectedIndex() != 0) {
+			
 			smm.setStart_d(y+"/01/01");
 			smm.setLast_d(y+"/12/31");
-//			System.out.println(Integer.parseInt(y)+"/01/01");
+			list = crud.selectSalesSum(smm);
+
+			center.setData(smm);
+			System.out.println(Integer.parseInt(y)+"/01/01");
 
 			
 		}
 	}
-
-	private JComboBox year;
+	Sales_management_M smm = new Sales_management_M();
+	List list;
+	public JComboBox year;
 	private JButton select;
 	private JPanel north;
 	public BarchartPanel center;
