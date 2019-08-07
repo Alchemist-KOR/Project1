@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 class BarchartPanel extends JPanel{
 	private Integer[] data; //25단위
@@ -22,21 +23,17 @@ class BarchartPanel extends JPanel{
 	BarchartPanel(){
 		Sales_management_M smm = new Sales_management_M();
 		data = new Integer[12];
-//		CrudProcess crud = new CrudProcess();
-//		salesList = crud.selectSalesSum(sm);
+
 		for(int i=0; i<data.length;i++) {
 			data[i] = 0;
 		}
-//		for(int i=0; i<salesList.size(); i++) {
-//			data[i] = (Integer) salesList.get(i);
-//		}
+
 		
 	}
 
 	void setData(Sales_management_M smm) {
 		this.sm = smm;
 		data = new Integer[12];
-//		avg = new Integer[12];
 
 		CrudProcess crud = new CrudProcess();
 		salesList = crud.selectSalesSum(sm); 
@@ -125,8 +122,9 @@ public class Mng_Barchart extends JPanel implements ItemListener, ActionListener
 	public void actionPerformed(ActionEvent e) {
 		CrudProcess crud = new CrudProcess();
 
-		
-		
+		if(year.getSelectedIndex() == 0) {
+			JOptionPane.showMessageDialog(this, "연도를 선택해주세요.");
+		}
 		String y = year.getSelectedItem().toString();
 		if(year.getSelectedIndex() != 0) {
 			
