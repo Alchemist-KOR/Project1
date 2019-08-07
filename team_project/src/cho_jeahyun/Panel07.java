@@ -3,6 +3,8 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.List;
 
@@ -119,7 +121,37 @@ class Column_Model extends AbstractTableModel {
 
 }
 
-public class Panel07 extends JPanel implements ActionListener {
+public class Panel07 extends JPanel implements ActionListener, MouseListener {
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		int selectedRow = table.getSelectedRow();
+		int columnCount = table.getColumnCount();
+		orderID = Integer.parseInt(table.getValueAt(selectedRow, 0) + "");
+		reservation_date = (table.getValueAt(selectedRow, 1) + "");
+		refund = Integer.parseInt((table.getValueAt(selectedRow, 5) + ""));
+		
+		System.out.println(orderID +"  "+reservation_date+"  "+refund);
+		
+	}
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -132,6 +164,22 @@ public class Panel07 extends JPanel implements ActionListener {
 			for (int i = 0; i < tcmSchedule.getColumnCount(); i++) {
 				tcmSchedule.getColumn(i).setCellRenderer(tScheduleCellRenderer);
 			}
+		}else if(button == cancel) {
+			Reservation_cancel_info rc = new Reservation_cancel_info();
+			CrudProcess crud = new CrudProcess();
+			
+			rc.setOrder_id(orderID);
+			rc.setRefund(refund);
+			rc.setReservation_date(reservation_date);
+			
+			
+			int r = crud.insertReservation_cancel(rc);
+			
+			if(r > 0) {
+				JOptionPane.showMessageDialog(this, "정상적으로 취소 처리되었습니다.");
+			}else {
+				JOptionPane.showMessageDialog(this, "취소등록 중 문제가 발생했습니다.");
+			}
 		}
 	}
 
@@ -139,10 +187,12 @@ public class Panel07 extends JPanel implements ActionListener {
 	private JButton select, cancel;
 	private JTable table;
 	private JScrollPane tablescroll;
-	private JButton cancel1, cancel2;
 	private String[] columnName = { "예약번호", "예약날짜", "예약자 명", "방 번호", "체크인/체크아웃", "가격", " " };
 	MainFrame mf;
 	String cid;
+	Integer orderID;
+	Integer refund;
+	String reservation_date;
 
 	Panel07(MainFrame mf) {
 		this.mf = mf;
@@ -159,6 +209,7 @@ public class Panel07 extends JPanel implements ActionListener {
 
 		table = new JTable();
 		table.setModel(new Column_Model());
+		table.addMouseListener(this);
 		
 		tablescroll = new JScrollPane(table);
 

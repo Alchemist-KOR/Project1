@@ -9,7 +9,6 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
 public class CrudProcess {
 	private final String NAMESPACE="cho_jeahyun.myMapper";
 	
@@ -152,6 +151,64 @@ public class CrudProcess {
 			s.close();
 		}
 	}
+	public Integer insertReservation_cancel(Reservation_cancel_info li) {//회원가입
+		SqlSession ss=getSession();
+		Integer result=null;
+		try {
+			String query=NAMESPACE+".insertReservation_cancel";
+			result=ss.insert(query,li);
+			
+			if(result>0) ss.commit();
+			else ss.rollback();		
+			return result;
+		}finally {
+			ss.close();
+		}
+	}
+	public int deleteReservation(Integer order_id) {//(관리자) 예약내역 취소
+		SqlSession s = getSession();
+		int result = 0;
+		try {
+			String query = NAMESPACE + ".deleteReservation";
+			result = s.delete(query,order_id);
+			if(result > 0) {
+				s.commit();
+			}else {
+				s.rollback();
+			}return result;
+		}finally {
+			s.close();
+		}
+	}
+	public Integer updateReservation_cancel(Reservation_cancel_info info) {// (관리자) 최종 예약 취소
+		SqlSession session = getSession();
+		Integer result = null;
+		try {
+			String query = NAMESPACE+".updateReservation_cancel";
+			result = session.insert(query, info);
+			if(result > 0) {
+				session.commit();
+			}else {
+				session.rollback();
+			}return result;
+		}finally {
+			session.close();
+		}
+	}
+	public List<Reservation_cancel_info> selectReservation_cancel_info() {// 관리자가 모든 예약취소 내역 확인
+		SqlSession s = getSession();
+		List<Reservation_cancel_info> info = null;
+		
+		try {
+			String query = NAMESPACE + ".selectReservation_cancel";
+			info = s.selectList(query);
+			
+			return info;
+		}finally {
+			s.close();
+		}
+		
+	}
 	public List<Reservation_Info> selectReservation(HashMap map) {// 관리자가 특정 예약내역 검색
 		SqlSession s = getSession();
 		List<Reservation_Info> info = null;
@@ -171,6 +228,35 @@ public class CrudProcess {
 		try {
 			String query = NAMESPACE + ".selectAllReservation";
 			info = s.selectList(query);
+			
+			return info;
+		}finally {
+			s.close();
+		}
+		
+	}
+	public List selectSalesAvg(Sales_management_M sm) {
+		SqlSession s = getSession();
+		List info = null;
+		
+		try {
+			String query = NAMESPACE + ".selectSalesAvg";
+			info = s.selectList(query , sm);
+			
+			return info;
+		}finally {
+			s.close();
+		}
+		
+	}
+	
+	public List selectSalesSum(Sales_management_M sm) {
+		SqlSession s = getSession();
+		List info = null;
+		
+		try {
+			String query = NAMESPACE + ".selectSalesSum";
+			info = s.selectList(query , sm);
 			
 			return info;
 		}finally {
@@ -238,7 +324,21 @@ public class CrudProcess {
 			ss.close();
 		}
 	}
-
+	public int deleteCheck_inout(Integer order_id) {// 체크인아웃 테이블 데이터 삭제
+		SqlSession s = getSession();
+		int result = 0;
+		try {
+			String query = NAMESPACE + ".deleteCheck_inout";
+			result = s.delete(query,order_id);
+			if(result > 0) {
+				s.commit();
+			}else {
+				s.rollback();
+			}return result;
+		}finally {
+			s.close();
+		}
+	}
 	public Integer updateCustomer(Login_info info) {// 고객 가입정보 고객이 수정
 		SqlSession session = getSession();
 		Integer result = null;

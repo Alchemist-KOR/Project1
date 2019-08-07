@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.List;
 
@@ -121,7 +123,39 @@ class Column_Model extends AbstractTableModel {
 
 }
 
-public class Panel08 extends JPanel implements ActionListener {
+public class Panel08 extends JPanel implements ActionListener, MouseListener{
+	
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		int selectedRow = table.getSelectedRow();
+		int columnCount = table.getColumnCount();
+		orderID = Integer.parseInt(table.getValueAt(selectedRow, 0) + "");
+		reservation_date = (table.getValueAt(selectedRow, 1) + "");
+		refund = Integer.parseInt((table.getValueAt(selectedRow, 5) + ""));
+		
+		System.out.println(orderID +"  "+reservation_date+"  "+refund);
+		
+	}
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -150,9 +184,24 @@ public class Panel08 extends JPanel implements ActionListener {
 
 			}
 
+		}else if(button == cancel) {
+			Reservation_cancel_info rc = new Reservation_cancel_info();
+			CrudProcess crud = new CrudProcess();
+			
+			rc.setOrder_id(orderID);
+			rc.setRefund(refund);
+			rc.setReservation_date(reservation_date);
+			
+			
+			int r = crud.insertReservation_cancel(rc);
+			
+			if(r > 0) {
+				JOptionPane.showMessageDialog(this, "정상적으로 취소 처리되었습니다.");
+			}else {
+				JOptionPane.showMessageDialog(this, "취소등록 중 문제가 발생했습니다.");
+			}
 		}
 	}
-
 	public static boolean isNumeric(String s) {
 		try {
 			Double.parseDouble(s);
@@ -163,15 +212,17 @@ public class Panel08 extends JPanel implements ActionListener {
 	}
 
 	private JPanel tabPanel, north, north_center, south;
-	private JButton select;
+	private JButton select, cancel;
 	private JLabel l1, l2, l3;
 	private JTextField t1, t2, t3;
 	private JTable table;
 	private JScrollPane tablescroll;
-	private JButton cancel;
 	private Reservation_Info info;
 	MainFrame mf;
 	String cid;
+	String reservation_date;
+	Integer refund;
+	Integer orderID;
 
 	Panel08() {
 		this.setLayout(new BorderLayout());
@@ -187,6 +238,7 @@ public class Panel08 extends JPanel implements ActionListener {
 		north.add("East", select);
 
 		table = new JTable();
+		table.addMouseListener(this);
 		table.setModel(new Column_Model());
 		tablescroll = new JScrollPane(table);
 		l1 = new JLabel("주문번호");
