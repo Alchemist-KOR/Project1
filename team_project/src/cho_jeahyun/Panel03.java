@@ -36,7 +36,7 @@ public class Panel03 extends JPanel implements ActionListener {
 			c_Center.removeAll();
 			c_Center.setLayout(null);
 			
-			ImageIcon pool_icon3 = new ImageIcon("src//cyc//pool_info2.png");
+			ImageIcon pool_icon3 = new ImageIcon("img//pool_info2.png");
 			img_pool3 = pool_icon3.getImage();
 			img_pool4 = img_pool3.getScaledInstance(1100, 100, Image.SCALE_SMOOTH);
 			ImageIcon pool_icon4 = new ImageIcon(img_pool4);
@@ -45,12 +45,12 @@ public class Panel03 extends JPanel implements ActionListener {
 			lbl111.setBounds(10, 50, 1100, 100);
 			c_Center.add(lbl111);
 
-			ImageIcon img1 = new ImageIcon("src//cyc//pool01.jpg");
+			ImageIcon img1 = new ImageIcon("img//pool01.jpg");
 			poo1_1 = img1.getImage();
 			poo1_2 = poo1_1.getScaledInstance(500, 400, Image.SCALE_SMOOTH);
 			ImageIcon img1_1 = new ImageIcon(poo1_2);
 			img[0] = new JLabel(img1_1);
-			ImageIcon img3 = new ImageIcon("src//cyc//pool2.jpg");
+			ImageIcon img3 = new ImageIcon("img//pool2.jpg");
 			poo2_1 = img3.getImage();
 			poo2_2 = poo2_1.getScaledInstance(500, 400, Image.SCALE_SMOOTH);
 			ImageIcon img3_1 = new ImageIcon(poo2_2);
@@ -65,7 +65,7 @@ public class Panel03 extends JPanel implements ActionListener {
 			c_Center.setBackground(new Color(0xFFFFFF));
 
 			
-			ImageIcon pool_icon = new ImageIcon("src//cyc//pool_info.png");
+			ImageIcon pool_icon = new ImageIcon("img//pool_info.png");
 			img_pool1 = pool_icon.getImage();
 			img_pool2 = img_pool1.getScaledInstance(1000, 110, Image.SCALE_SMOOTH);
 			ImageIcon pool_icon2 = new ImageIcon(img_pool2);
@@ -79,7 +79,7 @@ public class Panel03 extends JPanel implements ActionListener {
 		} else if (combo.getSelectedIndex() == 2) {
 			c_Center.removeAll();
 			
-			ImageIcon spa_icon1 = new ImageIcon("src//cyc//spa_info.png");
+			ImageIcon spa_icon1 = new ImageIcon("img//spa_info.png");
 			img_spa1 = spa_icon1.getImage();
 			img_spa2 = img_spa1.getScaledInstance(1100, 100, Image.SCALE_SMOOTH);
 			ImageIcon spa_icon2 = new ImageIcon(img_spa2);
@@ -89,12 +89,12 @@ public class Panel03 extends JPanel implements ActionListener {
 			lbl33.setBounds(10, 50, 1100, 100);
 			c_Center.add(lbl33);
 
-			ImageIcon spa1 = new ImageIcon("src//cyc//spa01.jpg");
+			ImageIcon spa1 = new ImageIcon("img//spa01.jpg");
 			spa1_1 = spa1.getImage();
 			spa1_2 = spa1_1.getScaledInstance(500, 400, Image.SCALE_SMOOTH);
 			ImageIcon spa_1 = new ImageIcon(spa1_2);
 			img[3] = new JLabel(spa_1);
-			ImageIcon spa2 = new ImageIcon("src//cyc//spa02.jpg");
+			ImageIcon spa2 = new ImageIcon("img//spa02.jpg");
 			spa2_1 = spa2.getImage();
 			spa2_2 = spa2_1.getScaledInstance(500, 400, Image.SCALE_SMOOTH);
 			ImageIcon spa_2 = new ImageIcon(spa2_2);
@@ -107,7 +107,7 @@ public class Panel03 extends JPanel implements ActionListener {
 			c_Center.add(img[4]);
 			this.setBackground(new Color(0xFFFFFF));
 			
-			ImageIcon spa_icon3 = new ImageIcon("src//cyc//spa_info2.png");
+			ImageIcon spa_icon3 = new ImageIcon("img//spa_info2.png");
 			img_spa3 = spa_icon3.getImage();
 			img_spa4 = img_spa3.getScaledInstance(1000, 110, Image.SCALE_SMOOTH);
 			ImageIcon spa_icon4 = new ImageIcon(img_spa4);
@@ -122,7 +122,7 @@ public class Panel03 extends JPanel implements ActionListener {
 			c_Center.removeAll();
 			c_Center.setLayout(null);
 			
-			ImageIcon fit_icon1 = new ImageIcon("src//cyc//fit_info.png");
+			ImageIcon fit_icon1 = new ImageIcon("img//fit_info.png");
 			img_fit1 = fit_icon1.getImage();
 			img_fit2 = img_fit1.getScaledInstance(1100, 100, Image.SCALE_SMOOTH);
 			ImageIcon fit_icon2 = new ImageIcon(img_fit2);
@@ -131,12 +131,12 @@ public class Panel03 extends JPanel implements ActionListener {
 			lbl55.setBounds(10, 50, 1100, 100);
 			c_Center.add(lbl55);
 
-			ImageIcon fit1 = new ImageIcon("src//cyc//fit01.jpg");
+			ImageIcon fit1 = new ImageIcon("img//fit01.jpg");
 			fit1_1 = fit1.getImage();
 			fit1_2 = fit1_1.getScaledInstance(500, 400, Image.SCALE_SMOOTH);
 			ImageIcon fit_1 = new ImageIcon(fit1_2);
 			img[6] = new JLabel(fit_1);
-			ImageIcon fit2 = new ImageIcon("src//cyc//fit02.jpg");
+			ImageIcon fit2 = new ImageIcon("img//fit02.jpg");
 			fit2_1 = fit2.getImage();
 			fit2_2 = fit2_1.getScaledInstance(500, 400, Image.SCALE_SMOOTH);
 			ImageIcon fit_2 = new ImageIcon(fit2_2);
@@ -150,7 +150,7 @@ public class Panel03 extends JPanel implements ActionListener {
 			c_Center.setBackground(new Color(0xFFFFFF));
 			
 			
-			ImageIcon fit_icon3 = new ImageIcon("src//cyc//fit_info2.png");
+			ImageIcon fit_icon3 = new ImageIcon("img//fit_info2.png");
 			img_fit3 = fit_icon3.getImage();
 			img_fit4 = img_fit3.getScaledInstance(1000, 110, Image.SCALE_SMOOTH);
 			ImageIcon fit_icon4 = new ImageIcon(img_fit4);
@@ -163,7 +163,7 @@ public class Panel03 extends JPanel implements ActionListener {
 		}
 		else if(combo.getSelectedIndex() == 0) {
 			c_Center.removeAll();
-			ImageIcon icon_rogo = new ImageIcon("src//cyc//rogo.jpg");
+			ImageIcon icon_rogo = new ImageIcon("img//rogo.jpg");
 			rogo1 = icon_rogo.getImage();
 			rogo2 = rogo1.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
 			ImageIcon icon_rogo2 = new ImageIcon(rogo2);
@@ -172,7 +172,7 @@ public class Panel03 extends JPanel implements ActionListener {
 
 
 			
-			ImageIcon icon_info = new ImageIcon("src//cyc//info1.png");//품격이 다른 편안함으로 OO호텔은 당신의 휴식을 책임집니다
+			ImageIcon icon_info = new ImageIcon("img//info1.png");//품격이 다른 편안함으로 OO호텔은 당신의 휴식을 책임집니다
 			info1 = icon_info.getImage();
 			info2 = info1.getScaledInstance(1200, 130, Image.SCALE_SMOOTH);
 			ImageIcon icon_info2 = new ImageIcon(info2);
@@ -181,7 +181,7 @@ public class Panel03 extends JPanel implements ActionListener {
 			info.setBounds(10, 40, 1200, 100);
 			
 			
-			ImageIcon icon_main = new ImageIcon("src//cyc//main.jpg");
+			ImageIcon icon_main = new ImageIcon("img//main.jpg");
 			main1 = icon_main.getImage();
 			main2 = main1.getScaledInstance(800, 530, Image.SCALE_SMOOTH);
 			ImageIcon icon_main2 = new ImageIcon(main2);
@@ -230,7 +230,7 @@ public class Panel03 extends JPanel implements ActionListener {
 		center.add("Center", c_Center);
 		center.add("East", c_East);
 
-		ImageIcon icon_rogo = new ImageIcon("src//cyc//rogo.jpg");
+		ImageIcon icon_rogo = new ImageIcon("img//rogo.jpg");
 		rogo1 = icon_rogo.getImage();
 		rogo2 = rogo1.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
 		ImageIcon icon_rogo2 = new ImageIcon(rogo2);
@@ -239,7 +239,7 @@ public class Panel03 extends JPanel implements ActionListener {
 
 
 		
-		ImageIcon icon_info = new ImageIcon("src//cyc//info1.png");//품격이 다른 편안함으로 OO호텔은 당신의 휴식을 책임집니다
+		ImageIcon icon_info = new ImageIcon("img//info1.png");//품격이 다른 편안함으로 OO호텔은 당신의 휴식을 책임집니다
 		info1 = icon_info.getImage();
 		info2 = info1.getScaledInstance(1200, 130, Image.SCALE_SMOOTH);
 		ImageIcon icon_info2 = new ImageIcon(info2);
@@ -248,7 +248,7 @@ public class Panel03 extends JPanel implements ActionListener {
 		info.setBounds(10, 40, 1200, 100);
 		
 		
-		ImageIcon icon_main = new ImageIcon("src//cyc//main.jpg");
+		ImageIcon icon_main = new ImageIcon("img//main.jpg");
 		main1 = icon_main.getImage();
 		main2 = main1.getScaledInstance(800, 530, Image.SCALE_SMOOTH);
 		ImageIcon icon_main2 = new ImageIcon(main2);
