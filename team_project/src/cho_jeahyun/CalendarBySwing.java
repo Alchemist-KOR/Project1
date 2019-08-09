@@ -11,12 +11,16 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class CalendarBySwing extends JFrame implements WindowListener, ActionListener, ItemListener{
@@ -31,9 +35,11 @@ public class CalendarBySwing extends JFrame implements WindowListener, ActionLis
 	private GridLayout grid = new GridLayout(7,7,5,5);//행,열,수평갭,수직갭
 	private Calendar ca = Calendar.getInstance();
 	private Dimension dimen, dimen1;
+	private Calendar calander2 = Calendar.getInstance();
 	private int xpos, ypos;
 	private Join join;
 	private Update_Account ua;
+	private Panel06 p6;
 	public CalendarBySwing(Join join) {
 		this.join = join;
 		setTitle("달력 - 오늘:"+ca.get(Calendar.YEAR)+"/"+(ca.get(Calendar.MONTH)+1)+"/"+ca.get(Calendar.DATE));
@@ -47,9 +53,9 @@ public class CalendarBySwing extends JFrame implements WindowListener, ActionLis
 		setVisible(true);
 		chyear = new Choice(); chmonth = new Choice();
 		yLabel = new JLabel("년"); mLabel = new JLabel("월");
-//		addWindowListener(this);
+
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
 		init();
 	}
 	public CalendarBySwing(Update_Account ua) {
@@ -65,52 +71,124 @@ public class CalendarBySwing extends JFrame implements WindowListener, ActionLis
 		setVisible(true);
 		chyear = new Choice(); chmonth = new Choice();
 		yLabel = new JLabel("년"); mLabel = new JLabel("월");
-//		addWindowListener(this);
+
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+		init();
+	}
+	public CalendarBySwing(Panel06 p6) {
+		this.p6 = p6;
+		setTitle("달력 - 오늘:"+ca.get(Calendar.YEAR)+"/"+(ca.get(Calendar.MONTH)+1)+"/"+ca.get(Calendar.DATE));
+		setSize(550,500);
+		dimen = Toolkit.getDefaultToolkit().getScreenSize();
+		dimen1 = this.getSize();
+		xpos = (int)(dimen.getWidth()/2 - dimen1.getWidth()/2);
+		ypos = (int)(dimen.getHeight()/2 - dimen1.getHeight()/2);
+		setLocation(xpos, ypos);//화면의 가운데에 출력
+		setResizable(false);
+		setVisible(true);
+		chyear = new Choice(); chmonth = new Choice();
+		yLabel = new JLabel("년"); mLabel = new JLabel("월");
+
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
 		init();
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
 		
 		String year = chyear.getSelectedItem();
-		String month = chmonth.getSelectedItem();
+		
+		Integer m = Integer.parseInt(chmonth.getSelectedItem());
+
+		String month;
+		String day;
+		if(m < 10) {
+			month = "0" + m;
+		}else {
+			month = chmonth.getSelectedItem();
+		}
+		
 		JButton btn = (JButton)arg0.getSource();
-		String day = btn.getText();
+
+		int d = Integer.parseInt(btn.getText());
+		
+		if(d < 10) {
+			day = "0" + d;
+		}else {
+			day = btn.getText();
+		}
+
 		if(join != null) {
 			join.birth_txt.setText(year+"-"+month+"-"+day);
+			dispose();
 		}
 		if(ua != null) {
 			ua.t1[2].setText(year+"-"+month+"-"+day);
+			dispose();
 		}
-//		if(index != 0) {
-//			
-//			if(index != 0) {
-//				es.choices[3].removeAllItems();
-//				es.choices[3].addItem("일");
-//				switch(index) {
-//				case 4:
-//				case 6:
-//				case 9:
-//				case 11:	for(int i=1;i<=30;i++) {
-//								es.choices[3].addItem(i+"");											
-//							}
-//							break;
-//				case 2:		for(int i=1;i<=28;i++) {
-//								es.choices[3].addItem(i+"");
-//							}
-//							break;
-//				default :	for(int i=1;i<=31;i++) {
-//								es.choices[3].addItem(i+"");
-//							}
-//				}//end of switch
-//			}//end of if
-//			//월에 따라서 일을 채운다. 끝
-//			es.choices[3].setSelectedItem(day);
-//		}
-//		}
-		
-		//월에 따라서 일을 채운다. 시작
+		if(p6 != null && p6.flage.equals("true")) {
+
+			Calendar date1 = Calendar.getInstance();
+			Calendar date = Calendar.getInstance();
+			
+			date1.set(Calendar.YEAR, date1.get(Calendar.YEAR));
+			date1.set(Calendar.MONTH, date1.get(Calendar.MONTH)+1);
+			date1.set(Calendar.DAY_OF_MONTH, date1.get(Calendar.DAY_OF_MONTH));
+			
+			date.set(Calendar.YEAR, Integer.parseInt(year));
+			date.set(Calendar.MONTH, Integer.parseInt(month));
+			date.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
+			System.out.println(date);
+			System.out.println(date1);
+			
+			int compare = date.compareTo(date1);
+			
+			if(compare > 0) {
+				p6.textfield[4].setText(year+"-"+month+"-"+day);
+				System.out.println("date > date1");
+				dispose();
+			}else if(compare < 0){
+				JOptionPane.showMessageDialog(this, "선택할 수 없습니다.");
+				p6.textfield[4].setText("");
+				System.out.println("date < date1");
+			}else {
+				JOptionPane.showMessageDialog(this, "선택할 수 없습니다.");
+				p6.textfield[5].setText("");
+			}
+			
+		}else if(p6 != null && p6.flage.equals("false")) {
+			p6.textfield[5].setText(year+"-"+month+"-"+day);
+			calander2 = Calendar.getInstance();
+			calander2.set(Calendar.YEAR, Integer.parseInt(year));
+			calander2.set(Calendar.MONTH, Integer.parseInt(month));
+			calander2.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
+			
+			System.out.println(p6.calander1);
+			System.out.println(calander2);
+			long resSec = (calander2.getTimeInMillis() - p6.calander1.getTimeInMillis())/1000;
+			
+			long resDay = resSec/(24*60*60);
+			System.out.println(resDay);
+			int compare = p6.calander1.compareTo(calander2);
+			
+			if(compare > 0) {
+				JOptionPane.showMessageDialog(this, "선택할 수 없습니다.");
+				p6.textfield[5].setText("");
+			}else if(compare < 0) {
+				System.out.println("day1 < day2");
+				p6.resDay = resDay;
+				p6.insert.setEnabled(true);
+				
+				DecimalFormat f = new DecimalFormat("#,##0");
+				
+				p6.price.setText("결제금액: "+f.format(p6.price_sum));
+				dispose();
+			}else {
+				JOptionPane.showMessageDialog(this, "선택할 수 없습니다.");
+				p6.textfield[5].setText("");
+			}
+		}
 	}
 		
 

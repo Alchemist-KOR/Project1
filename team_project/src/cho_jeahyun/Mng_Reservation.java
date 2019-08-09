@@ -25,7 +25,7 @@ import javax.swing.table.TableColumnModel;
 class ReservationModel extends AbstractTableModel {
 	Object[][] data;
 	private int cols, rows;// 열의 갯수, 행의 갯수용 변수
-	private String[] colName = { "예약번호", "CID", "이름", "전화번호", "방호수", "성인(명)", "아이(명)", "총액", "예약 날짜", "체크인", "체크아웃",
+	private String[] colName = { "예약번호", "CID", "이름", "전화번호", "방호수", "등급", "성인(명)", "아이(명)", "총액", "예약 날짜", "체크인", "체크아웃",
 			"체크인확인", "체크아웃확인" };
 	private List<Reservation_Info> bookingList;// DB조회 결과용 변수
 	private List<Check_inout> check_inout;
@@ -60,22 +60,29 @@ class ReservationModel extends AbstractTableModel {
 			data[r1][2] = rinfo.getName();
 			data[r1][3] = rinfo.getPhone();
 			data[r1][4] = rinfo.getRoomid();
-			data[r1][5] = rinfo.getAdult();
-			data[r1][6] = rinfo.getChild();
-			data[r1][7] = rinfo.getTotal_price();
-			data[r1][8] = rinfo.getReservation_date().substring(0, 10);
-			data[r1][9] = rinfo.getCheck_in_d().substring(0, 10);
-			data[r1][10] = rinfo.getCheck_out_d().substring(0, 10);
+			data[r1][5] = rinfo.getRating();
+			data[r1][6] = rinfo.getAdult();
+			data[r1][7] = rinfo.getChild();
+			data[r1][8] = rinfo.getTotal_price();
+			data[r1][9] = rinfo.getReservation_date().substring(0, 10);
+			data[r1][10] = rinfo.getCheck_in_d().substring(0, 10);
+			data[r1][11] = rinfo.getCheck_out_d().substring(0, 10);
 			
 			r1++;
 		}
 		while(it2.hasNext()) {
 			Check_inout cinfo = (Check_inout) it2.next();
+			int temp = 0;
 			if(!(cinfo.getCheck_in_d() == null)) {
-				data[r2][11] = cinfo.getCheck_in_d().substring(0, 10);
+				temp = Integer.parseInt(cinfo.getCheck_in_d().substring(0,4));
+//				if(temp <) {
+//			
+//				}
+				System.out.println(cinfo.getCheck_in_d().substring(0,4));
+				data[r2][12] = cinfo.getCheck_in_d().substring(4,5);
 			}
 			if(!(cinfo.getCheck_out_d() == null)) {
-				data[r2][12] = cinfo.getCheck_out_d().substring(0, 10);
+				data[r2][13] = cinfo.getCheck_out_d().substring(4,5);
 			}
 			r2++;
 		}
@@ -105,7 +112,7 @@ class ReservationModel extends AbstractTableModel {
 class ReservationModel2 extends AbstractTableModel {
 	Object[][] data;
 	private int cols, rows;// 열의 갯수, 행의 갯수용 변수
-	private String[] colName = { "예약번호", "CID", "이름", "전화번호", "방호수", "성인(명)", "아이(명)", "총액", "예약 날짜", "체크인", "체크아웃",
+	private String[] colName = { "예약번호", "CID", "이름", "전화번호", "방호수", "등급", "성인(명)", "아이(명)", "총액", "예약 날짜", "체크인", "체크아웃",
 			"체크인확인", "체크아웃확인" };
 
 	ReservationModel2() {
@@ -147,17 +154,26 @@ public class Mng_Reservation extends JPanel implements ActionListener, MouseList
 //	CheckInOutModel ck;
 	JLabel cid, reservation_date;
 	private JLabel[] lbl;
+	private JLabel room;
 	private JTextField[] txt;
-	private JButton select, check_in, check_out;
-	private JTable table, table2;
-	private JScrollPane scroll, scroll2;
-	private JPanel north, south, center;
+	private JTextField room_txt;
+	private JButton select, check_in, check_out, room_btn, delete_btn;
+	private JTable table;
+	private JScrollPane scroll;
+	private JPanel north, south;
 
 	public Mng_Reservation() {
 
 		this.setLayout(new BorderLayout());
 		north = new JPanel();
 		south = new JPanel();
+		
+		room = new JLabel("방배정");
+		room_txt = new JTextField(10);
+		room_btn = new JButton("배정");
+		room_btn.addActionListener(this);
+		delete_btn = new JButton("예약취소");
+		delete_btn.addActionListener(this);
 
 		lbl = new JLabel[3];
 		lbl[0] = new JLabel("주문번호");
@@ -181,8 +197,8 @@ public class Mng_Reservation extends JPanel implements ActionListener, MouseList
 		north.add(txt[2]);
 		north.add(select);
 		this.add("North", north);
-
-		center = new JPanel();
+		
+		
 		table = new JTable();
 		table.setModel(new ReservationModel());
 		table.addMouseListener(this);
@@ -191,8 +207,15 @@ public class Mng_Reservation extends JPanel implements ActionListener, MouseList
 //		center.add(scroll);
 		this.add("Center", scroll);
 
+		south.add(room);
+		south.add(room_txt);
+		south.add(room_btn);
+		
+		
 		south.add(check_in);
 		south.add(check_out);
+		south.add(delete_btn);
+		
 		this.add("South", south);
 
 		cid = new JLabel("");
@@ -200,12 +223,22 @@ public class Mng_Reservation extends JPanel implements ActionListener, MouseList
 	}
 
 	private Integer orderID;
+	private String check_in_d;
+	private String check_out_d;
+	private String res_date;
+	private Integer price;
+	
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		int selectedRow = table.getSelectedRow();
 		int columnCount = table.getColumnCount();
 		orderID = Integer.parseInt(table.getValueAt(selectedRow, 0) + "");
+		price = Integer.parseInt(table.getValueAt(selectedRow, 8) + "");
+		res_date = (String) table.getValueAt(selectedRow, 9);
+		check_in_d = (String) table.getValueAt(selectedRow, 10);
+		check_out_d = (String) table.getValueAt(selectedRow, 11);
+		
 		System.out.println(orderID);
 
 	}
@@ -236,7 +269,8 @@ public class Mng_Reservation extends JPanel implements ActionListener, MouseList
 		if (obj == select) {
 			if(!isNumeric(txt[0].getText()) && !(txt[0].getText().equals(""))) {
 				JOptionPane.showMessageDialog(this, "주문번호를 입력하여 주십시오.");
-			}else if(txt[0].getText().equals("") && txt[1].getText().equals("") && txt[2].getText().equals("")) {
+			}
+			else if(txt[0].getText().equals("") && txt[1].getText().equals("") && txt[2].getText().equals("")) {
 				CrudProcess crud = new CrudProcess();
 				List<Reservation_Info> info = crud.selectAllReservation();
 				
@@ -247,8 +281,9 @@ public class Mng_Reservation extends JPanel implements ActionListener, MouseList
 					table.setModel(new ReservationModel());
 					JOptionPane.showMessageDialog(this, "전체가 조회 되었습니다.");
 				}
-			}else if(txt[0].getText().equals("") || !(txt[0].getText().equals(""))){
-//				table.setModel(new CustomerModel());
+			}
+			else if(txt[0].getText().equals("") || !(txt[0].getText().equals(""))){
+
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				Check_inout ck = new Check_inout();
 				if (!txt[0].getText().equals("")) {// 주문번호
@@ -264,8 +299,8 @@ public class Mng_Reservation extends JPanel implements ActionListener, MouseList
 				CrudProcess crud = new CrudProcess();
 				List<Reservation_Info> rinfo = crud.selectReservation(map);
 				List<Check_inout> rinfo2 = crud.selectCheck_inout(ck);
-
-				if(rinfo.size() == 0 || rinfo2.size() == 0) {
+				
+				if(rinfo.size() == 0 && rinfo2.size() == 0) {
 					table.setModel(new ReservationModel2());
 					DefaultTableCellRenderer tScheduleCellRenderer = new DefaultTableCellRenderer();
 					tScheduleCellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -338,6 +373,82 @@ public class Mng_Reservation extends JPanel implements ActionListener, MouseList
 					JOptionPane.showMessageDialog(this, "작업 중 문제가 발생했습니다.");
 				}
 			}
+		}else if(obj == room_btn) {
+			int result = JOptionPane.showConfirmDialog(this, "방배정을 하시겠습니까?", "작업 확인", JOptionPane.YES_NO_OPTION);
+			if (result == JOptionPane.YES_OPTION) {
+				int r = -1;
+				int r2 = 0;
+				String room = room_txt.getText();
+				if(orderID != null) {
+					CrudProcess crud = new CrudProcess();
+					Room_info rd = new Room_info();
+					Reservation_Info rinfo = new Reservation_Info();
+					Sales_management sm = new Sales_management();
+					
+					
+					rd.setOrder_id(orderID);
+					rd.setCheck_in_d(check_in_d);
+					rd.setCheck_out_d(check_out_d);
+					rd.setRoomid(room);
+					
+					sm.setOrder_id(orderID);
+					sm.setBenefit(price);
+					sm.setReservation_date(res_date);
+					
+					r2 = crud.updateRoom_info(rd);
+					if(r2 > 0) {
+						rinfo.setOrder_id(orderID);
+						rinfo.setRoomid(room);
+						crud.insertSales_management(sm);
+						r = crud.updateReservation_room(rinfo);
+					}
+				}
+				if (r > 0) {
+					JOptionPane.showMessageDialog(this, "방이 배정 되었습니다.");
+					table.setModel(new ReservationModel());
+					DefaultTableCellRenderer tScheduleCellRenderer = new DefaultTableCellRenderer();
+					tScheduleCellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+					TableColumnModel tcmSchedule = table.getColumnModel();
+					for (int i = 0; i < tcmSchedule.getColumnCount(); i++) {
+						tcmSchedule.getColumn(i).setCellRenderer(tScheduleCellRenderer);
+					}
+				}else if(r == 0) {
+					JOptionPane.showMessageDialog(this, "방을 선택하여 주십시오.");
+				}else {
+					JOptionPane.showMessageDialog(this, "작업 중 문제가 발생했습니다.");
+				}
+			}
+		}else if(obj == delete_btn) {
+			int result = JOptionPane.showConfirmDialog(this, "예약을 취소 하시겠습니까?", "작업 확인", JOptionPane.YES_NO_OPTION);
+			if (result == JOptionPane.YES_OPTION) {
+				CrudProcess crud = new CrudProcess();
+				int r = crud.deleteReservation(orderID);
+				int r2 = 0;
+				if(r > 0) {
+					List<Sales_management> slist;
+					slist = crud.selectSales(orderID);
+					if(slist.size() > 0) {
+						crud.deleteSales(orderID);
+					}
+					r2 = crud.updateRoom_info_null(orderID);
+				}
+				
+				if (r > 0) {
+					JOptionPane.showMessageDialog(this, "예약이 취소되었습니다.");
+					table.setModel(new ReservationModel());
+					DefaultTableCellRenderer tScheduleCellRenderer = new DefaultTableCellRenderer();
+					tScheduleCellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+					TableColumnModel tcmSchedule = table.getColumnModel();
+					for (int i = 0; i < tcmSchedule.getColumnCount(); i++) {
+						tcmSchedule.getColumn(i).setCellRenderer(tScheduleCellRenderer);
+					}
+				}else if(r == 0) {
+					JOptionPane.showMessageDialog(this, "예약을 선택하여 주십시오.");
+				}else {
+					JOptionPane.showMessageDialog(this, "작업 중 문제가 발생했습니다.");
+				}
+			}
+		
 		}
 	}
 }

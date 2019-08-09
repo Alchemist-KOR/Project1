@@ -121,6 +121,81 @@ public class CrudProcess {
 			ss.close();
 		}
 	}
+	public List<Room_info> selectAllRoom_info() {//회원 예약내역확인
+		SqlSession s = getSession();
+		List<Room_info> info = null;
+		
+		try {
+
+			String query = NAMESPACE + ".selectAllRoom_info";
+			info = s.selectList(query);
+			
+			return info;
+		}finally {
+			s.close();
+		}
+		
+	}
+	public Integer updateRoom_info(Room_info roomid_info) {// (관리자) 예약 방 배정 (room DB에 입력)
+		SqlSession session = getSession();
+		Integer result = null;
+		try {
+			String query = NAMESPACE+".updateRoom_info";
+			result = session.insert(query, roomid_info);
+			if(result > 0) {
+				session.commit();
+			}else {
+				session.rollback();
+			}return result;
+		}finally {
+			session.close();
+		}
+	}
+	public Integer updateRoom_info_null(Integer order_id) {// (관리자) 예약 방 배정 삭제 (room DB에 입력)
+		SqlSession session = getSession();
+		Integer result = null;
+		try {
+			String query = NAMESPACE+".updateRoom_info_null";
+			result = session.insert(query, order_id);
+			if(result > 0) {
+				session.commit();
+			}else {
+				session.rollback();
+			}return result;
+		}finally {
+			session.close();
+		}
+	}
+	public Integer updateReservation_room(Reservation_Info rinfo) {// (관리자) 예약방 배정
+		SqlSession session = getSession();
+		Integer result = null;
+		try {
+			String query = NAMESPACE+".updateReservation_room";
+			result = session.insert(query, rinfo);
+			if(result > 0) {
+				session.commit();
+			}else {
+				session.rollback();
+			}return result;
+		}finally {
+			session.close();
+		}
+	}
+	public Integer updateReservation_room_null(String roomid) {// (관리자) 예약방 배정 삭제
+		SqlSession session = getSession();
+		Integer result = null;
+		try {
+			String query = NAMESPACE+".updateReservation_room_null";
+			result = session.insert(query, roomid);
+			if(result > 0) {
+				session.commit();
+			}else {
+				session.rollback();
+			}return result;
+		}finally {
+			session.close();
+		}
+	}
 	public List<Reservation_Info> selectAllReservation_Info(String cid) {//회원 예약내역확인
 		SqlSession s = getSession();
 		List<Reservation_Info> info = null;
@@ -135,6 +210,20 @@ public class CrudProcess {
 			s.close();
 		}
 		
+	}
+	public Integer selectReservation_Max() {//고객 예약내역 주문번호 최대 수
+		SqlSession s = getSession();
+		Integer max_num = null;
+		try {
+			String query = NAMESPACE + ".selectReservation_Max";
+			max_num = s.selectOne(query);
+			if(max_num == null) {
+				max_num = 0;
+			}
+			return max_num;
+		}finally {
+			s.close();
+		}
 	}
 	public List<Reservation_Info> selectAllReservation_Info_non(Reservation_Info info) {//비회원 예약내역확인
 		SqlSession s = getSession();
@@ -160,6 +249,50 @@ public class CrudProcess {
 			
 			if(result>0) ss.commit();
 			else ss.rollback();		
+			return result;
+		}finally {
+			ss.close();
+		}
+	}
+	public Integer updateReservation_Info_roomid(Integer order_id) {// (관리자) 예약 방 배정
+		SqlSession session = getSession();
+		Integer result = null;
+		try {
+			String query = NAMESPACE+".updateReservation_Info_roomid";
+			result = session.insert(query, order_id);
+			if(result > 0) {
+				session.commit();
+			}else {
+				session.rollback();
+			}return result;
+		}finally {
+			session.close();
+		}
+	}
+	public Integer insertReservation_Info_nomember(Reservation_Info li) {//비회원 예약하기
+		SqlSession ss=getSession();
+		Integer result=null;
+		try {
+			String query=NAMESPACE+".insertReservation_Info_nomember";
+			result=ss.insert(query,li);
+			
+			if(result>0) ss.commit();
+			else ss.rollback();
+			return result;
+		}finally {
+			ss.close();
+		}
+	}
+	
+	public Integer insertReservation_Info_member(Reservation_Info ri) {//회원 예약하기
+		SqlSession ss=getSession();
+		Integer result=null;
+		try {
+			String query=NAMESPACE+".insertReservation_Info_member";
+			result=ss.insert(query,ri);
+			
+			if(result>0) ss.commit();
+			else ss.rollback();
 			return result;
 		}finally {
 			ss.close();
@@ -212,7 +345,6 @@ public class CrudProcess {
 	public List<Reservation_Info> selectReservation(HashMap map) {// 관리자가 특정 예약내역 검색
 		SqlSession s = getSession();
 		List<Reservation_Info> info = null;
-		
 		try {
 			String query=NAMESPACE+".selectReservation";
 			List<Reservation_Info> data = s.selectList(query, map);
@@ -235,6 +367,20 @@ public class CrudProcess {
 		}
 		
 	}
+	public Integer insertSales_management(Sales_management sm) {//회원가입
+		SqlSession ss=getSession();
+		Integer result=null;
+		try {
+			String query=NAMESPACE+".insertSales_management";
+			result=ss.insert(query,sm);
+			
+			if(result>0) ss.commit();
+			else ss.rollback();		
+			return result;
+		}finally {
+			ss.close();
+		}
+	}
 	public List selectSalesAvg(Sales_management_M sm) {
 		SqlSession s = getSession();
 		List info = null;
@@ -249,7 +395,20 @@ public class CrudProcess {
 		}
 		
 	}
-	
+	public List selectSales(Integer order_id) {
+		SqlSession s = getSession();
+		List info = null;
+		
+		try {
+			String query = NAMESPACE + ".selectSales";
+			info = s.selectList(query , order_id);
+			
+			return info;
+		}finally {
+			s.close();
+		}
+		
+	}
 	public List selectSalesSum(Sales_management_M sm) {
 		SqlSession s = getSession();
 		List info = null;
@@ -263,6 +422,21 @@ public class CrudProcess {
 			s.close();
 		}
 		
+	}
+	public int deleteSales(Integer order_id) {// 세일즈 테이블 데이터 삭제
+		SqlSession s = getSession();
+		int result = 0;
+		try {
+			String query = NAMESPACE + ".deleteSales";
+			result = s.delete(query,order_id);
+			if(result > 0) {
+				s.commit();
+			}else {
+				s.rollback();
+			}return result;
+		}finally {
+			s.close();
+		}
 	}
 	public List<Check_inout> selectAllCheckInout() {// 체크인/아웃 테이블 검색
 		SqlSession s = getSession();

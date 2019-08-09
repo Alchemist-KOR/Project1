@@ -2,11 +2,15 @@ package cho_jeahyun;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -56,14 +60,29 @@ public class Join extends JFrame implements ActionListener{
 			login_info.setPhone(phone);
 			
 			CrudProcess crud=new CrudProcess();
-			int r = crud.insertLogin(login_info);
 			
-			if(r > 0) {
-				JOptionPane.showMessageDialog(this, "정상적으로 등록되었습니다.");
-				dispose();
-			}else {
-				JOptionPane.showMessageDialog(this, "등록 중 문제가 발생했습니다.");
+			List<Login_info> lg = crud.selectAccount(id);
+			Iterator temp = lg.iterator();
+			Login_info li = null;
+			if(lg.size() > 0) {
+				while(temp.hasNext()) {
+					li = (Login_info) temp.next();
+				}
 			}
+			if(lg.size() > 0) {
+				JOptionPane.showMessageDialog(this, "이미 있는 아이디입니다.");
+			}else{
+				int r = crud.insertLogin(login_info);
+				
+				if(r > 0) {
+					JOptionPane.showMessageDialog(this, "정상적으로 등록되었습니다.");
+					dispose();
+				}else {
+					JOptionPane.showMessageDialog(this, "등록 중 문제가 발생했습니다.");
+				}
+			}
+			
+			
 		}else if(obj == calendar_btn) {
 			new CalendarBySwing(this);
 		}
@@ -103,14 +122,20 @@ public class Join extends JFrame implements ActionListener{
 		id_txt=new JTextField(15);
 		pwd_txt=new JPasswordField(15);
 		birth_txt=new JTextField("예시)2000/01/01",11);
+		
+		ImageIcon temp = new ImageIcon("img//calendarIcon.png");
+		Image img = temp.getImage();
+		img = img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		temp = new ImageIcon(img);
 
-		calendar_btn = new JButton("달력");
+		calendar_btn = new JButton(temp);
+		calendar_btn.setContentAreaFilled(false);
+		calendar_btn.addActionListener(this);
+		
 		email_txt=new JTextField(6);
 		
 		addr_txt=new JTextField(15);
 		phoneNum_txt=new JTextField("예시)01012345678",15);
-		
-		calendar_btn.addActionListener(this);
 		
 		man=new JRadioButton("남자");
 		woman=new JRadioButton("여자");
@@ -127,6 +152,8 @@ public class Join extends JFrame implements ActionListener{
 		
 		center=new JPanel(new GridLayout(10,2));
 		calendar_panel = new JPanel(new FlowLayout());
+		
+		
 		
 		email_panel = new JPanel(new FlowLayout());
 		email_panel.add(email_txt);

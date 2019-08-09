@@ -59,10 +59,10 @@ class Reservation_Info_Model_norl extends AbstractTableModel {
 		while (it.hasNext()) {
 			Reservation_Info res = (Reservation_Info) it.next();
 			tableData[r][0] = res.getOrder_id();
-			tableData[r][1] = res.getReservation_date().substring(0,10);
+			tableData[r][1] = res.getReservation_date().substring(0, 10);
 			tableData[r][2] = res.getName();
 			tableData[r][3] = res.getRoomid();
-			tableData[r][4] = res.getCheck_in_d().substring(0,10) +" ~ "+ res.getCheck_out_d().substring(0,10);
+			tableData[r][4] = res.getCheck_in_d().substring(0, 10) + " ~ " + res.getCheck_out_d().substring(0, 10);
 			tableData[r][5] = res.getTotal_price();
 			r++;
 		}
@@ -123,8 +123,8 @@ class Column_Model extends AbstractTableModel {
 
 }
 
-public class Panel08 extends JPanel implements ActionListener, MouseListener{
-	
+public class Panel08 extends JPanel implements ActionListener, MouseListener {
+
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		int selectedRow = table.getSelectedRow();
@@ -132,28 +132,29 @@ public class Panel08 extends JPanel implements ActionListener, MouseListener{
 		orderID = Integer.parseInt(table.getValueAt(selectedRow, 0) + "");
 		reservation_date = (table.getValueAt(selectedRow, 1) + "");
 		refund = Integer.parseInt((table.getValueAt(selectedRow, 5) + ""));
-		
-		System.out.println(orderID +"  "+reservation_date+"  "+refund);
-		
+
+		System.out.println(orderID + "  " + reservation_date + "  " + refund);
+
 	}
+
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -161,47 +162,44 @@ public class Panel08 extends JPanel implements ActionListener, MouseListener{
 		// TODO Auto-generated method stub
 		JButton button = (JButton) e.getSource();
 		if (button == select) {
-			if (t1.getText().equals("") || t2.getText().equals("") || t3.getText().equals("")) {
+			if (t2.getText().equals("") || t3.getText().equals("")) {
 				JOptionPane.showMessageDialog(this, "빈칸을 채워주십시오.");
 			} else {
-				if(isNumeric(t1.getText())) {
-					info = new Reservation_Info();
-					info.setOrder_id(Integer.parseInt(t1.getText()));
-					info.setName(t2.getText());
-					info.setPhone(t3.getText());
+				info = new Reservation_Info();
+				info.setName(t2.getText());
+				info.setPhone(t3.getText());
 
-					table.setModel(new Reservation_Info_Model_norl(info));
-					DefaultTableCellRenderer tScheduleCellRenderer = new DefaultTableCellRenderer();
-					tScheduleCellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-					TableColumnModel tcmSchedule = table.getColumnModel();
-					for (int i = 0; i < tcmSchedule.getColumnCount(); i++) {
-						tcmSchedule.getColumn(i).setCellRenderer(tScheduleCellRenderer);
-					}
-				}
-				else {
-					JOptionPane.showMessageDialog(this, "주문번호를 숫자로 입력하여 주십시오.");
-				}
+				table.setModel(new Reservation_Info_Model_norl(info));
+				DefaultTableCellRenderer tScheduleCellRenderer = new DefaultTableCellRenderer();
+				tScheduleCellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+				TableColumnModel tcmSchedule = table.getColumnModel();
+				for (int i = 0; i < tcmSchedule.getColumnCount(); i++) {
+					tcmSchedule.getColumn(i).setCellRenderer(tScheduleCellRenderer);
 
+				}
 			}
 
-		}else if(button == cancel) {
+		} else if (button == cancel) {
 			Reservation_cancel_info rc = new Reservation_cancel_info();
 			CrudProcess crud = new CrudProcess();
-			
+
 			rc.setOrder_id(orderID);
 			rc.setRefund(refund);
 			rc.setReservation_date(reservation_date);
-			
-			
+			rc.setCheck_info("false");
+
 			int r = crud.insertReservation_cancel(rc);
-			
-			if(r > 0) {
+
+			if (r > 0) {
 				JOptionPane.showMessageDialog(this, "정상적으로 취소 처리되었습니다.");
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(this, "취소등록 중 문제가 발생했습니다.");
 			}
+		}else if(button == refresh) {
+			table.setModel(new Column_Model());
 		}
 	}
+
 	public static boolean isNumeric(String s) {
 		try {
 			Double.parseDouble(s);
@@ -212,10 +210,10 @@ public class Panel08 extends JPanel implements ActionListener, MouseListener{
 	}
 
 	private JPanel tabPanel, north, north_center, south;
-	private JButton select, cancel;
-	private JLabel l1, l2, l3;
-	private JTextField t1, t2, t3;
-	private JTable table;
+	private JButton select, cancel,refresh;
+	private JLabel l2, l3;
+	public JTextField t2, t3;
+	public JTable table;
 	private JScrollPane tablescroll;
 	private Reservation_Info info;
 	MainFrame mf;
@@ -234,6 +232,9 @@ public class Panel08 extends JPanel implements ActionListener, MouseListener{
 		select.addActionListener(this);
 		cancel = new JButton("취소");
 		cancel.addActionListener(this);
+		refresh = new JButton("검색결과 초기화");
+		refresh.addActionListener(this);
+		
 
 		north.add("East", select);
 
@@ -241,22 +242,21 @@ public class Panel08 extends JPanel implements ActionListener, MouseListener{
 		table.addMouseListener(this);
 		table.setModel(new Column_Model());
 		tablescroll = new JScrollPane(table);
-		l1 = new JLabel("주문번호");
 		l2 = new JLabel("이름");
 		l3 = new JLabel("전화번호");
-		t1 = new JTextField(10);
+
 		t2 = new JTextField(10);
 		t3 = new JTextField(10);
 
-		north_center.add(l1);
-		north_center.add(t1);
 		north_center.add(l2);
 		north_center.add(t2);
 		north_center.add(l3);
 		north_center.add(t3);
 
+		
 		north.add("Center", north_center);
 
+		south.add("East",refresh);
 		south.add(cancel);
 
 		this.add("North", north);

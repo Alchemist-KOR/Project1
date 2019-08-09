@@ -24,7 +24,7 @@ import javax.swing.table.TableColumnModel;
 class Reservation_cancelModel extends AbstractTableModel {
 	Object[][] data;
 	private int cols, rows;// 열의 갯수, 행의 갯수용 변수
-	private String[] colName = {"예약번호", "환불금액", "예약날자", "취소날자"};
+	private String[] colName = {"예약번호", "환불금액", "예약날자", "취소날자", "취소작업"};
 	private List<Reservation_cancel_info> cancelList;// DB조회 결과용 변수
 
 	Reservation_cancelModel() {
@@ -232,10 +232,11 @@ public class Mng_Reservation_cancel extends JPanel implements ActionListener, Mo
 			CrudProcess crud = new CrudProcess();
 			
 			int r = crud.deleteReservation(orderID);
-			int r2 = crud.deleteCheck_inout(orderID);
+			crud.deleteSales(orderID);
 			int r3 = crud.updateReservation_cancel(rc);
+			crud.updateRoom_info_null(orderID);
 			
-			if(r > 0 && r2 > 0) {
+			if(r > 0 ) {
 				JOptionPane.showMessageDialog(this, "정상적으로 취소 처리되었습니다.");
 			}else {
 				JOptionPane.showMessageDialog(this, "취소처리 중 문제가 발생했습니다.");

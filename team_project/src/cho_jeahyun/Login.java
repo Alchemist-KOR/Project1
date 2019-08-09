@@ -3,6 +3,7 @@ package cho_jeahyun;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -34,10 +35,11 @@ public class Login extends JFrame implements ActionListener{
 	Panel06 p6;
 	Panel07 p7;
 	MyPage mp;
-	public Login(MainFrame mf, Panel01 p1, Panel07 p7) {
+	public Login(MainFrame mf, Panel01 p1, Panel07 p7, Panel06 p6) {
 		this.mf = mf;
 		this.p1 = p1;
 		this.p7 = p7;
+		this.p6 = p6;
 		this.mp = mp;
 		log_label=new JLabel("아이디");
 		pwd_label=new JLabel("비밀번호");
@@ -127,14 +129,27 @@ public class Login extends JFrame implements ActionListener{
 				}else {								//로그인 성공
 					JOptionPane.showMessageDialog(this, "로그인 되었습니다.");
 					//윈도위의 title 를 바꾼다 -> 환영합니다 누구누구 님
+					String cid = login_info.getCid();
+					System.out.println(cid);
 					login_check = true;
 					mf.check_login = login_check;
 					p1.btn_login.setVisible(false);
 					p1.btn_mypage.setVisible(true);
 					p1.btn_logout.setVisible(true);
 					mf.mainTabb.setEnabledAt(6, true);
-					p7.cid = login_info.getCid();
-					p1.cid = login_info.getCid();
+					mf.cid = cid;
+					List<Login_info> lf = crud.selectAccount(cid);
+					Iterator it = lf.iterator();
+					Login_info rinfo = (Login_info) it.next();
+					mf.name = rinfo.getName();
+					mf.phone = rinfo.getPhone();
+					p7.cid = cid;
+					p6.label[0].setVisible(false);
+					p6.label[3].setVisible(false);
+					p6.textfield[0].setVisible(false);
+					p6.textfield[3].setVisible(false);
+					
+					p1.cid = cid;
 					dispose();
 				}
 			}

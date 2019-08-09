@@ -6,7 +6,7 @@ import javax.swing.JTabbedPane;
 
 public class Mng extends JFrame {
 
-	private JPanel sales, reservation, reservation_cancel;;
+	private JPanel sales, reservation, reservation_cancel, room_info;
 	public Mng_Customer customer = null;
 	private Panel01 p1;
 	public Mng(Panel01 p1){
@@ -16,11 +16,13 @@ public class Mng extends JFrame {
 		sales = new Mng_Barchart();
 		reservation = new Mng_Reservation();
 		reservation_cancel = new Mng_Reservation_cancel();
+		room_info = new Mng_Room_info();
 		JTabbedPane tab = new JTabbedPane();
 		tab.addTab("고객관리", customer);
 		tab.addTab("매출관리", sales);
 		tab.addTab("예약관리", reservation);
-		tab.addTab("예약취소", reservation_cancel);
+		tab.addTab("방조회", room_info);
+		tab.addTab("예약취소요청", reservation_cancel);
 		this.add("Center",tab);
 		
 		this.setTitle("관리자페이지");

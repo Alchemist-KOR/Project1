@@ -23,7 +23,7 @@ public class Panel02 extends JPanel implements ActionListener{
 	private JPanel north, center,center_content;
 	private ImageIcon img1,img2;
 	private ImageIcon res_img1, res_img2;
-	private JLabel rating1,text1,imglabel1, imglabel2;
+	private JLabel text1,imglabel1, imglabel2;
 	private Image resizeimage, resizeimage2;
 	private Image result;
 	private JButton left, right;
@@ -34,7 +34,7 @@ public class Panel02 extends JPanel implements ActionListener{
 
 	private JComboBox room_select;
 	
-	private String room[] = {"선택하세요.","스텐다드", "프리미엄", "스위트"};
+	private String room[] = {"스텐다드", "프리미엄", "스위트"};
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -47,7 +47,7 @@ public class Panel02 extends JPanel implements ActionListener{
 		}else if(room_select.getSelectedIndex() == 3) {
 			change_image = 3;
 		}
-		if(room_select.getSelectedIndex() == 1) {
+		if(room_select.getSelectedIndex() == 0) {
 			center_content.removeAll();
 			
 			
@@ -78,7 +78,7 @@ public class Panel02 extends JPanel implements ActionListener{
 			center_content.add(room_select);
 			center_content.repaint();
 			
-		}else if(room_select.getSelectedIndex() == 2) {
+		}else if(room_select.getSelectedIndex() == 1) {
 			center_content.removeAll();
 			
 			
@@ -108,7 +108,7 @@ public class Panel02 extends JPanel implements ActionListener{
 			center_content.add(text1);
 			center_content.add(room_select);
 			center_content.repaint();
-		}else if(room_select.getSelectedIndex() == 3){
+		}else if(room_select.getSelectedIndex() == 2){
 			center_content.removeAll();
 			
 			
@@ -307,10 +307,9 @@ public class Panel02 extends JPanel implements ActionListener{
 		center_content.setLayout(null);
 		
 		
-		rating1 = new JLabel();
-		img1 = new ImageIcon();
-		imglabel1 = new JLabel();
-		imglabel2 = new JLabel();
+//		img1 = new ImageIcon();
+//		imglabel1 = new JLabel();
+//		imglabel2 = new JLabel();
 		text1 = new JLabel();
 
 		ImageIcon icon_rogo = new ImageIcon("img//rogo.jpg");
@@ -324,8 +323,32 @@ public class Panel02 extends JPanel implements ActionListener{
 
 		room_select.setBounds(1000, 7, 150, 25);
 		
+		img2 = new ImageIcon("img//스텐다드.PNG");
+		resizeimage2 = img2.getImage();
+		result = resizeimage2.getScaledInstance(450, 70, Image.SCALE_SMOOTH);
+		res_img2 = new ImageIcon(result);
+		imglabel2 = new JLabel(res_img2);
 		
+		img1 = new ImageIcon("img//hotel_class//호텔02(스텐다드)1.png");
+		resizeimage = img1.getImage();
+		result = resizeimage.getScaledInstance(750, 450, Image.SCALE_SMOOTH);
+		res_img1 = new ImageIcon(result);
+		imglabel1 = new JLabel(res_img1);
+		
+		imglabel2.setBounds(60,15, 450 , 70);
+		imglabel1.setBounds(200, 100, 750, 450);
+		text1.setBounds(200, 520, 420, 120);
+		
+
+		text1.setText("<html><body>기본타입 룸<br>스튜디오 타입의 파스텔 톤 객실에 휴식을 취할 수 있는"
+			+ "테이블과 체어, <br>그리고 라탄 타입의 아늑한 체어를 완비한 OO의 가장 기본적인 룸입니다.</body></html>");
+		center_content.add(left);
+		center_content.add(right);
+		center_content.add(imglabel2);
+		center_content.add(imglabel1);
+		center_content.add(text1);
 		center_content.add(room_select);
+		
 		
 		center.add(center_content);
 		center_content.setBackground(Color.white);

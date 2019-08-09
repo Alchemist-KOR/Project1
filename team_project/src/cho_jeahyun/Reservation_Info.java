@@ -1,7 +1,6 @@
 package cho_jeahyun;
 
 public class Reservation_Info {
-	
 	private Integer order_id;
 	private String cid;
 	private String name;
@@ -9,11 +8,19 @@ public class Reservation_Info {
 	private Integer adult;
 	private Integer child;
 	private Integer total_price;
+	private String rating;
 	private String reservation_date;
 	private String check_in_d;
 	private String check_out_d;
 	private String phone;
 	
+	
+	public String getRating() {
+		return rating;
+	}
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
 	
 	public String getPhone() {
 		return phone;

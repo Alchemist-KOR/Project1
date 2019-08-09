@@ -36,6 +36,7 @@ class Reservation_Info_Model extends AbstractTableModel {
 
 	Reservation_Info_Model(String cid) {
 		this.cid = cid;
+		System.out.println(cid);
 		CrudProcess crud = new CrudProcess();
 		list = crud.selectAllReservation_Info(cid);
 		setData();
@@ -55,7 +56,7 @@ class Reservation_Info_Model extends AbstractTableModel {
 			tableData[r][1] = res.getReservation_date().substring(0, 10);
 			tableData[r][2] = res.getName();
 			tableData[r][3] = res.getRoomid();
-			tableData[r][4] = res.getCheck_in_d().substring(0, 10) +
+			tableData[r][4] = res.getCheck_in_d().substring(0, 10) +"~"+
 					res.getCheck_out_d().substring(0, 10);
 			tableData[r][5] = res.getTotal_price();
 			r++;
@@ -63,7 +64,7 @@ class Reservation_Info_Model extends AbstractTableModel {
 			
 			
 		}
-		System.out.println(list.size());
+
 		if (list.size() == 0) {
 			JOptionPane.showMessageDialog(null, "조회내역이 없습니다.");
 		} else {
@@ -157,6 +158,7 @@ public class Panel07 extends JPanel implements ActionListener, MouseListener {
 		// TODO Auto-generated method stub
 		JButton button = (JButton) e.getSource();
 		if (button == select) {
+			System.out.println(cid);
 			table.setModel(new Reservation_Info_Model(cid));
 			DefaultTableCellRenderer tScheduleCellRenderer = new DefaultTableCellRenderer();
 			tScheduleCellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -171,6 +173,7 @@ public class Panel07 extends JPanel implements ActionListener, MouseListener {
 			rc.setOrder_id(orderID);
 			rc.setRefund(refund);
 			rc.setReservation_date(reservation_date);
+			rc.setCheck_info("false");
 			
 			
 			int r = crud.insertReservation_cancel(rc);
@@ -185,9 +188,9 @@ public class Panel07 extends JPanel implements ActionListener, MouseListener {
 
 	private JPanel tabPanel, north_right, south;
 	private JButton select, cancel;
-	private JTable table;
+	public JTable table;
 	private JScrollPane tablescroll;
-	private String[] columnName = { "예약번호", "예약날짜", "예약자 명", "방 번호", "체크인/체크아웃", "가격", " " };
+	private String[] columnName = { "예약번호", "예약날짜", "예약자 명", "방 번호", "체크인/체크아웃", "가격"};
 	MainFrame mf;
 	String cid;
 	Integer orderID;

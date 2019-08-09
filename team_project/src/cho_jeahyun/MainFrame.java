@@ -17,6 +17,8 @@ public class MainFrame extends JFrame{
 	public boolean check_login;
 	public MyPage mp;
 	
+	public String name, cid, phone;
+	
 	
 	MainFrame(){
 		mainTabb = new JTabbedPane();
@@ -24,13 +26,15 @@ public class MainFrame extends JFrame{
 		check_login = false;
 		
 		p7 = new Panel07(this);
-		p1 = new Panel01(this,p7);
+		
 		p2 = new Panel02(this);
 		p3 = new Panel03();
 		p4 = new Panel04();
 		p5 = new Panel05(this);
 		p6 = new Panel06(this);
 		p8 = new Panel08();
+		p1 = new Panel01(this,p7, p6, p8);
+		
 		
 		
 		

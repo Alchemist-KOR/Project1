@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.AbstractTableModel;
 
 public class Panel01 extends JPanel implements ActionListener{
 	
@@ -32,13 +33,15 @@ public class Panel01 extends JPanel implements ActionListener{
 	Panel05 p5;
 	Panel06 p6;
 	Panel07 p7;
+	Panel08 p8;
 	Mng mng;
 	
 
-	Panel01(MainFrame mf,Panel07 p7){
+	Panel01(MainFrame mf,Panel07 p7, Panel06 p6, Panel08 p8){
 		this.mf = mf;
 		this.p7 = p7;
-
+		this.p6 = p6;
+		this.p8 = p8;
 		this.setLayout(new BorderLayout());
 		north = new JPanel(new BorderLayout());
 		east = new JPanel(new FlowLayout());
@@ -116,7 +119,7 @@ public class Panel01 extends JPanel implements ActionListener{
 		JButton bt = (JButton)e.getSource();
 		
 		if(bt == btn_login) {
-			new Login(mf, this, p7);
+			new Login(mf, this, p7, p6);
 
 			
 		}else if(bt == btn_logout) {
@@ -124,6 +127,14 @@ public class Panel01 extends JPanel implements ActionListener{
 			btn_login.setVisible(true);
 			btn_mypage.setVisible(false);
 			btn_logout.setVisible(false);
+			p6.label[0].setVisible(true);
+			p6.textfield[0].setVisible(true);
+			p6.label[3].setVisible(true);
+			p6.textfield[3].setVisible(true);
+			p7.table.setModel(new Column_Model1());
+			p8.table.setModel(new Column_Model2());
+			p8.t2.setText("");
+			p8.t3.setText("");
 			p7.cid = null;
 			mf.mainTabb.setEnabledAt(6, false);
 		}else if(bt == btn_mypage) {
@@ -136,9 +147,78 @@ public class Panel01 extends JPanel implements ActionListener{
 			btn_login.setVisible(true);
 			manager_page_bth.setVisible(false);
 			btn_mlogout.setVisible(false);
-			mng.dispose();
+			
+			p7.table.setModel(new Column_Model1());
+			p8.table.setModel(new Column_Model2());
+			p8.t2.setText("");
+			p8.t3.setText("");
+			
+			mf.cid = "";
+			mf.name = "";
+			mf.phone = "";
+			if(mng != null) {
+				mng.dispose();
+			}
 		}
-		
+	}
+}
+class Column_Model1 extends AbstractTableModel {
+
+	private Object[][] tableData;
+	int cols, rows;
+	
+	private String[] columnName = { "예약번호", "예약날짜", "예약자 명", "방 번호", "체크인/체크아웃", "가격"};
+
+	Column_Model1() {
+		rows = 0;
+		cols = columnName.length;
+	}
+
+	@Override
+	public String getColumnName(int arg0) {
+		return columnName[arg0];
+	}
+
+	public int getColumnCount() {
+		return cols;
+	}
+
+	public int getRowCount() {
+		return rows;
+	}
+
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		return tableData[rowIndex][columnIndex];
+	}
+
+}
+class Column_Model2 extends AbstractTableModel {
+
+	private Object[][] tableData;
+	int cols, rows;
+
+	private String[] columnName = { "예약번호", "예약날짜", "예약자 명", "방 번호", "체크인/체크아웃", "가격" };
+
+	Column_Model2() {
+		rows = 0;
+		cols = columnName.length;
+	}
+
+	@Override
+	public String getColumnName(int arg0) {
+		return columnName[arg0];
+	}
+
+	public int getColumnCount() {
+		return cols;
+	}
+
+	public int getRowCount() {
+		return rows;
+	}
+
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		return tableData[rowIndex][columnIndex];
 	}
 
 }

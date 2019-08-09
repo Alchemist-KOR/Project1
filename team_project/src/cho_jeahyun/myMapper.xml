@@ -12,13 +12,42 @@
 	<select id="selectAllReservation_Info_non" parameterType="cho_jeahyun.Login_info"
 		resultType = "cho_jeahyun.Reservation_Info">
 		select * from Reservation_Info
-		where order_id = #{order_id} and name = #{name} and phone = #{phone}
+		<where>
+		<if test="name != null">and name=#{name}</if>
+		<if test="phone != null">and phone=#{phone}</if>
+		</where>
 		order by to_date(reservation_date) desc
 	</select>
 	<select id="selectAllReservation"
 		resultType = "cho_jeahyun.Reservation_Info">
 		select * from reservation_info order by order_id desc
 	</select>
+	<select id="selectAllRoom_info"
+		resultType = "cho_jeahyun.Room_info">
+		select * from room_info order by order_id
+	</select>
+	<update id="updateReservation_room" parameterType = "cho_jeahyun.Reservation_Info">
+		update reservation_info set roomid = #{roomid}
+		where order_id = #{order_id}
+	</update>
+	<update id="updateReservation_room_null" parameterType = "String">
+		update reservation_info set roomid = null
+		where order_id = #{order_id}
+	</update>
+	<update id="updateRoom_info" parameterType = "cho_jeahyun.Room_info">
+		update Room_info set order_id = #{order_id},
+		check_in_d = #{check_in_d}, check_out_d = #{check_out_d}
+		where roomid = #{roomid}
+	</update>
+	<update id="updateRoom_info_null" parameterType = "Integer">
+		update Room_info set order_id = null,
+		check_in_d = null, check_out_d = null
+		where order_id = #{order_id}
+	</update>
+	<insert id="insertSales_management" parameterType="cho_jeahyun.Sales_management" >
+		insert into Sales_management values(#{order_id},#{benefit},
+		#{reservation_date})
+	</insert>
 	
 	<select id="selectReservation" parameterType ="HashMap"
 						resultType="cho_jeahyun.Reservation_Info">
@@ -29,12 +58,33 @@
 		<if test="phone != null">and phone=#{phone}</if>
 		</where>
 	</select>
+	<select id="selectReservation_Max" resultType="Integer">
+		select max(order_id) max_num from reservation_info
+	</select>
+	<update id="updateReservation_Info_roomid" parameterType = "Integer">
+		update reservation_info set roomid = #{roomid},
+		where order_id = #{order_id}
+	</update>
+	
+	<insert id="insertReservation_Info_member" parameterType="cho_jeahyun.Reservation_Info" >
+		insert into reservation_info(order_id, cid, name, adult, child, phone, rating, total_price,
+		reservation_date, check_in_d, check_out_d) values(#{order_id}, #{cid},#{name}, #{adult},#{child},#{phone},
+		#{rating},#{total_price},SYSDATE, #{check_in_d}, #{check_out_d})
+	</insert>
+	
+	<insert id="insertReservation_Info_nomember" parameterType="cho_jeahyun.Reservation_Info" >
+		insert into reservation_info(order_id, name, adult, child, phone, rating, total_price,
+		reservation_date, check_in_d, check_out_d) values(#{order_id},#{name}, #{adult},#{child},#{phone},
+		#{rating},#{total_price},SYSDATE, #{check_in_d}, #{check_out_d})
+	</insert>
+	
 	<insert id="insertReservation_cancel" parameterType="cho_jeahyun.Reservation_cancel_info" >
 		insert into reservation_cancel values(#{order_id},#{refund},
-		#{reservation_date},SYSDATE)
+		#{reservation_date},SYSDATE, 'false')
 	</insert>
+	
 	<update id="updateReservation_cancel" parameterType = "cho_jeahyun.Reservation_cancel_info">
-		update Reservation_cancel set check_info = #{check_info},
+		update Reservation_cancel set check_info = #{check_info}
 		where order_id = #{order_id}
 	</update>
 	<delete id="deleteReservation" parameterType = "Integer">
@@ -130,6 +180,12 @@
 		phone = #{phone}
 		where cid = #{cid}
 	</update>
+	<delete id="deleteSales" parameterType = "Integer">
+		delete from sales_management where order_id = #{order_id}
+	</delete>
+	<select id="selectSales" resultType="cho_jeahyun.Sales_management" parameterType = "Integer" >
+		select * from sales_management where order_id = #{order_id}
+	</select>
 	<select id="selectSalesSum" 	resultType="Integer"
 								parameterType="cho_jeahyun.Sales_management">
 		select sum(benefit) ben
