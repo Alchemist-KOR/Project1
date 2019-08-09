@@ -70,19 +70,24 @@ class ReservationModel extends AbstractTableModel {
 			
 			r1++;
 		}
+		int temp = 2000;
 		while(it2.hasNext()) {
 			Check_inout cinfo = (Check_inout) it2.next();
-			int temp = 0;
+			
 			if(!(cinfo.getCheck_in_d() == null)) {
-				temp = Integer.parseInt(cinfo.getCheck_in_d().substring(0,4));
-//				if(temp <) {
-//			
-//				}
-				System.out.println(cinfo.getCheck_in_d().substring(0,4));
-				data[r2][12] = cinfo.getCheck_in_d().substring(4,5);
+				if(temp < Integer.parseInt(cinfo.getCheck_in_d().substring(0,4))) {
+					data[r2][12] = cinfo.getCheck_in_d().substring(0,10);
+				}else {
+					data[r2][12] = cinfo.getCheck_in_d().substring(4,5);
+				}
 			}
 			if(!(cinfo.getCheck_out_d() == null)) {
-				data[r2][13] = cinfo.getCheck_out_d().substring(4,5);
+				if(temp < Integer.parseInt(cinfo.getCheck_out_d().substring(0,4))) {
+					data[r2][13] = cinfo.getCheck_out_d().substring(0,10);
+				}else {
+					data[r2][13] = cinfo.getCheck_out_d().substring(4,5);
+				}
+				
 			}
 			r2++;
 		}

@@ -26,7 +26,7 @@ public class Update_Account extends JPanel implements ActionListener{
 	private ButtonGroup group;
 	public JTextField[] t1;
 	private JComboBox email_default;
-	String[] email_address = {"직접입력","naver.com","daum.net","hanmail.net","nate.com","gmail.com",
+	String[] email_address = {"선택하기","naver.com","daum.net","hanmail.net","nate.com","gmail.com",
 			"lycos.co.kr","yahoo.co.kr","empal.com","dream wiz.com","paran.com",
 			"korea.com","choi.com","hanmir.com","hanafos.com","hotmail.com"};
 	String cid;

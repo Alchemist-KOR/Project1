@@ -94,6 +94,14 @@
 	resultType="cho_jeahyun.Reservation_cancel_info">
 		select * from Reservation_cancel
 	</select>
+	<select id="selectReservation_cancel_check" parameterType="Integer" resultType="cho_jeahyun.Manager_info">
+		select check_info from Reservation_cancel
+		where order_id = #{order_id}
+	</select>
+	<select id="selectReservation_cancel_spe" parameterType="Integer" resultType="cho_jeahyun.Manager_info">
+		select * from Reservation_cancel
+		where order_id = #{order_id}
+	</select>
 	<select id="select_managerLogin" parameterType="cho_jeahyun.Manager_info"
 	resultType="cho_jeahyun.Manager_info">
 		select * from manager
@@ -132,10 +140,14 @@
 		<if test="name != null">and name=#{name}</if>
 		</where>
 	</select>
-	<insert id="Check_in_t" parameterType="cho_jeahyun.Check_inout">
-		insert into check_inout(order_id,check_in_d)
-		values(#{order_id}, SYSDATE)
+	<insert id="insertCheck_inout" parameterType="Integer">
+		insert into check_inout
+		values(#{order_id}, '2000/01/01', '2000/01/01');
 	</insert>
+	<update id="Check_in_t" parameterType="cho_jeahyun.Check_inout">
+		update check_inout set check_in_d = SYSDATE
+		where order_id =#{order_id}
+	</update>
 	<update id="Check_out_t" parameterType="cho_jeahyun.Check_inout">
 		update check_inout set check_out_d = SYSDATE
 		where order_id =#{order_id}

@@ -182,18 +182,26 @@ public class Panel08 extends JPanel implements ActionListener, MouseListener {
 		} else if (button == cancel) {
 			Reservation_cancel_info rc = new Reservation_cancel_info();
 			CrudProcess crud = new CrudProcess();
+			
+			List<Reservation_cancel_info> rlist = crud.selectReservation_cancel_info_spe(orderID);
+			List<Reservation_cancel_info> rlist2 = crud.selectReservation_cancel_check(orderID);
+			if(rlist.size() > 0) {
+				JOptionPane.showMessageDialog(this, "이미 요청되었습니다.");
+			}else if(rlist2.size() > 0) {
+				JOptionPane.showMessageDialog(this, "취소처리가 완료 되었습니다.");
+			}else {
+				rc.setOrder_id(orderID);
+				rc.setRefund(refund);
+				rc.setReservation_date(reservation_date);
+				rc.setCheck_info("false");
 
-			rc.setOrder_id(orderID);
-			rc.setRefund(refund);
-			rc.setReservation_date(reservation_date);
-			rc.setCheck_info("false");
-
-			int r = crud.insertReservation_cancel(rc);
-
-			if (r > 0) {
-				JOptionPane.showMessageDialog(this, "정상적으로 취소 처리되었습니다.");
-			} else {
-				JOptionPane.showMessageDialog(this, "취소등록 중 문제가 발생했습니다.");
+				int r = crud.insertReservation_cancel(rc);
+				
+				if (r > 0) {
+					JOptionPane.showMessageDialog(this, "정상적으로 취소 처리되었습니다.");
+				} else {
+					JOptionPane.showMessageDialog(this, "취소등록 중 문제가 발생했습니다.");
+				}
 			}
 		}else if(button == refresh) {
 			table.setModel(new Column_Model());

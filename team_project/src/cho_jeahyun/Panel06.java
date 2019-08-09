@@ -139,6 +139,7 @@ public class Panel06 extends JPanel implements ActionListener {
 								textfield[i].setText("");
 							}
 							rateing.setSelectedIndex(0);
+							crud.insertCheck_inout(max_num);
 							JOptionPane.showMessageDialog(this, "예약처리가 정상적으로 완료 되었습니다.");
 						} else {
 							JOptionPane.showMessageDialog(this, "예약처리 중 문제가 발생하였습니다.");
@@ -209,12 +210,12 @@ public class Panel06 extends JPanel implements ActionListener {
 
 						int r = crud.insertReservation_Info_member(rinfo);
 						if (r > 0) {
-							JOptionPane.showMessageDialog(this, "예약처리가 정상적으로 완료 되었습니다.");
 							for (int i = 0; i < textfield.length; i++) {
 								textfield[i].setText("");
 							}
-
 							rateing.setSelectedIndex(0);
+							crud.insertCheck_inout(max_num);
+							JOptionPane.showMessageDialog(this, "예약처리가 정상적으로 완료 되었습니다.");
 						} else {
 							JOptionPane.showMessageDialog(this, "예약처리 중 문제가 발생하였습니다.");
 						}
@@ -239,10 +240,10 @@ public class Panel06 extends JPanel implements ActionListener {
 	private Image resizeimage;
 	private Image result;
 	private ImageIcon res_img;
-	private JLabel imglabel1, imglabel2, imglabel3;
-	public final int STANDARD = 250000;
-	public final int PREMIUM = 340000;
-	public final int SWEET = 450000;
+	private JLabel imglabel1, imglabel2;
+	public final int STANDARD = 3200000;
+	public final int PREMIUM = 4200000;
+	public final int SWEET = 5200000;
 	public final int ADULT = 50000;
 	public final int CHILD = 25000;
 
@@ -349,7 +350,7 @@ public class Panel06 extends JPanel implements ActionListener {
 
 		insert.setBounds(950, 15, 100, 30);
 		insert.setEnabled(false);
-		price.setBounds(880, 40, 300, 70);
+		price.setBounds(880, 70, 300, 70);
 
 		price.setFont(new Font("맑음고딕", Font.ITALIC | Font.BOLD, 30));
 		for (int i = 0; i < 6; i++) {

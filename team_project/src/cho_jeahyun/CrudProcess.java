@@ -340,6 +340,33 @@ public class CrudProcess {
 		}finally {
 			s.close();
 		}
+	}
+	public List<Reservation_cancel_info> selectReservation_cancel_check(Integer orderid) {// 관리자가 특정 예약취소 처리 확인
+		SqlSession s = getSession();
+		List<Reservation_cancel_info> info = null;
+		
+		try {
+			String query = NAMESPACE + ".selectReservation_cancel_check";
+			info = s.selectList(query, orderid);
+			
+			return info;
+		}finally {
+			s.close();
+		}
+		
+	}
+	public List<Reservation_cancel_info> selectReservation_cancel_info_spe(Integer orderid) {// 관리자가 특정 예약취소 내역 확인
+		SqlSession s = getSession();
+		List<Reservation_cancel_info> info = null;
+		
+		try {
+			String query = NAMESPACE + ".selectReservation_cancel_spe";
+			info = s.selectList(query, orderid);
+			
+			return info;
+		}finally {
+			s.close();
+		}
 		
 	}
 	public List<Reservation_Info> selectReservation(HashMap map) {// 관리자가 특정 예약내역 검색
@@ -470,6 +497,20 @@ public class CrudProcess {
 			return res;
 		}finally {
 			s.close();
+		}
+	}
+	public Integer insertCheck_inout(Integer ci) {//체크인 여부 초기화
+		SqlSession ss=getSession();
+		Integer result=null;
+		try {
+			String query=NAMESPACE+".insertCheck_inout";
+			result=ss.insert(query,ci);
+			
+			if(result>0) ss.commit();
+			else ss.rollback();		
+			return result;
+		}finally {
+			ss.close();
 		}
 	}
 	public Integer check_in_true(Check_inout cio) {// 테이블에 체크인 날짜 입력

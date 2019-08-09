@@ -59,30 +59,35 @@ public class Join extends JFrame implements ActionListener{
 			String phone=phoneNum_txt.getText();
 			login_info.setPhone(phone);
 			
-			CrudProcess crud=new CrudProcess();
-			
-			List<Login_info> lg = crud.selectAccount(id);
-			Iterator temp = lg.iterator();
-			Login_info li = null;
-			if(lg.size() > 0) {
-				while(temp.hasNext()) {
-					li = (Login_info) temp.next();
-				}
-			}
-			if(lg.size() > 0) {
-				JOptionPane.showMessageDialog(this, "이미 있는 아이디입니다.");
-			}else{
-				int r = crud.insertLogin(login_info);
+			if(id.equals("") || name.equals("") || pwd.equals("") || birth.equals("")
+					|| gender.equals("") || email.equals("") || addr.equals("") || phone.equals("")) {
+				JOptionPane.showMessageDialog(this, "양식을 체워주십시오.");
+			}else if(phone.length() > 13) {
+				JOptionPane.showMessageDialog(this, "전화번호는 12자리로 이하로 입력하여주십시오.");
+			}else {
+				CrudProcess crud=new CrudProcess();
 				
-				if(r > 0) {
-					JOptionPane.showMessageDialog(this, "정상적으로 등록되었습니다.");
-					dispose();
-				}else {
-					JOptionPane.showMessageDialog(this, "등록 중 문제가 발생했습니다.");
+				List<Login_info> lg = crud.selectAccount(id);
+				Iterator temp = lg.iterator();
+				Login_info li = null;
+				if(lg.size() > 0) {
+					while(temp.hasNext()) {
+						li = (Login_info) temp.next();
+					}
+				}
+				if(lg.size() > 0) {
+					JOptionPane.showMessageDialog(this, "이미 있는 아이디입니다.");
+				}else{
+					int r = crud.insertLogin(login_info);
+					
+					if(r > 0) {
+						JOptionPane.showMessageDialog(this, "정상적으로 등록되었습니다.");
+						dispose();
+					}else {
+						JOptionPane.showMessageDialog(this, "등록 중 문제가 발생했습니다.");
+					}
 				}
 			}
-			
-			
 		}else if(obj == calendar_btn) {
 			new CalendarBySwing(this);
 		}
@@ -107,7 +112,7 @@ public class Join extends JFrame implements ActionListener{
 	public Join(){
 		name_label=new JLabel("이름");
 		id_label=new JLabel("아이디");
-		pwd_label=new JLabel("비밀전호");
+		pwd_label=new JLabel("비밀번호");
 		birth_label=new JLabel("생년월일");
 		gender_label=new JLabel("성별");
 		email_label=new JLabel("이메일");
