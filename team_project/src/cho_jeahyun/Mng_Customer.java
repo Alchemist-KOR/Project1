@@ -86,9 +86,13 @@ public class Mng_Customer extends JPanel implements ActionListener, MouseListene
 		lbl = new JLabel[2];
 		lbl[0]= new JLabel("Cid");
 		lbl[1]= new JLabel("고객명");
+		
 		txt = new JTextField[2];
+		
 		txt[0]= new JTextField(15);
+		txt[0].addActionListener(this);
 		txt[1]= new JTextField(15);
+		txt[1].addActionListener(this);
 		select = new JButton("검색");
 		select.addActionListener(this);
 		selectAll = new JButton("전체조회");
@@ -123,8 +127,8 @@ public class Mng_Customer extends JPanel implements ActionListener, MouseListene
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		JButton obj = (JButton)arg0.getSource();
-		if(obj == select) {
+		Object obj = arg0.getSource();
+		if(obj == select || obj == txt[0] || obj == txt[1]) {
 			table.setModel(new CustomerModel());
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			if (!txt[0].getText().equals("")) {// 번호

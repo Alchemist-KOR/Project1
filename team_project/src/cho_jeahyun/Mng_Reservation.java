@@ -428,6 +428,7 @@ public class Mng_Reservation extends JPanel implements ActionListener, MouseList
 			if (result == JOptionPane.YES_OPTION) {
 				CrudProcess crud = new CrudProcess();
 				int r = crud.deleteReservation(orderID);
+				crud.deleteCheck_inout(orderID);
 				int r2 = 0;
 				if(r > 0) {
 					List<Sales_management> slist;

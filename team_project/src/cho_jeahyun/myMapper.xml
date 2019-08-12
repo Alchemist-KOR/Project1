@@ -98,7 +98,7 @@
 		select check_info from Reservation_cancel
 		where order_id = #{order_id}
 	</select>
-	<select id="selectReservation_cancel_spe" parameterType="Integer" resultType="cho_jeahyun.Manager_info">
+	<select id="selectReservation_cancel_spe" parameterType="Integer" resultType="cho_jeahyun.Reservation_cancel_info">
 		select * from Reservation_cancel
 		where order_id = #{order_id}
 	</select>

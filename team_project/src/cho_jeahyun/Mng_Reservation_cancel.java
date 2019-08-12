@@ -210,18 +210,22 @@ public class Mng_Reservation_cancel extends JPanel implements ActionListener, Mo
 		// TODO Auto-generated method stub
 		JButton obj = (JButton) e.getSource();
 		if (obj == select) {
-			if(!isNumeric(txt[0].getText()) && !(txt[0].getText().equals(""))) {
+			if(txt[0].getText().equals("")) {
+				table.setModel(new Reservation_cancelModel());
+				JOptionPane.showMessageDialog(this, "전체가 조회 되었습니다.");
+			}else if(!(isNumeric(txt[0].getText()))) {
 				JOptionPane.showMessageDialog(this, "주문번호를 입력하여 주십시오.");
-			}else if(txt[0].getText().equals("")) {
+			}else{
 				CrudProcess crud = new CrudProcess();
-				List<Reservation_cancel_info> info = crud.selectReservation_cancel_info();
+				Integer order_id = Integer.parseInt(txt[0].getText());
+				List<Reservation_cancel_info> info = crud.selectReservation_cancel_info_spe(order_id);
 				
 				if(info == null) {
-					table.setModel(new Reservation_cancelModel(info));
+					table.setModel(new Reservation_cancelModel2());
 					JOptionPane.showMessageDialog(this, "조회내역이 없습니다.");
 				}else {
 					table.setModel(new Reservation_cancelModel(info));
-					JOptionPane.showMessageDialog(this, "전체가 조회 되었습니다.");
+					JOptionPane.showMessageDialog(this, "조회 되었습니다.");
 				}
 			}
 		}else if(obj == cancel) {
@@ -233,6 +237,7 @@ public class Mng_Reservation_cancel extends JPanel implements ActionListener, Mo
 			
 			int r = crud.deleteReservation(orderID);
 			crud.deleteSales(orderID);
+			crud.deleteCheck_inout(orderID);
 			int r3 = crud.updateReservation_cancel(rc);
 			crud.updateRoom_info_null(orderID);
 			

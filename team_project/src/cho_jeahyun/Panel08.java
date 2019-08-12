@@ -159,9 +159,8 @@ public class Panel08 extends JPanel implements ActionListener, MouseListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		JButton button = (JButton) e.getSource();
-		if (button == select) {
+		Object obj = e.getSource();
+		if (obj == select || t2 == obj || t3 == obj) {
 			if (t2.getText().equals("") || t3.getText().equals("")) {
 				JOptionPane.showMessageDialog(this, "빈칸을 채워주십시오.");
 			} else {
@@ -179,7 +178,7 @@ public class Panel08 extends JPanel implements ActionListener, MouseListener {
 				}
 			}
 
-		} else if (button == cancel) {
+		} else if (obj == cancel) {
 			Reservation_cancel_info rc = new Reservation_cancel_info();
 			CrudProcess crud = new CrudProcess();
 			
@@ -203,7 +202,7 @@ public class Panel08 extends JPanel implements ActionListener, MouseListener {
 					JOptionPane.showMessageDialog(this, "취소등록 중 문제가 발생했습니다.");
 				}
 			}
-		}else if(button == refresh) {
+		}else if(obj == refresh) {
 			table.setModel(new Column_Model());
 		}
 	}
@@ -254,7 +253,9 @@ public class Panel08 extends JPanel implements ActionListener, MouseListener {
 		l3 = new JLabel("전화번호");
 
 		t2 = new JTextField(10);
+		t2.addActionListener(this);
 		t3 = new JTextField(10);
+		t3.addActionListener(this);
 
 		north_center.add(l2);
 		north_center.add(t2);
